@@ -1,0 +1,59 @@
+body {
+    text-align: center;
+    background-image: url("../images/ep_naturalblack.png"); /* Background pattern from Subtle */
+}
+.modal-container {
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0,0,0,.5);
+	position: fixed;
+	top: 0px;
+	z-index: 2000;
+	display: none;
+	justify-content: center;
+	align-items: center;
+}
+
+
+.modal-container.appear {
+	
+	display: flex;
+}
+
+
+.modal {
+    background: #ffffff url("../images/ep_naturalblack.png"); /* Background pattern from Subtle Patterns */
+    color: white;
+	width: 23%;
+	min-width: 200px;
+	padding: 40px;
+	position: relative;
+	text-align: center;
+}
+
+
+@keyframes modal {
+from {
+	opacity: 0;
+	transform: translate3d(0, -60px, 0);
+}
+to {
+	opacity: 1;
+	transform: translate3d(0, 0, 0);
+}
+}
+
+
+.appear .modal {
+	animation: modal .3s;
+}
+
+
+.button {
+	background: black;
+	font-size: 16px;
+	text-decoration: none;
+	color: white;
+	cursor: pointer;
+	border-radius: 10px;
+}
