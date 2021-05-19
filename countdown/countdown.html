@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/countdown.css">
+  <link rel="stylesheet" href="css/fontawesome.min.css">
+  <link rel="stylesheet" href="css/solid.min.css">
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Libre+Baskerville|Montserrat&display=swap"
+  >
+</head>
+<body>
+
+<header class="header">
+  <h1>COUNTDOWN TO YOUR EVENT</h1>
+</header>
+
+
+<div class="page">
+  <div class="modal">
+    <div class="modal__window">
+      <div class="window__header">
+        <div class="window__close" onclick="closeModal()">&times;</div>
+        <h2>NEW EVENT</h2>
+      </div>
+      <form class="modal__form" onsubmit="return addEvent(event)">
+        <div class="form__section">
+          <label for="eventname">Event Name: </label>
+          <input class="section__input" type="text" name="eventname" required>
+        </div>
+        <div class="form__section">
+          <label for="eventdate">Date: </label>
+          <input class="section__input" type="date" name="eventdate" required>
+        </div>
+        <div class="form__section">
+          <label for="eventtime">*Time: </label>
+          <input class="section__input" type="time" name="eventtime">
+        </div>
+        <div class="form__section">
+          <input class="button section__cancel" type="button" onclick="closeModal()" value="Cancel">
+          <input class="button section__add " type="submit" value="Add">
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <main class="events">
+  </main>
+</div>
+
+<div class="add-button" onclick="openModal()">+</div>  
+
+<script src="countdown.js"></script>
+</body>
+</html>

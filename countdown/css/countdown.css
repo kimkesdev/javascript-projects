@@ -1,0 +1,307 @@
+body {
+  font-family: Montserrat, sans-serif;
+  display: flex;
+  flex-direction: column;
+  background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)) ,url('../images/balloons.jpg')center/cover no-repeat fixed;
+}
+
+
+/* HEADER */
+
+.header {
+  font-family: "Libre Baskerville", serif;
+  font-weight: bold;
+  font-size: .9rem;
+  color: #fc5dd4;
+  text-align: center;
+  margin: 0;
+  padding: 6px;
+  background-color: #ffffff;
+  z-index: 200;
+  user-select: none;
+}
+
+.page {
+  height: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* EVENTS */
+
+.events {
+  background-size: 100% 100%;
+  background-image: url("../images/bg.svg#svgView(preserveAspectRatio(none))");
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.event {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+  padding: 8px 10px 16px 10px;
+  width: 20rem;
+  margin: 20px auto;
+  transition: .5s transform;
+}
+
+.event__header {
+  display: flex;
+  align-self: center;
+  font-weight: bold;
+  justify-content: space-between;
+  border-bottom: 2px solid #d3d3d3;
+}
+
+.event__header-name {
+  
+  font-size: 1.3rem;
+}
+
+.event__delete {
+  line-height: 1.5rem;
+  color: #D21313;
+  cursor: pointer;
+}
+
+.event__target {
+  margin: 4px 0;
+  font-size: 0.9rem;
+  color: #8B8B8B;
+}
+
+.event__countdown {
+  display: flex;
+  justify-content: space-around;
+}
+
+.countdown {
+  text-align: center;
+}
+
+.countdown__box {
+  margin: 0 auto;
+  height: 3rem;
+  width: 3rem;
+  background-color: #F0F7F9;
+  border: 1px solid #fc5dd4;
+  font-size: 2rem;
+}
+
+.countdown:first-child .countdown__box {
+  width: 3.5rem;
+}
+
+.event--deleting {
+  transform: translateX(-100vw);
+}
+
+/* ADD BUTTON */
+
+.add-button {
+  font-family: "Montserrat";
+  font-size: 4rem;
+  font-weight: bold;
+  color: #fc5dd4;
+  position: fixed;
+  width: 8rem;
+  height: 4rem;
+  line-height: 4rem;
+  border-radius: 500px;
+  background-color: #ffffff;
+  padding-left: 1rem;
+  top: 70vh;
+  left: calc(100vw - 4rem);
+  box-shadow: -3px 3px 3px rgba(0, 0, 0, 0.25);
+  z-index: 200;
+  cursor: pointer;
+  user-select: none;
+}
+
+
+/* MODAL */
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 300;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal--shown {
+  display: block;
+  animation-name: fade-in;
+  animation-duration: 0.2s;
+}
+
+.modal--disappearing {
+  animation-name: fade-out;
+  animation-duration: 0.2s;
+}
+
+.modal__window {
+  background-color: #fff;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  height: 20rem;
+  left: 50%;
+  margin-top: -10rem;
+  margin-left: -10rem;
+  position: inherit;
+  top: 50%;
+  width: 20rem;
+}
+
+.window__header {
+  background-color: #fc5dd4;
+  text-align: center;
+  font-size: 1rem;
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+.window__close {
+  position: absolute;
+  color: #939393;
+  top: 0;
+  right: 5px;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.window__close:hover {
+  color: #e3e3e3;
+}
+
+.modal__form {
+  padding: 8px;
+}
+
+.form__section {
+  padding: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.section__input {
+  margin-left: 5px;
+  height: 1rem;
+  width: 10rem;
+}
+
+.button {
+  border: none;
+  cursor: pointer;
+  padding: 10px 24px;
+}
+
+.section__cancel {
+  background-color: white;
+  border-bottom: 1px solid black;
+  margin: 10px;
+  transition: .2s all;
+}
+
+.section__cancel:hover {
+  background-color: #eee;
+  color: #666;
+  border-bottom: 1px solid #eee;
+}
+
+.section__add {
+  background-color: hsl(148, 84%, 30%);
+  box-shadow: 0 3px 1px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  color: white;
+  transition: .2s background-color;
+}
+
+.section__add:hover {
+  background-color: hsl(148, 90%, 35%);
+}
+
+
+@media all and (min-width: 720px) {
+  .events {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .event {
+    width: 16rem;
+    height: 15rem;
+  }
+
+  .event__countdown {
+    height: 70%;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+}
+
+@media all and (min-width: 1200px) {
+  .header {
+    font-size: .8rem;
+    padding: 1px;
+  }
+
+  .page {
+    display: grid;
+    grid-template-columns: 20rem 1fr;
+    grid-template-rows: 100%;
+  }
+
+  .modal {
+    display: block;
+    position: static;
+  }
+
+  .modal__window {
+    margin: 0;
+    height: 100%;
+    border-radius: 0;
+  }
+
+  .window__header {
+    background-color: #fc5dd4;
+  }
+
+  .form__section {
+    display: block;
+  }
+
+  .section__input {
+    margin: 5px;
+    display: block;
+    width: 100%;
+  }
+
+  .section__add {
+    width: 100%;
+  }
+
+  .window__close,
+  .section__cancel,
+  .add-button {
+    display: none;
+  }
+
+  .modal--disappearing {
+    animation-name:;
+  }
+}
