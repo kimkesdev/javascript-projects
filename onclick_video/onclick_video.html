@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  background-color: red;
+}
+
+.flex-container > div {
+  background-color: #f1f1f1;
+  width: 300px;
+  text-align: center;
+  line-height: 600px;
+  font-size: 30px;
+}
+</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weborama Layers</title>
+</head>
+<body>
+<div class="flex-container">
+
+  <div>
+      <button onclick="playVid()" type="button">Play Video</button>
+      <button onclick="pauseVid()" type="button">Pause Video</button>
+
+<video id="myVideo" src="cookies.mp4"  width="300" controls>
+</video>
+  </div>
+
+  <div>
+    <p>Two</p>
+  </div>
+
+</div>
+
+<script>
+var vid = document.getElementById("myVideo"); 
+
+function playVid() { 
+  vid.play(); 
+} 
+
+function pauseVid() { 
+  vid.pause(); 
+} 
+</script>
+
+</body>
+</html>
