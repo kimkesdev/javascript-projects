@@ -6,6 +6,8 @@
   display: flex;
   justify-content: space-between;
   background-image: url("icecream_background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .flex-container > div {
@@ -24,7 +26,7 @@
 <div class="flex-container">
 
   <div>
-    <video  id="myVideo" width="240" height="320" controls>
+    <video  id="myVideo1" width="300" height="600" controls>
     <source src="cookies.mp4" type="video/mp4">
     <source src="cookies.ogg" type="video/ogg">
     </video>
@@ -33,7 +35,7 @@
   </div>
 
   <div>
-    <video  id="myVideo" width="240" height="320" controls>
+    <video  id="myVideo2" width="300" height="600" controls>
     <source src="icecream.mp4" type="video/mp4">
     <source src="icecream.ogg" type="video/ogg">
     </video>
@@ -42,7 +44,7 @@
 </div>
 
 <script>
-var vid = document.getElementById("myVideo"); 
+var vid = document.getElementById("myVideo1 + myVideo2"); 
 
 function playVid() { 
   vid.play(); 
