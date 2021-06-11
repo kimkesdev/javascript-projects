@@ -24,15 +24,16 @@
 <div class="flex-container">
 
   <div>
-      <button onclick="playVid()" type="button">Play Video</button>
-      <button onclick="pauseVid()" type="button">Pause Video</button>
-
-<video id="myVideo" src="cookies.mp4"  width="300" controls>
-</video>
+    <video width="240" height="320" controls autoplay>
+    <source src="cookies.mp4" type="video/mp4">
+    <source src="cookies.ogg" type="video/ogg">
+    Your browser does not support the video tag.
+    </video>
   </div>
 
   <div>
-    <p>Two</p>
+    <button onclick="playVid()" type="button">Play Video</button>
+    <button onclick="pauseVid()" type="button">Pause Video</button>
   </div>
 
 </div>
