@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- WEBORAMA SCREENAD META DATA (don't edit/remove) -->
+		<!-- SCRVERSION: screenad_interface_1.0.3 -->
+		<!-- SCRFORMAT: layer -->
+		<!-- SCRWIDTH: 300 -->
+		<!-- SCRHEIGHT: 600 -->
+		<script type="text/javascript" src="//media.adrcdn.com/scripts/screenad_interface_1.0.3_scrambled.js"></script>
+		<script type="text/javascript">
+
+		</script>
+		<style type="text/css">
+			body {
+				margin: 0px;
+				padding: 0px;
+				background: red;
+			}
+            .flex-container {
+                display: flex;
+                justify-content: space-between;
+                float: left;
+                }
+
+            .flex-container > div {
+                width: 300px;
+                height: 600px;
+                background-color: pink;
+                }
+            #myVideo {
+                background-size: cover;
+                background-position: center center;
+            }
+            #myVideo::-webkit-media-controls-panel {
+                display: none !important;
+                opacity: 1 !important;}
+		</style>
+	</head>
+	<body>
+        <div class="flex-container">
+
+  <div>
+    <video  id="myVideo" width="300" height="600" controls autoplay>
+    <source src="icecream.mp4" type="video/mp4">
+    <source src="icecream.ogg" type="video/ogg">
+    </video>
+  </div>
+	</body>
+</html>
