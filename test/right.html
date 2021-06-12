@@ -29,10 +29,16 @@
                 background-size: cover;
                 background-position: center center;
                 }
-            .top-right {
+            .button-top-right {
                 position: absolute;
-                top: 8px;
-                right: 16px;
+                top: 4px;
+                right: 4px;
+                font-size: 16px;
+                padding: 8px 8px;
+                border-radius: 8px;
+                border: 5px solid rgb(121, 32, 99);
+                background-color: rgb(228, 174, 216);
+                color: rgb(75, 14, 62);
 }
 		</style>
 	</head>
@@ -40,11 +46,11 @@
         <div class="flex-container">
 
   <div>
-    <button class="top-right" onclick="playVid()" type="button">Add Topping</button>
+    <button class="button-top-right" onclick="playVid()" type="button">Add Topping</button>
   </div>
 
   <script>
-var vid = document.getElementById("myVideo1 + myVideo2"); 
+var vid = document.getElementById("myVideo"); 
 
 function playVid() { 
   vid.play(); 
