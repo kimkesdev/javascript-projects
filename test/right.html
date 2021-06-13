@@ -39,26 +39,35 @@
                 border: 5px solid rgb(121, 32, 99);
                 background-color: rgb(228, 174, 216);
                 color: rgb(75, 14, 62);
-}
+            }
+            .animation.active {
+                animation-duration: 2s;
+                animation-name: slidein;
+                animation-iteration-count: 2;
+            }
+            .animation {
+                color: rgb(253, 208, 223);
+                font-size: x-large;
+            }
+            @keyframes slidein {
+                from {
+                    transform: translateX(100%) scaleX(3);
+                }
+                to {
+                    transform: translateX(0) scaleX(1);
+                }
+                }
 		</style>
 	</head>
 	<body>
         <div class="flex-container">
 
-  <div>
-    <button class="button-top-right" onclick="playVid()" type="button">Add Topping</button>
-  </div>
+ <div class="animation-example">
+    <div class="container">
+        <p class="animation">Icecream time!</p>
+    </div>
+        </div>
 
-  <script>
-var vid = document.getElementById("myVideo"); 
-
-function playVid() { 
-  vid.play(); 
-} 
-
-function pauseVid() { 
-  vid.pause(); 
-} 
-</script>
+<script src="activate_animation.js"></script>
 	</body>
 </html>
