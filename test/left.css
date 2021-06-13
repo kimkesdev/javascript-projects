@@ -21,3 +21,13 @@
                 background-size: cover;
                 background-position: center center;
             }
+            .button-styling {
+                background-color: rgb(253, 208, 223);
+                font-size: 16px;
+                padding: 12px 28px;
+                border-radius: 12px;
+                border: 2px solid rgb(252, 168, 224);
+                float: right;
+                margin-top: 15px;
+                margin-right: 15px;
+}
