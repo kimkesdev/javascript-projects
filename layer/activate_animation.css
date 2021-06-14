@@ -1,0 +1,35 @@
+body {
+    background-color: pink;
+}
+.container {
+  height: 3rem;
+}
+
+.animation.active {
+  animation-duration: 2s;
+  animation-name: slidein;
+  animation-iteration-count: 2;
+}
+
+.animation {
+    color: purple;
+    font-size: x-large;
+}
+
+button {
+    background-color: palevioletred;
+    font-size: 16px;
+    padding: 12px 28px;
+    border-radius: 12px;
+    border: 2px solid purple;
+    align-items: center;
+}
+
+@keyframes slidein {
+  from {
+    transform: translateX(100%) scaleX(3);
+  }
+  to {
+    transform: translateX(0) scaleX(1);
+  }
+}
