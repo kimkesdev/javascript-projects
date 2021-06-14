@@ -1,0 +1,74 @@
+/* Grid Layout */
+
+.item-left { grid-area: left; }
+
+.item-right { grid-area: right; }
+
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'left none right';
+  grid-gap: 0px;
+  background-color: azure;
+  padding: 0px;
+}
+
+.grid-container > div {
+  text-align: center;
+  height: 600px;
+  width: 300px;
+  font-size: 30px;
+}
+
+/* Left Layer */
+
+.item-left {
+    background-image: url("icecream_neon.jpg");
+    background-size: cover;
+    background-position: center center;
+    float: left;
+}
+
+button {
+    background-color: rgb(253, 208, 223);
+    font-size: 16px;
+    padding: 12px 28px;
+    border-radius: 12px;
+    border: 2px solid rgb(252, 168, 224);
+    float: right;
+    margin-top: 15px;
+    margin-right: 15px;
+}
+
+/* Right Layer */
+
+.item-right {
+    background-image: url("icecream_background.jpg");
+    background-size: cover;
+    background-position: center center;
+    float: right;
+}
+
+/* Animation */
+
+.animation.active {
+    animation-duration: 2s;
+    animation-name: slidein;
+    animation-iteration-count: 2;
+}
+
+.animation {
+    color: rgb(252, 168, 224);
+    font-size: x-large;
+    background-color: rgb(253, 208, 223);
+}
+
+@keyframes slidein {
+  from {
+    transform: translateX(100%) scaleX(3);
+  }
+  to {
+    transform: translateX(0) scaleX(1);
+  }
+}
