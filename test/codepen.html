@@ -1,0 +1,279 @@
+<html>
+
+<head>
+    <!-- WEBORAMA SCREENAD META DATA (don't edit/remove) -->
+    <!-- SCRVERSION: screenad_interface_1.0.3 -->
+    <!-- SCRFORMAT: layer -->
+    <!-- SCRWIDTH: 550 -->
+    <!-- SCRHEIGHT: 1200 -->
+    <!-- TEMPLATENAME: Persgroep Parool VK HPTO -->
+    <!-- TEMPLATEDATE: 2016-11-03 -->
+
+    <script type="text/javascript" src="https://media.adrcdn.com/scripts/screenad_interface_1.0.3_scrambled.js"></script>
+    <script type="text/javascript" src="https://media.adrcdn.com/scripts/jquery.min.js"></script>
+    <script type="text/javascript">
+        // <--    Do not edit this.       --> //
+        var element = 'left';
+    </script>
+    <script type="text/javascript">
+        // <--    Edit the functions below.   --> //
+
+        //Activate scaling?
+        var scale_content = true;
+        //How narrow can the scalable content get?
+        var minWidth = 100;
+        //How big does the scalabelContent start and what is the maximum width.
+        var originalWidth = 300;
+        var maxWidth = 300;
+
+        // This function is called when this element is done loading.
+        function onReady() {
+
+            // Do things.
+
+        }
+
+        // This function is called when all elements are ready.
+        function onSync() {
+            // Start your synced content.
+
+        }
+
+        // This function is called when the page resizes and when it loads.
+        // This determines the way the scalableContent div looks.
+        function onResize() {
+            var contentWidth, contentHeight, leftOffset;
+            if (scale_content == true) {
+                contentWidth = (Math.ceil(screenad.browserwidth * screenad.zoom) - 1024) / 2;
+                scaleAmount = contentWidth / originalWidth;
+                leftOffset = 550 - (maxWidth * scaleAmount);
+                var content = $('#scalableContent');
+                if (contentWidth >= minWidth && contentWidth <= maxWidth) {
+                    content.css("transform-origin", "0% 0%");
+                    content.css("transform", "scale(" + scaleAmount + "," + scaleAmount + ")");
+                    content.css("right", "auto");
+                    content.css("left", leftOffset + "px");
+                } else if (contentWidth >= maxWidth) {
+                    content.css("transform-origin", "0% 0%");
+                    content.css("transform", "scale(1,1)");
+                    content.css("left", "auto");
+                    content.css("right", "0px");
+                } else {
+                    scaleAmount = minWidth / originalWidth;
+                    leftOffset = 550 - (maxWidth * scaleAmount);
+                    content.css('transform-origin', '0% 0%');
+                    content.css('transform', 'scale(' + scaleAmount + ',' + scaleAmount + ')');
+                    content.css('right', 'auto');
+                    content.css('left', leftOffset + 'px');
+                }
+            }
+        }
+    </script>
+    <style type="text/css">
+        body {
+            margin: 0px;
+            padding: 0px;
+            overflow: hidden;
+        }
+        
+        .full {
+            width: 550px;
+            height: 1200px;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+        }
+        
+        #scalableContent {
+            position: absolute;
+            width: 300px;
+            height: 800px;
+            font-family: Verdana;
+            font-size: 11px;
+            font-weight: 700;
+            color: rgb(85, 103, 112);
+            text-align: center;
+            background-color: #A8A8A8;
+            z-index: 100;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="background" class="full" style="background: #EBEBEB;"></div>
+    <!-- can be removed -->
+    <div id="scalableContent">
+        <!-- Scalable Content -->
+        Right Skin Scalable Content
+    </div>
+    <div id="content" class="full">
+        <!-- Regular Content -->
+    </div>
+    <div id="weborama_click" style="cursor: pointer; position: absolute; top: 10px; right: 10px;width: 70px; height: 20px;" onclick="screenad.click();"></div>
+<script>
+    // Turn off auto preloading
+screenad.conf_autopreload = false;
+
+// Add listeners
+$(document).ready(readyHandler);
+screenad.onSync = syncHandler;
+screenad.shared.syncDone = trySync;
+if (element === 'header' || element === 'halfpage' || element === 'rectangle') {
+    screenad.shared.tagSynced = tagReadyHandler;
+}
+
+// some variables.
+// Browsers viewport width.
+var viewportWidth = screenad.viewportwidth;
+// How wide is the visible area.
+var visibleWidth, offset, originalWidth, maxWidth;
+
+// Header: Set widht and height
+var mediumWidth = 728;
+var mediumHeight = 90;
+var largeWidth = 1034;
+var largeHeight = 120;
+var adWidth, adHeight, activeView, targetView;
+var bwInterval;
+
+// Sync variables
+var totalTags = 3;
+var syncedTags = 0;
+var hasSynced = false;
+
+function readyHandler() {
+    screenad.setPreloaded(true);
+    onReady();
+  if (element == 'left' || element == 'right' || element == 'rectangle') {
+        position();
+    }
+    if (element === 'header') {
+        screenad.onResize = checkResolution;
+        bwInterval = setInterval(checkResolution, 100);
+    } else if (element === 'left' || element === 'right') {
+        screenad.onResize = onResize;
+        onResize();
+    } else if (element === 'halfpage') {
+        if (screenad.isPreviewer === true) {
+            screenad.executeScript('document.location.href.toString();', positionHandler);
+        }
+    }
+}
+
+function syncHandler() {
+    try {
+        onSync();
+    } catch (e) {}
+    if (element === 'header' || element === 'halfpage') {
+        screenad.shared.callMethod('tagSynced');
+    }
+    if (element === 'header') {
+        changeView();
+    }
+}
+
+function tagReadyHandler() {
+    syncedTags++;
+    if (syncedTags === totalTags) {
+        screenad.shared.callMethod('syncDone');
+    }
+}
+
+function trySync() {
+    if (hasSynced === false) {
+        hasSynced = true;
+        syncHandler();
+    }
+}
+
+function position() {
+  //console.log(element, adWidth, adHeight);
+    if (element === 'header') {
+        screenad.setAlignment('center', 'top');
+        screenad.setOffset(0, 0);
+        screenad.setSize(adWidth, adHeight);
+        screenad.resize(adWidth, adHeight);
+        screenad.resize(screenad.bannerwidth, adHeight, 'banner');
+        screenad.setClip('auto', 'auto', 'auto', 'auto');
+        screenad.setZIndex(7500);
+    } else if (element === 'left') {
+        screenad.setAlignment('center', 'top');
+        screenad.setOffset(-792, 0);
+        screenad.setSize('550', '1200');
+        screenad.setZIndex(7501);
+    } else if (element === 'right') {
+        screenad.setAlignment('center', 'top');
+        screenad.setOffset(792, 0);
+        screenad.setSize('550', '1199');
+        screenad.setZIndex(7501);
+    } else if (element === 'rectangle') {
+        if (screenad.isPreviewer === true) {
+            screenad.setAlignment('#adrPos300x250B', '#adrPos300x250B');
+            screenad.setOffset(0, 0);
+            screenad.setSize(300, 250);
+            screenad.setZIndex(7500);
+        }
+    }
+    screenad.setSticky(false);
+    screenad.position();
+}
+
+function checkResolution() {
+    if (element === 'header') {
+        if (screenad.browserwidth > 100) {
+            if (screenad.browserwidth < 1034) {
+                adWidth = mediumWidth;
+                adHeight = mediumHeight;
+                targetView = 'medium';
+                $('#medium').show();
+                $('#large').hide();
+            } else {
+                adWidth = largeWidth;
+                adHeight = largeHeight;
+                targetView = 'large';
+                $('#medium').hide();
+                $('#large').show();
+            }
+            position();
+            if (screenad.isPreloaded === false) {
+                // onPreloadReady();
+            } else {
+                changeView();
+            }
+            clearInterval(bwInterval);
+        }
+    }
+}
+
+// Handle positioning for halfpage in Previewer
+function positionHandler(loc) {
+    if (loc.indexOf('volkskrant.') !== -1 || loc.indexOf('vk.') !== -1) {
+        screenad.setAlignment('#adrPos300x250', '#adrPos300x250');
+        screenad.executeScript('document.getElementById(\'adrPos300x250\').style.height=\'600px\';');
+    } else {
+        screenad.setAlignment('#adrPos300x600', '#adrPos300x600');
+    }
+    screenad.setOffset(0, 0);
+    screenad.setSize(300, 600);
+    screenad.setSticky(false);
+    screenad.setZIndex(7502);
+    screenad.position();
+}
+
+// Change view of header size
+function changeView() {
+    if (element == 'header') {
+        if (activeView != targetView) {
+            if (targetView == 'medium') {
+                onMediumView();
+            } else if (targetView == 'large') {
+                onLargeView();
+            }
+            activeView = targetView;
+        }
+    }
+}
+</script>
+</body>
+
+</html>
