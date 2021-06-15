@@ -1,33 +1,14 @@
-/* Grid Layout */
 
-.item-left { grid-area: left; }
-
-.item-right { grid-area: right; }
-
-
-.grid-container {
-  display: grid;
-  grid-template-areas:
-    'left none right';
-  grid-gap: 0px;
-  background-color: azure;
-  padding: 0px;
-}
-
-.grid-container > div {
-  text-align: center;
-  height: 600px;
-  width: 300px;
-  font-size: 30px;
-}
 
 /* Left Layer */
 
-.item-left {
+.layer_left {
     background-image: url("icecream_neon.jpg");
     background-size: cover;
     background-position: center center;
     float: left;
+    width: 300px;
+    height: 600px;
 }
 
 button {
@@ -43,11 +24,14 @@ button {
 
 /* Right Layer */
 
-.item-right {
+.layer_right {
     background-image: url("icecream_background.jpg");
     background-size: cover;
     background-position: center center;
     float: right;
+    width: 300px;
+    height: 600px;
+    text-align: center;
 }
 
 /* Animation */

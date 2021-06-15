@@ -1,5 +1,5 @@
 const animation = document.querySelector('p.animation');
-const applyAnimation = document.querySelector('.animation-example>button.activate');
+const applyAnimation = document.querySelector('.animation-text>button.activate');
 let iterationCount = 0;
 
 applyAnimation.addEventListener('click', () => {
