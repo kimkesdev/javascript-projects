@@ -1,4 +1,6 @@
-
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
 /* Left Layer */
 
@@ -37,22 +39,32 @@ button {
 /* Animation */
 
 .animation.active {
-    animation-duration: 2s;
-    animation-name: slidein;
-    animation-iteration-count: 2;
+    animation-name: bounce;
+    animation-timing-function: cubic-bezier(0.280, 0.840, 0.420, 1);
 }
 
 .animation {
-    color: rgb(252, 168, 224);
-    font-size: x-large;
+    align-self: flex-end;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
     background-color: rgb(253, 208, 223);
+    font-size: 16px;
+    height: 50px;
+    transform-origin: bottom;
+    width: 100px;    
+    padding: 12px 18px;
+    border-radius: 12px;
+    border: 2px solid rgb(252, 168, 224);
+    margin-top: 120px;
+    margin-left: 15px;
 }
 
-@keyframes slidein {
-  from {
-    transform: translateX(100%) scaleX(3);
-  }
-  to {
-    transform: translateX(0) scaleX(1);
-  }
+@keyframes bounce {
+        0%   { transform: scale(1,1)      translateY(0); }
+        10%  { transform: scale(1.1,.9)   translateY(0); }
+        30%  { transform: scale(.9,1.1)   translateY(-100px); }
+        50%  { transform: scale(1.05,.95) translateY(0); }
+        57%  { transform: scale(1,1)      translateY(-7px); }
+        64%  { transform: scale(1,1)      translateY(0); }
+        100% { transform: scale(1,1)      translateY(0); }
 }
