@@ -8,6 +8,12 @@
         body {
             background-color: pink;
         }
+        #bg{
+        width: 200px;
+        height: 200px;
+        border: 4px solid blue;
+        }
+</style>
     </style>
 </head>
 <body>
@@ -168,5 +174,96 @@
             Answer: 55 Kees Tol 64000
         </p>
     </div>
+    <hr>
+    <div>
+        span id="text" /span <br>
+        var today=new Date();  <br>
+        document.getElementById('txt').innerHTML=today; 
+    </div>
+    <hr>
+    <div>
+        <p>
+        document.writeln("screen.width: "+screen.width);   <br>
+        document.writeln("screen.height: "+screen.height);   <br>
+        document.writeln("screen.availWidth: "+screen.availWidth);   <br>
+        document.writeln("screen.availHeight: "+screen.availHeight);   <br>
+        document.writeln("screen.colorDepth: "+screen.colorDepth);   <br>
+        document.writeln("screen.pixelDepth: "+screen.pixelDepth);
+        </p>
+        <p>
+        Answer:  <br>
+        screen.width: 1536  <br>
+        screen.height: 864  <br>
+        screen.availWidth: 1536  <br>
+        screen.availHeight: 824  <br>
+        screen.colorDepth: 24  <br>
+        screen.pixelDepth: 24
+        </p>
+    </div>
+    <hr>
+    <div>
+        <p>
+            style: <br>
+            #bg{ <br>
+            width: 200px; <br>
+            height: 200px; <br>
+            border: 4px solid blue; <br>
+            <br>
+            body: <br>
+            div id = "bg" <br>
+            <br>
+            script: <br>
+            window.onload = function(){ <br>
+            document.getElementById("bg").style.backgroundColor = "red"; <br>
+            document.getElementById("bg").style.width = "100px"; <br>
+            document.getElementById("bg").style.height = "100px"; <br>
+            }
+        </p>
+        <p>
+            Answer:
+            <div id = "bg"></div>
+        </p>
+    </div>
+    <hr>
+    <div>
+        <p>
+            var x = 0; <br>
+            var str = "if(x == 1) {'SUNDAY'} else 'MONDAY';"; <br>
+            document.write('The output is : ', eval(str));
+        </p>
+        <p>
+            Answer: The output is : MONDAY
+        </p>
+    </div>
+    <hr>
+    <div>
+        <p>
+         var date1, date2; <br>
+         date1 = new Date("09/10/2021"); <br>
+         date2 = new Date("12/31/2021"); <br>
+         var time_difference = date2.getTime() - date1.getTime(); <br>
+         var days_difference = time_difference / (1000 * 60 * 60 * 24); <br>
+         document.write("Number of days between dates" +  <br>
+         date1 + " and " + date2 + " are: "  <br>
+         + days_difference + " days");
+        </p>
+        <p>
+            Answer: <br>
+            Number of days between dates <br>
+            Fri Sep 10 2021 00:00:00 GMT+0200 (Midden-Europese zomertijd) and <br>
+            Fri Dec 31 2021 00:00:00 GMT+0100 (Midden-Europese standaardtijd) are: <br>
+            112.04166666666667 days
+        </p>
+    </div>
+
+
+
+    <script type = "text/javascript">
+    window.onload = function(){
+    document.getElementById("bg").style.backgroundColor = "red";
+    document.getElementById("bg").style.width = "100px";
+    document.getElementById("bg").style.height = "100px";
+    }
+</script>
 </body>
 </html>
