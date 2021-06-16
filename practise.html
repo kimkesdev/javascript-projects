@@ -16,13 +16,95 @@
         <h4>Fahrenheit to Celsius</h4>
         <p>
             var text = "The temperature is " + toCelsius(104) + " Celsius"; <br>
-             <br>
             function toCelsius(fahrenheit) { <br>
                 return (5/9) * (fahrenheit-32); <br>
             }
         </p>
         <p>
             Answer: The temperature is 40 Celsius
+        </p>
+    </div>
+    <hr>
+    <div>
+        <p>
+            myFunction(7, 4); <br>
+            function myFunction(a, b) { <br>
+                return a * b;    <br>
+            }
+        </p>
+        <p>
+            Answer: 28
+        </p>
+    </div>
+    <hr>
+    <div>
+        <p>
+            const x = function (a, b) {return a * b}; <br>
+            let z = x(8, 5);
+        </p>
+        <p>
+            Answer: 40
+        </p>
+    </div>
+    <hr>
+    <div>
+        <p>
+            function (x, y = 2) { <br>
+            } <br>
+            myFunction(8);
+        </p>
+        <p>
+            Answer: 16
+        </p>
+    </div>
+    <hr>
+    <div>
+        <p>
+            function myFunction(a, b) { <br>
+            return a * b; <br>
+            } <br>
+            myFunction(11, 3);  
+        </p>
+        <p>
+            Answer: 33
+        </p>
+    </div>
+    <hr>
+    <div>
+        <p>
+            const myObject = { <br>
+            firstName:"Kim", <br>
+            lastName: "Kes", <br>
+            fullName: function () { <br>
+            return this.firstName + " " + this.lastName; <br>
+            } <br>
+            } <br>
+            myObject.fullName();   
+        </p>
+        <p>
+            Answer: Kim Kes
+        </p>
+    </div>
+    <hr>
+    <div>
+        <p>
+            const person = { <br>
+            fullName: function() { <br>
+            return this.firstName + " " + this.lastName; <br>
+            } <br>
+            } <br>
+            const person1 = { <br>
+            firstName:"Katy", <br>
+            lastName: "Perry" <br>
+            } <br>
+            const person2 = { <br>
+            firstName:"Kim", <br>
+            lastName: "Kes" <br>
+            } <br>
+            person.fullName.call(person2);
+        </p>
+        <p>
+            Answer: Kim Kes
         </p>
     </div>
 </body>
