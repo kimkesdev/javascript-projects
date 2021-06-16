@@ -2,24 +2,34 @@
   min-height: 100vh;
 }
 body {
-  background: #b09e99;
+  background: #a774a7;
+}
+.container {
+    margin-top: 25px;
+    margin-left: 25px;
+    margin-right: 25px;
 }
 .quote-container {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(250, 170, 223, 0.5);
 }
 #generate-btn {
-  color: white !important;
-  background: #64b6ac !important;
-  border-color: #64b6ac !important;
+  color: white;
+  background: #64b6ac;
+  border-color: #64b6ac;
   cursor: pointer;
   font-size: 1.5rem;
   padding: 0.5rem 1rem;
+  margin-top: 15px;
 }
 #generate-btn:hover {
-  background: #b09e99 !important;
-  border-color: #b09e99 !important;
-  color: #333333 !important;
+  background: #64b6ac;
+  border-color: #64b6ac;
+  color: #333333;
 }
 .author {
-  color: #64b6ac;
+  color: #333333;
+}
+
+.align-items-center {
+    text-align: center;
 }
