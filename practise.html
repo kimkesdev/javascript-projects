@@ -255,6 +255,19 @@
             112.04166666666667 days
         </p>
     </div>
+    <hr>
+    <p>
+        script: <br>
+       todaydate = new Date(); <br>
+       var oneJan =  new Date(todaydate.getFullYear(), 0, 1);  <br>
+       var numberOfDays =  Math.floor((todaydate - oneJan) / (24 * 60 * 60 * 1000)); <br>
+       var result = Math.ceil(( todaydate.getDay() + 1 + numberOfDays) / 7);   <br>
+       document.write("Week Numbers of current date (" + todaydate + <br>
+       ") is: " + result);
+    </p>
+    <p>
+        Answer: Week Numbers of current date ..
+    </p>
 
 
 
