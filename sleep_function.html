@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleep Function</title>
+    <style>
+         body {
+            background-color: pink;
+        }
+    </style>      
+</head>
+<body>
+    <h1>JavaScript sleep() function 5x</h1>
+
+<script>
+   function sleep(milliseconds) {
+      return new Promise(resolve => setTimeout(resolve, milliseconds));
+   }
+   async function fun() {
+      for (let i = 1; i <=5 ; i++) {        
+         await sleep(2000);
+         document.write( i + " " + "I'm awake, I'm awake!" + " " + "</br>");
+      }
+   }
+   fun();
+</script>
+
+</body>
+</html>
