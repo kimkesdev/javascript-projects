@@ -12,16 +12,30 @@
 </head>
 <body>
     <!-- project 1-->
-    <h1 id = "heading" ondblclick = "fun()"> Hello world :):) </h1>  
+    <h1 id = "heading1" ondblclick = "fun1()"> Hello world :):) </h1>  
     <h2> Double Click the text above to see the effect. </h2>  
     <hr>
-
+    <!-- project 2-->
+    <h1>
+    JavaScript hide elements
+    </h1>
+    <div id = "div2" style = "background-color: rgb(151, 23, 134); font-size: 25px; color: rgb(97, 211, 192);">
+    This is the div element.
+    </div>
+    <p id = "p2" style = "background-color: rgb(151, 23, 134); font-size: 25px; color: rgb(97, 211, 192);"> 
+    This is a paragraph element. </p>
+    <button onclick = "fun2()" id = "btn">Click me!
+    </button>
 <script>  
 // project 1
-function fun() {  
-document.getElementById("heading").innerHTML = "Cool right!";  
+function fun1() {  
+document.getElementById("heading1").innerHTML = "Cool right!";  
 }  
-
+// project 2
+function fun2() {
+document.getElementById("div2").style.display = "none";
+document.getElementById("p2").style.display = "none";
+}
 </script> 
 </body>
 </html>
