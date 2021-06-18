@@ -24,10 +24,15 @@
     </div>
     <p id = "p2" style = "background-color: rgb(151, 23, 134); font-size: 25px; color: rgb(97, 211, 192);"> 
     This is a paragraph element. </p>
-    <button onclick = "fun2()" id = "btn">Click me!
+    <button onclick = "fun2()" id = "btn">Hide the div & p
     </button>
     <hr>
     <!-- project 3-->
+    <p>Fill in something and see what happens.</p>
+    <input type="text" onblur="alert('JavaScript Handling the Blur Event. :) ')">
+    <button type="button">Submit</button>
+    <hr>
+    <!-- project buttom-->
     <h1>Multiplication Table</h1>
 <script>  
 // project 1
@@ -39,7 +44,7 @@ function fun2() {
 document.getElementById("div2").style.display = "none";
 document.getElementById("p2").style.display = "none";
 }
-// project 3
+// project bottom
     var rows = prompt("How many rows for your multiplication table?");
     var cols = prompt("How many columns for your multiplication table?");
     if(rows == "" || rows == null)
