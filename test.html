@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<script type="text/javascript"></script>
+		<!-- WEBORAMA SCREENAD META DATA (don't edit/remove) -->
+		<!-- SCRVERSION: screenad_interface_1.0.3 -->
+		<!-- SCRFORMAT: layer -->
+		<!-- SCRWIDTH: 300 -->
+		<!-- SCRHEIGHT: 600 -->
+		<script type="text/javascript" src="//media.adrcdn.com/scripts/screenad_interface_1.0.3_scrambled.js"></script>
+		<script type="text/javascript">
+
+		</script>
 		<style type="text/css">
 			body {
 				margin: 0px;
 				padding: 0px;
 				background: red;
-            }
-
+			}
 		</style>
 	</head>
-
 	<body>
 	<div id="layer_left">
         <h1>Layer left</h1>
     </div>
-    document.getElementById("layer_left").setAlignment('left', 'top');
-    document.getElementById("layer_left").setOffset(0, 0);
-    document.getElementById("layer_left").setSize('300', '600');
-    document.getElementById("layer_left").position();
-
 <script>
-var window;
-
-function () {
-  window = window.setAlignment('left', 'top');
-}
-
+    function () {
+        document.getElementById("layer_left").setAlignment('left');
+        document.getElementById("layer_left").setOffset('0', '0');
+        document.getElementById("layer_left").setSize('300', '600');
+        document.getElementById("layer_left").position('fixed');
+    }
 </script>
-   	</body>
+</body>
 </html>

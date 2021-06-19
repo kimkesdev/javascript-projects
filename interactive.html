@@ -32,6 +32,11 @@
     <input type="text" onblur="alert('JavaScript Handling the Blur Event. :) ')">
     <button type="button">Submit</button>
     <hr>
+    <!-- project 4 -->
+    <p id="para">CHANGE THE COLOR TO......</p>
+    <button onclick="changeColor('blue');">blue</button>
+    <button onclick="changeColor('red');">red</button>
+    <hr>
     <!-- project buttom-->
     <h1>Multiplication Table</h1>
 <script>  
@@ -43,6 +48,11 @@ document.getElementById("heading1").innerHTML = "Cool right!";
 function fun2() {
 document.getElementById("div2").style.display = "none";
 document.getElementById("p2").style.display = "none";
+}
+// project 4
+function changeColor(newColor) {
+    var elem = document.getElementById('para');
+    elem.style.color = newColor;
 }
 // project bottom
     var rows = prompt("How many rows for your multiplication table?");
