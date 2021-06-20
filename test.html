@@ -23,11 +23,12 @@
         <h1>Layer left</h1>
     </div>
 <script>
-    function () {
-        document.getElementById("layer_left").setAlignment('left');
-        document.getElementById("layer_left").setOffset('0', '0');
-        document.getElementById("layer_left").setSize('300', '600');
-        document.getElementById("layer_left").position('fixed');
+    function layer_left () {
+        var left = document.getElementById("layer_left");
+        left.setAlignment('left');
+        left.setOffset('0', '0');
+        left.setSize('300', '600');
+        left.position('fixed');
     }
 </script>
 </body>
