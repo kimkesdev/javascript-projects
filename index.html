@@ -4,187 +4,197 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JavaScript Projects</title>
-    <link rel="stylesheet" href="style.css">
 </head>
+<style>
+    * {
+  box-sizing: border-box;
+    }
+
+    body {
+    font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* Float four columns side by side */
+    .column {
+    float: left;
+    width: 25%;
+    padding: 0 10px;
+    }
+
+    /* Remove extra left and right margins, due to padding */
+    .row {margin: 0 -5px;}
+
+    /* Clear floats after the columns */
+    .row:after {
+    content: "";
+    display: table;
+    clear: both;
+    }
+
+    /* Responsive columns */
+    @media screen and (max-width: 600px) {
+    .column {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+    }
+    }
+
+    /* Style the counter cards */
+    .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    margin-bottom: 10px;
+    text-align: center;
+    background-image: linear-gradient(orange, white, yellow);
+    }
+
+    a {
+    color: darkred;
+    text-decoration: none;
+    }
+</style>
 <body>
 
     <h1>JavaScript Projects</h1>
+    <br>
+    <h2>Animations</h2>
+    <div class="row"> 
 
-    <div class="row">
-        <div class="column">
-            <div class="card">
-            <h3><a href="form/form.html">Form</a></h3>
-            </div>
-        </div>
+        <div class="column"><div class="card">
+           <h3><a href="animation/form/form.html">Form</a></h3>
+        </div></div>
     
-        <div class="column">
-            <div class="card">
-            <h3><a href="testimonial/testimonial.html">Testimonial</a></h3>
-            </div>
-        </div>
+        <div class="column"><div class="card">
+            <h3><a href="animation/notes/notes.html">Notes</a></h3>
+        </div></div>
 
-        <div class="column">
-            <div class="card">
-            <h3><a href="timeline/timeline.html">Timeline</a></h3>
-            </div>
-        </div>
+        <div class="column"><div class="card">
+            <h3><a href="animation/analog_clock/analog_clock.html">Analog Clock</a></h3>
+        </div></div>
 
-        <div class="column">
-            <div class="card">
-            <h3><a href="cross_road/cross_road.html">Cross Road</a></h3>
-            </div>
-        </div>
+        <div class="column"><div class="card">
+            <h3><a href="animation/countdown/countdown.html">Countdown</a></h3>
+        </div></div>
 
-        <div class="column">
-            <div class="card">
-            <h3><a href="space_invader/space_invader.html">Space Invader</a></h3>
-            </div>
-        </div>
+        <div class="column"><div class="card">
+            <h3><a href="animation/random_number/random_number.html">Random Number</a></h3>
+        </div></div>
 
-        <div class="column">
-            <div class="card">
-            <h3><a href="simple_photo_gallery/simple_photo_gallery.html">Simple Photo Gallery</a></h3>
-            </div>
-        </div>
+        <div class="column"><div class="card">
+            <h3><a href="animation/time/time.html">Time</a></h3>
+        </div></div>
 
-        <div class="column">
-            <div class="card">
-            <h3><a href="rock_paper_scissors/rock_paper_scissors.html">Rock Paper Scissors</a></h3>
-            </div>
-        </div>
-
-        <div class="column">
-            <div class="card">
-            <h3><a href="notes/notes.html">Notes</a></h3>
-            </div>
-        </div>
-
-        <div class="column">
-            <div class="card">
-            <h3><a href="analog_clock/analog_clock.html">Analog Clock</a></h3>
-            </div>
-        </div>
-
-        <div class="column">
-            <div class="card">
-            <h3><a href="countdown/countdown.html">Countdown</a></h3>
-            </div>
-        </div>
-
-        <div class="column">
-            <div class="card">
-            <h3><a href="random_number/random_number.html">Random Number</a></h3>
-            </div>
-        </div>
-
-        <div class="column">
-            <div class="card">
-            <h3><a href="time/time.html">Time</a></h3>
-            </div>
-        </div>
-
-        <div class="column">
-            <div class="card">
-            <h3><a href="birthday_countdown/birthday_countdown.html">Birthday Countdown</a></h3>
-            </div>
-        </div>
-
-        <div class="column">
-            <div class="card">
-            <h3><a href="overlay/overlay.html">Overlay Text Effect</a></h3>
-            </div>
-        </div>
-
-        <div class="column">
-            <div class="card">
-            <h3><a href="activate_animation/activate_animation.html">Activate Animation</a></h3>
-            </div>
-        </div>
+        <div class="column"><div class="card">
+            <h3><a href="animation/activate_animation/activate_animation.html">Activate Animation</a></h3>
+        </div></div>
         
-        <div class="column">
-            <div class="card">
-            <h3><a href="layers/layers.html">Layers</a></h3>
-            </div>
-        </div>
+        <div class="column"><div class="card">
+            <h3><a href="animation/layers/layers.html">Layers</a></h3>
+        </div></div>
 
-        <div class="column">
-            <div class="card">
-            <h3><a href="random_quotes/random_quotes.html">Random Quotes</a></h3>
-            </div>
-        </div>
+        <div class="column"><div class="card">
+            <h3><a href="animation/practise.html">JavaScript Practise</a></h3>
+        </div></div>
 
-        <div class="column">
-            <div class="card">
-            <h3><a href="shoppinglist/shoppinglist.html">Shoppinglist</a></h3>
-            </div>
-        </div>
+        <div class="column"><div class="card">
+            <h3><a href="animation/interactive.html">Interactive</a></h3>
+        </div></div>
 
-        <div class="column">
-            <div class="card">
-            <h3><a href="change_background_color/backgroundcolor.html">Change Background Color</a></h3>
-            </div>
-        </div>
+        <div class="column"><div class="card">
+            <h3><a href="animation/sleep_function.html">Sleep Function</a></h3>
+        </div></div>
+
+        <div class="column"><div class="card">
+            <h3><a href="animation/js_form.html">JS Form</a></h3>
+        </div></div>
+
+
+    </div>
+    <hr>
+    <h2>API</h2>
+    <div class="row">
+
+        <div class="column"><div class="card">
+            <h3><a href="API/random_quotes/random_quotes.html">Random Quotes</a></h3>
+        </div></div>
+
+        <div class="column"><div class="card">
+            <h3><a href="API/weather_app/weather_app.html">Weather App</a></h3>
+        </div></div>
+
+        <div class="column"><div class="card">
+            <h3><a href="API/news_feed/news.html">News Feed</a></h3>
+        </div></div>
+
         
-        <div class="column">
-            <div class="card">
-            <h3><a href="weather_app/weather_app.html">Weather App</a></h3>
-            </div>
-        </div>
 
-        <div class="column">
-            <div class="card">
-            <h3><a href="news_feed/news.html">News Feed</a></h3>
-            </div>
-        </div>
+    </div>
+    <hr>
+    <h2>Games</h2>
+    <div class="row">
 
-        <div class="column">
-            <div class="card">
-            <h3><a href="practise.html">JavaScript Practise</a></h3>
-            </div>
-        </div>
+        <div class="column"><div class="card">
+            <h3><a href="games/cross_road/cross_road.html">Cross Road</a></h3>
+        </div></div>
 
-        <div class="column">
-            <div class="card">
-            <h3><a href="interactive.html">Interactive</a></h3>
-            </div>
-        </div>
+        <div class="column"><div class="card">
+            <h3><a href="games/space_invader/space_invader.html">Space Invader</a></h3>
+        </div></div>
 
-        <div class="column">
-            <div class="card">
-            <h3><a href="sleep_function.html">Sleep Function</a></h3>
-            </div>
-        </div>
+        <div class="column"><div class="card">
+            <h3><a href="games/rock_paper_scissors/rock_paper_scissors.html">Rock Paper Scissors</a></h3>
+        </div></div>
 
-        <div class="column">
-            <div class="card">
-            <h3><a href="js_form.html">JS Form</a></h3>
-            </div>
-        </div>
+        <div class="column"><div class="card">
+            <h3><a href="games/memory_game/memory_game.html">Memory Game</a></h3>
+        </div></div>
 
-        <div class="column">
-            <div class="card">
-            <h3><a href="memory_game/memory_game.html">Memory Game</a></h3>
-            </div>
-        </div>
+        <div class="column"><div class="card">
+            <h3><a href="games/snake/snake.html">Snake</a></h3>
+        </div></div>
 
-        <div class="column">
-            <div class="card">
-            <h3><a href="snake/snake.html">Snake</a></h3>
-            </div>
-        </div>
+        <div class="column"><div class="card">
+            <h3><a href="games/tetris/tetris.html">Tetris</a></h3>
+        </div></div>
 
-        <div class="column">
-            <div class="card">
-            <h3><a href="tetris/tetris.html">Tetris</a></h3>
-            </div>
-        </div>
+        <div class="column"><div class="card">
+            <h3><a href="games/four/four.html">Four</a></h3>
+        </div></div>
 
-        <div class="column">
-            <div class="card">
-            <h3><a href="four/four.html">Four</a></h3>
-            </div>
-        </div>
+    </div>
+    <hr>
+    <h2>Website</h2>
+    <div class="row">
 
+        <div class="column"><div class="card">
+            <h3><a href="website/testimonial/testimonial.html">Testimonial</a></h3>
+        </div></div>
+
+        <div class="column"><div class="card">
+            <h3><a href="website/timeline/timeline.html">Timeline</a></h3>
+        </div></div>
+
+        <div class="column"><div class="card">
+            <h3><a href="website/simple_photo_gallery/simple_photo_gallery.html">Simple Photo Gallery</a></h3>
+        </div></div>
+
+        <div class="column"><div class="card">
+            <h3><a href="website/birthday_countdown/birthday_countdown.html">Birthday Countdown</a></h3>
+        </div></div>
+
+        <div class="column"><div class="card">
+            <h3><a href="website/overlay/overlay.html">Overlay Text Effect</a></h3>
+        </div></div>
+
+        <div class="column"><div class="card">
+            <h3><a href="website/shoppinglist/shoppinglist.html">Shoppinglist</a></h3>
+        </div></div>
+
+        <div class="column"><div class="card">
+            <h3><a href="website/change_background_color/backgroundcolor.html">Change Background Color</a></h3>
+        </div></div>
+        
 
 
 </div> 
