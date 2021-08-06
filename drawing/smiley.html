@@ -4,25 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heart</title>
+    <title>Smiley</title>
     <script>
         function draw() {
             var canvas = document.getElementById('canvas');
             if (canvas.getContext) {
                 var ctx = canvas.getContext('2d');
     
-                // Cubic curves example
                 ctx.beginPath();
-                ctx.moveTo(75, 40);
-                ctx.bezierCurveTo(75, 37, 70, 25, 50, 25);
-                ctx.bezierCurveTo(20, 25, 20, 62.5, 20, 62.5);
-                ctx.bezierCurveTo(20, 80, 40, 102, 75, 120);
-                ctx.bezierCurveTo(110, 102, 130, 80, 130, 62.5);
-                ctx.bezierCurveTo(130, 62.5, 130, 25, 100, 25);
-                ctx.bezierCurveTo(85, 25, 75, 37, 75, 40);
-                ctx.fill();
+                ctx.arc(75, 75, 50, 0, Math.PI * 2, true); // Outer circle
+                ctx.moveTo(110, 75);
+                ctx.arc(75, 75, 35, 0, Math.PI, false);  // Mouth (clockwise)
+                ctx.moveTo(65, 65);
+                ctx.arc(60, 65, 5, 0, Math.PI * 2, true);  // Left eye
+                ctx.moveTo(95, 65);
+                ctx.arc(90, 65, 5, 0, Math.PI * 2, true);  // Right eye
+                ctx.stroke();
             }
-        }
+            }
     </script>
 </head>
 <body onload="draw();">
