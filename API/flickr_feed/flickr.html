@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html ng-app="flickr_Gallery">
+
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+        <link rel="stylesheet" href="flickr.css" />
+        
+        <script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script>
+        <!-- Latest hosted library d.d. 28-08-2021 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        
+        <!-- Latest compiled and minified CSS d.d. 28-08-2021 -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript d.d. 28-08-2021 -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+        <title>Flickr Feed</title>
+    </head>
+
+    <body class= "body" ng-controller="mainController">
+        <header class="container">
+            <nav id="mainNav">
+                <nav id="mainNav" class="navbar navbar-inverse" role="navigation">
+                    <div class="navbar-header">
+                        <p class="flickFont">Flickr Gallery</p> 
+                    </div>
+                    <div class="collapse navbar-collapse" id="mainMenu">
+                        <ul class="nav navbar-nav"></ul>
+                        <form class="navbar-form navbar-right" role="search" style="margin-right:5%">
+                           <div class ="form-group">
+                            <div class="searchPanel">
+                                <input class="form-control input-lg" ng-model="search" ng-change="searchFlickr()" placeholder="Search Tag..." />
+                            </div>
+                            </div>
+                        </form>
+                    </div>
+                </nav>
+            </nav>
+            <div class = "resultNotFound">
+                <div ng-if="!data.length && search">
+                    No Results Found
+                </div>
+            </div>
+    
+            <div>
+                <table class="table" ng-if="data.length && search">
+                    <tbody>
+                      <tr ng-repeat="d in data">
+                        <td>
+                          <a ng-href="{{(d.media.m).replace('_m.jpg', '_h.jpg')}}" target="_blank">
+                            <img ng-if="d.link" class="img-rounded"  style="height:150px;width:150px" ng-src="{{d.media.m}}" />
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </header>
+    </body>        
+       
+    <script src="flickr.js"></script>
+</html>

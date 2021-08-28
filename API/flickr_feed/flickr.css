@@ -1,0 +1,22 @@
+.body{
+    background-color: #aebec1;
+    padding:20px;
+}
+
+.searchPanel{
+    margin-top:30px;
+    margin-bottom:30px;
+}
+
+.flickFont{
+    color: #9d9d9d;
+    font-size: 277%;
+    width: 151%;
+    padding-top: 14%;
+    padding-left: 15%;
+}
+
+.resultNotFound{
+    text-align: center;
+    font-size: 200%;
+}
