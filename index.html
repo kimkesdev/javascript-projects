@@ -6,41 +6,26 @@
     <title>JavaScript Projects</title>
 </head>
 <style>
-    * {
-  box-sizing: border-box;
-    }
-
-    body {
-    font-family: Arial, Helvetica, sans-serif;
-    }
-
-    /* Float four columns side by side */
+    * {box-sizing: border-box;}
+    body {font-family: Arial, Helvetica, sans-serif;}
     .column {
     float: left;
     width: 25%;
     padding: 0 10px;
     }
-
-    /* Remove extra left and right margins, due to padding */
     .row {margin: 0 -5px;}
-
-    /* Clear floats after the columns */
     .row:after {
     content: "";
     display: table;
     clear: both;
     }
-
-    /* Responsive columns */
     @media screen and (max-width: 600px) {
     .column {
         width: 100%;
         display: block;
         margin-bottom: 20px;
+        }
     }
-    }
-
-    /* Style the counter cards */
     .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     padding: 16px;
@@ -48,7 +33,6 @@
     text-align: center;
     background-image: linear-gradient(orange, white, yellow);
     }
-
     a {
     color: darkred;
     text-decoration: none;
@@ -101,6 +85,10 @@
 
         <div class="column"><div class="card">
             <h3><a href="games/tennis/tennis.html">Tennis</a></h3>
+        </div></div>
+
+        <div class="column"><div class="card">
+            <h3><a href="games/hangman/hangman.html">Hangman</a></h3>
         </div></div>
 
     </div>
