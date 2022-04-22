@@ -103,59 +103,60 @@ button {
 </style>
 </head>
 <body>
-    <body>
-        <div id="AdStage">
-          <div class="AdText1">
-            Envelope animation
-          </div>
-          <div class="envelope">
-            <div class="back paper"></div>
-            <div class="contents"></div>
-            <div class="front paper"></div>
-          </div>
-        </div>
-      
-        <div id="buttons">
-          <button id="btnRestart">restart</button>
-        </div>
-      
-      
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script>
-          window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')
-        </script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenLite.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TimelineMax.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/plugins/CSSPlugin.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/easing/EasePack.min.js"></script>
-      
-        <script>
-            
-        var
-        text1 = $('.AdText1'),
-        letter = $('.contents');
-        stage = $('#AdStage');
-        tl = new TimelineLite(),
-        buttons = $('button');
+  <body>
+    <div id="AdStage">
+      <div class="AdText1">
+        Envelope Animation
+      </div>
 
-            tl
-            .fromTo(stage, 0.5,{autoAlpha: 0},{autoAlpha: 1},0.4)
-            .staggerFromTo(text1, 1,{autoAlpha: 0, y: -60},{y: 20, autoAlpha: 1, ease:Power1.easeOut},'-=0.15')
-        .from(letter, 1, {y:-440, ease:Power4.easeNone}, '-=0.15')
+      <div class="envelope">
+        <div class="back paper"></div>
+        <div class="contents"></div>
+        <div class="front paper"></div>
+      </div>
+    </div>
+  
+    <div id="buttons">
+      <button id="btnRestart">restart</button>
+    </div>
+  
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+      window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')
+    </script>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenLite.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TimelineMax.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/plugins/CSSPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/easing/EasePack.min.js"></script>
+  
+    <script>
+      
+var
+text1 = $('.AdText1'),
+letter = $('.contents');
+stage = $('#AdStage');
+tl = new TimelineLite(),
+buttons = $('button');
+
+	tl
+		.fromTo(stage, 0.5,{autoAlpha: 0},{autoAlpha: 1},0.4)
+		.staggerFromTo(text1, 1,{autoAlpha: 0, y: -60},{y: 20, autoAlpha: 1, ease:Power1.easeOut},'-=0.15')
+    .from(letter, 1, {y:-440, ease:Power4.easeNone}, '-=0.15')
 
 		//controls
-
 			$('#btnRestart').on('click',function(){
 				tl.restart();
 			});
 
-        </script>
-      
-      </body>
-      
-      </html>    
+    </script>
+    
+  
+  </body>
+  
+  </html>
 </body>
 </html>
