@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    body {
+	background-color: #424242;
+	width: 100%;
+	margin: 0px;
+	font-family: Arial;
+	margin: 0;
+	padding: 0;
+	position: relative;
+}
+
+.spacer {
+	height: 50vh;
+}
+
+#contact {
+	position: relative;
+	height: 200vh;
+}
+
+#contact > .envelope {
+	background-color: #ddd;
+	position: sticky;
+	top: 25vh;
+	width: 80%;
+	max-width: 550px;
+	height: 50vh;
+	margin: auto;
+	--border-radius: 15px;
+	border-radius: var(--border-radius);
+}
+
+#contact > .envelope .flapWrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.3));
+}
+
+#contact > .envelope .flap {
+	background: linear-gradient(
+		0deg,
+		rgba(238, 238, 238, 1) 0%,
+		rgba(41, 182, 246, 1) 100%
+	);
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	clip-path: polygon(0 0, 100% 0, 100% 8%, 50% 60%, 0 8%);
+	transform-origin: top;
+	backface-visibility: visible;
+	border-radius: var(--border-radius);
+}
+
+#contact > .envelope > .faceWrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	filter: drop-shadow(0px -2px 2px rgba(0, 0, 0, 0.4));
+}
+
+#contact > .envelope .face {
+	background: linear-gradient(
+		0deg,
+		rgba(238, 238, 238, 1) 0%,
+		rgba(41, 182, 246, 1) 100%
+	);
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	clip-path: polygon(
+		0 0,
+		0 100%,
+		100% 100%,
+		100% 0,
+		calc(100% - var(--border-radius)) 0,
+		50% 60%,
+		var(--border-radius) 0
+	);
+	border-radius: var(--border-radius);
+}
+
+#contact > .envelope > .letter {
+	background-color: white;
+	position: absolute;
+	top: 2%;
+	left: 10%;
+	right: 10%;
+	bottom: 0;
+	padding: 30px;
+	border-radius: 5px;
+	margin: auto;
+	box-sizing: border-box;
+}
+
+#contact > .envelope > .letter > h3 {
+	color: #424242;
+	text-align: left;
+	margin: 5px 0px;
+}
+
+#contact > .envelope > .letter > h4 {
+	color: #424242;
+	text-align: left;
+	margin: 5px 0px;
+}
+
+#contact > .envelope > .letter > textarea {
+	width: 100%;
+	max-width: 100%;
+	max-height: 70%;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	color: #424242;
+	margin: 15px auto;
+	padding: 5px;
+	border: none;
+	border-bottom: solid rgba(41, 182, 246, 1) 3px;
+	box-sizing: border-box;
+}
+
+#contact > .envelope > .letter > textarea:focus,
+#contact > .envelope > .letter > input {
+	outline: none;
+}
+
+#contact > .envelope > .letter > input {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	color: #424242;
+	margin: 5px auto;
+	padding: 5px;
+	border: none;
+	border-bottom: solid rgba(41, 182, 246, 1) 3px;
+	box-sizing: border-box;
+	max-width: 100%;
+}
+
+@media only screen and (max-height: 400px) {
+	#contact > .envelope > .letter > textarea {
+		margin: 5px auto;
+	}
+
+	#contact > .envelope {
+		top: 15vh;
+		height: 70vh;
+	}
+
+	#contact > .envelope > .letter {
+		padding: 8px;
+	}
+}
+</style>
+    
+</head>
+<body>
+    <div class="spacer"></div>
+<section id="contact">
+	<div class="envelope">
+		<div class="backFace"></div>
+		<div class="letter">
+			<h3>Hi there,</h3>
+			<textarea rows="1" placeholder="How are you doint?"></textarea>
+			<h4>Talk to you soon.</h4>
+			<input type="text" placeholder="Email" />
+		</div>
+		<div class="faceWrapper">
+			<div class="face"></div>
+		</div>
+		<div class="flapWrapper">
+			<div class="flap"></div>
+		</div>
+	</div>
+</section>
+<div class="spacer"></div>
+<div class="spacer"></div>
+<div class="spacer"></div>
+
+<script>
+    class ContactController {
+	constructor() {
+		this.elm = document.querySelector("#contact");
+
+		this.envelope = this.elm.querySelector(".envelope");
+
+		this.flapWrapper = this.envelope.querySelector(".flapWrapper");
+		this.flap = this.flapWrapper.querySelector(".flap");
+		this.letter = this.envelope.querySelector(".letter");
+
+		this.resize();
+		window.addEventListener("resize", this.resize.bind(this));
+		window.addEventListener("scroll", this.scroll.bind(this), { passive: true });
+	}
+
+	resize() {
+		this.envelope.style.width = "";
+		this.envelope.style.height = "";
+		this.elmPos = this.elm.getBoundingClientRect();
+		this.startPos = this.elm.offsetTop - window.innerHeight / 4;
+		this.endPos =
+			this.startPos + this.elmPos.height - (window.innerHeight * 3) / 4;
+		this.envelopePos = this.envelope.getBoundingClientRect();
+		if (this.envelopePos.width > this.envelopePos.height * 1.47)
+			this.envelope.style.width = `${this.envelopePos.height * 1.47}px`;
+		else this.envelope.style.height = `${this.envelopePos.width / 1.47}px`;
+		this.letterHeight = this.letter.getBoundingClientRect().height;
+	}
+
+	scroll() {
+		const pos = window.scrollY;
+		let flapRotation = this.animate(pos, 0, 30, 0, 180);
+		this.flap.style.transform = `rotateX(${flapRotation}deg)`;
+
+		let letterTranslate = this.animate(pos, 30, 100, 0, this.letterHeight / 1.5);
+		this.envelope.style.transform = `translateY(${letterTranslate}px)`;
+		this.letter.style.transform = `translateY(-${letterTranslate}px)`;
+
+		this.flapWrapper.style.zIndex = Math.floor(this.animate(pos, 30, 31, 1, -1));
+	}
+
+	animate(pos, fromPercent, toPercent, fromOut, toOut) {
+		return pos.map(
+			this.getPosFromPercent(fromPercent),
+			this.getPosFromPercent(toPercent),
+			fromOut,
+			toOut
+		);
+	}
+
+	getPosFromPercent(percent) {
+		let sumDistance = this.endPos - this.startPos;
+		return this.startPos + (sumDistance * percent) / 100;
+	}
+}
+
+Number.prototype.map = function (in_min, in_max, out_min, out_max) {
+	let number = this;
+	if (this > in_max) number = in_max;
+	else if (this < in_min) number = in_min;
+
+	return ((number - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
+};
+
+const contact = new ContactController();
+
+</script>
+</body>
+</html>
