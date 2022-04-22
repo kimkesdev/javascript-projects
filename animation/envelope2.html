@@ -25,26 +25,7 @@
 	font-size: 30px;
 	padding: 20px;
 }
-.AdButton {
-	background-color: white;
-	color: black;
-	font-family: sans-serif;
-	text-align: center;
-	padding: 8px 20px;
-	margin: 0 16px;
-	text-transform: uppercase;
-	text-decoration: none;
-	font-weight: bold;
-	font-size: 14px;
-	position: absolute;
-	top: 498px;
-}
-.AdButton:hover{
-	background-color: #00BCD4;
-}
-.AdLogo {
-	position: absolute;
-	top: 545px;
+
 }
 /*Letter*/
 .envelope {
@@ -127,10 +108,6 @@ button {
           <div class="AdText1">
             Envelope animation
           </div>
-          <a class="AdButton" href="#">Click Here</a>
-          <div class="AdLogo">
-            <img src="https://goo.gl/UC69zP" width="160" height="66">
-          </div>
           <div class="envelope">
             <div class="back paper"></div>
             <div class="contents"></div>
@@ -139,8 +116,6 @@ button {
         </div>
       
         <div id="buttons">
-          <button id="btnPlay">play</button>
-          <button id="btnPause">pause</button>
           <button id="btnRestart">restart</button>
         </div>
       
@@ -172,13 +147,6 @@ button {
         .from(letter, 1, {y:-440, ease:Power4.easeNone}, '-=0.15')
 
 		//controls
-			$('#btnPlay').on('click',function(){
-				tl.play();
-			});
-
-			$('#btnPause').on('click',function(){
-				tl.pause();
-			});
 
 			$('#btnRestart').on('click',function(){
 				tl.restart();
