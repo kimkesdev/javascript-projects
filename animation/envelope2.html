@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-    body {
+body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #323B40;
   color: white;
@@ -25,7 +25,26 @@
 	font-size: 30px;
 	padding: 20px;
 }
-
+.AdButton {
+	background-color: white;
+	color: black;
+	font-family: sans-serif;
+	text-align: center;
+	padding: 8px 20px;
+	margin: 0 16px;
+	text-transform: uppercase;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 14px;
+	position: absolute;
+	top: 498px;
+}
+.AdButton:hover{
+	background-color: #00BCD4;
+}
+.AdLogo {
+	position: absolute;
+	top: 545px;
 }
 /*Letter*/
 .envelope {
@@ -86,12 +105,16 @@
   background-color:#00BCD4;
   margin: 0 auto;
 }
+
+
+
 /*controls*/
 .buttons {
   background-color: #DEDEDE;
   width: 700px;
   padding: 10px 90px;
 }
+
 button {
   border: 1px;
   background-color: #D2D2D2;
@@ -100,15 +123,19 @@ button {
   padding: 10px 20px;
   margin-top: 5px;
 }
+
 </style>
 </head>
 <body>
-  <body>
+
     <div id="AdStage">
       <div class="AdText1">
-        Envelope Animation
+        Heading Title Here
       </div>
-
+      <a class="AdButton" href="#">Click Here</a>
+      <div class="AdLogo">
+        <img src="https://goo.gl/UC69zP" width="160" height="66">
+      </div>
       <div class="envelope">
         <div class="back paper"></div>
         <div class="contents"></div>
@@ -117,6 +144,8 @@ button {
     </div>
   
     <div id="buttons">
+      <button id="btnPlay">play</button>
+      <button id="btnPause">pause</button>
       <button id="btnRestart">restart</button>
     </div>
   
@@ -132,9 +161,8 @@ button {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TimelineMax.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/plugins/CSSPlugin.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/easing/EasePack.min.js"></script>
-  
-    <script>
-      
+  <style>
+    
 var
 text1 = $('.AdText1'),
 letter = $('.contents');
@@ -148,15 +176,19 @@ buttons = $('button');
     .from(letter, 1, {y:-440, ease:Power4.easeNone}, '-=0.15')
 
 		//controls
+			$('#btnPlay').on('click',function(){
+				tl.play();
+			});
+
+			$('#btnPause').on('click',function(){
+				tl.pause();
+			});
+
 			$('#btnRestart').on('click',function(){
 				tl.restart();
 			});
 
-    </script>
-    
-  
-  </body>
-  
-  </html>
+  </style>
+
 </body>
 </html>
