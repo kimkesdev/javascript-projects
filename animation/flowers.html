@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flowers</title>
+</head>
+<body>
+    <script>
+        "use strict";
+
+window.addEventListener("load",function() {
+
+  const NB_DOTS_MIN = 20;
+  const NB_DOTS_MAX = 30;
+  const ACCIDENT_FREQ = 1 / 10;
+
+  let canv, ctx;    // canvas and context
+  let bgcanv, bgctx;    // canvas and context
+  let maxx, maxy;   // canvas dimensions
+
+  let rand = prng('a');
+  let dark = true;
+  let fadeColor, edgeColor;
+
+// for animation
+  let events;
+
+// shortcuts for Math.
+  const mrandom = Math.random;
+  const mfloor = Math.floor;
+  const mround = Math.round;
+  const mceil = Math.ceil;
+  const mabs = Math.abs;
+  const mmin = Math.min;
+  const mmax = Math.max;
+
+  const mPI = Math.PI;
+  const mPIS2 = Math.PI / 2;
+  const mPIS3 = Math.PI / 3;
+  const m2PI = Math.PI * 2;
+  const m2PIS3 = Math.PI * 2 / 3;
+  const msin = Math.sin;
+  const mcos = Math.cos;
+  const matan2 = Math.atan2;
+
+  const mhypot = Math.hypot;
+  const msqrt = Math.sqrt;
+
+  const rac3   = msqrt(3);
+  const rac3s2 = rac3 / 2;
+
+//------------------------------------------------------------------------
+
+function alea (mini, maxi) {
+// random number in given range
+
+  if (typeof(maxi) == 'undefined') return mini * mrandom(); // range 0..mini
+
+  return mini + mrandom() * (maxi - mini); // range mini..maxi
+}
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+function intAlea (mini, maxi) {
+// random integer in given range (mini..maxi - 1 or 0..mini - 1)
+//
+  if (typeof(maxi) == 'undefined') return mfloor(mini * mrandom()); // range 0..mini - 1
+  return mini + mfloor(mrandom() * (maxi - mini)); // range mini .. maxi - 1
+}
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+/*	============================================================================
+	This is based upon Johannes Baagoe's carefully designed and efficient hash
+	function for use with JavaScript.  It has a proven "avalanche" effect such
+	that every bit of the input affects every bit of the output 50% of the time,
+	which is good.	See: http://baagoe.com/en/RandomMusings/hash/avalanche.xhtml
+	============================================================================
+*/
+/* This function returns a hash function depending on a seed.
+
+if no seed is provided (or a falsy value), Math.random() is used.
+The returned function always returns the same number in the range [0..1[ for the
+same value of the argument. This argument may be a String or a Number or anything else
+which can be 'toStringed'
+Two returned functions obtained with two equal seeds are equivalent.
+*/
+
+function hashFunction(seed) {
+  let n0 = 0xefc8249d;
+  let n = n0;
+  mash((seed || Math.random())); // pre-compute n for seed
+  n0 = n; //
+
+	function mash(data) {
+    data = data.toString() + 'U';
+    n = n0;
+    for (let i = 0; i < data.length; i++) {
+      n += data.charCodeAt(i);
+      var h = 0.02519603282416938 * n;
+      n = h >>> 0;
+      h -= n;
+      h *= n;
+      n = h >>> 0;
+      h -= n;
+      n += h * 0x100000000; // 2^32
+    } // for
+    return (n >>> 0) * 2.3283064365386963e-10; // 2^-32
+  } // mash
+  return mash;
+} // hashFunction(seed)
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+/* returns a pseudo-random number generator function.
+  Two generators created with the same seed will return the same sequence of numbers
+  The returned generator function returns numbers in the range 0..1
+*/
+function prng(seed) {
+  const f = hashFunction (seed);
+  let t = 0;
+  return ()=>(f(++t));
+}
+//let mrandom = prng('q')
+
+
+//------------------------------------------------------------------------
+function circularNoise(min, max, period, harmonics, rand = Math.random) {
+/* returns a function to generate noise for something circular
+i.e. a continuous periodical function with period period.
+The value returned is between min and max.
+harmonics is an array of{frq, ampl} objects with frq integer >=2 (number of random points by period)
+and ampl a relative amplitude. ampl should be positive, their sum non-zero.
+A pseudo random numbers generator, which generates values between 0 and 1,
+may be provided, by example for reproducible noise
+remark 1 : a random phase shift is used for every harmonic - no check for frq value,
+may lead to non continuous function if not integer values.
+
+The average value returned is NOT guaranteed to be 0, and won't be
+*/
+
+  let herm;
+// global amplitude
+  let ampl = harmonics.reduce((sum, val) => sum + val.ampl,0);
+
+// copy harmonics, adding random phase shift
+  let myHarms = []; // local copy (with addition of other properties) of harmonics
+  harmonics.forEach ((harm, k) => {
+    herm = {frq: harm.frq, ampl: harm.ampl, phase: rand(), pts: []};
+    for (let k = 0; k < harm.frq; ++k) herm.pts[k] = rand();
+    herm.pts[harm.frq] = herm.pts[0]; // for ease of interpolation
+    myHarms[k] = herm;
+  });
+
+  return function (t) {
+    let sum = 0;
+    let t1, frac, k;
+    myHarms.forEach (harm => {
+      t1 = t / period + harm.phase;
+      t1 -= mfloor(t1);  // 0..1
+      t1 *= harm.frq;    // 0..frq
+      k = mmin(mfloor(t1), harm.frq);
+      frac = t1 - k;
+      frac = (3 - 2 * frac) * frac * frac;
+      sum += (harm.pts[k + 1] * frac + (1 - frac) * harm.pts[k]) * harm.ampl;
+    }); // harmonics.forEach
+    sum /= ampl;
+    return min * (1 - sum) + max * sum;
+  } // function (t)
+
+} // circularNoise
+//------------------------------------------------------------------------
+function Point(x, y) {
+  this.x = x;
+  this.y = y;
+} // Point
+//------------------------------------------------------------------------
+Point.prototype.distance = function (otherPoint) {
+  return mhypot(otherPoint.x - this.x, otherPoint.y - this.y);
+} // Point.prototype.distance
+
+//------------------------------------------------------------------------
+Point.prototype.draw = function (radius, color) {
+  ctx.beginPath();
+  ctx.arc(this.x, this.y, radius, 0, m2PI);
+  ctx.fillStyle = color;
+  ctx.fill();
+} // Point.prototype.draw
+
+//------------------------------------------------------------------------
+
+function drawPoints(points, radius, color) {
+  points.forEach(point => point.draw(radius, color));
+} // drawPoints
+
+//------------------------------------------------------------------------
+function Ellipse(kab, nbPoints) {
+/* creates an ellipse with horizontal axis 1, vertical axis kab 
+ creates nbPoints around it
+ The center is located at (0, 0)
+ The points are moved from their original place to give a nice flower shape,
+ internally tangent to the "true" ellipse
+*/
+
+  this.kab = kab;
+  this.nbPoints = nbPoints;
+  this.dots = [];
+
+  const points = this.setPoints();
+/* we will slightly move these points by adding a noise to the radius
+To make a nice curve between the center and the point, we will create two slightly
+modified copies of the list of angles : one for the start of the curve at the center,
+the other for the end at the point
+*/
+/* noise on radius */
+  let fNoise = circularNoise(0.7,1, nbPoints,[{frq:5, ampl:1},{frq:2, ampl:2}], rand);
+// "normalize" fnoise to have an actual max value of 1
+  let noise = new Array(nbPoints).fill(0).map((v,k)=>fNoise(k));
+// let's add a few "accidents" (isolated inset or outset dots) for more fun
+  noise.forEach((v,k) => {
+    if (alea(1) < ACCIDENT_FREQ) noise[k] *= alea(0.90,1.1);
+  }); // add accidents
+  let maxNoise = 1 / noise.reduce((max, current) => mmax(max, current));
+  noise.forEach((v,k) => noise[k] *= maxNoise);
+  points.map((point, k) => {
+    let r = point.r * noise[k];
+    let p = new Point(r * mcos(point.angle), r * msin(point.angle));
+    this.dots[k] = {r,p};
+  });
+/* angles from center, initial position */
+  fNoise = circularNoise(-0.4 , 0.4, nbPoints,[{frq:3, ampl:2},{frq:4, ampl:1}], rand);
+  this.dots.forEach((dot, k) => dot.cangle0 = points[k].angle + fNoise(k));
+/* angles from point */
+  fNoise = circularNoise(-0.6, 0.6 , nbPoints,[{frq:3, ampl:2},{frq:4, ampl:1}], rand);
+  this.dots.forEach((dot, k) => dot.pangle0 = points[k].angle + fNoise(k));
+/* angles from center, final position */
+  fNoise = circularNoise(-0.6 , 0.6, nbPoints,[{frq:3, ampl:2},{frq:4, ampl:1}], rand);
+  this.dots.forEach((dot, k) => dot.cangle1 = points[k].angle + fNoise(k));
+/* angles from point */
+  fNoise = circularNoise(-0.4, 0.4 , nbPoints,[{frq:3, ampl:2},{frq:4, ampl:1}], rand);
+  this.dots.forEach((dot, k) => dot.pangle1 = points[k].angle + fNoise(k));
+
+} // Ellipse
+//------------------------------------------------------------------------
+
+Ellipse.prototype.setPoints = function() {
+/* spreads points as regularly as possible around the ellipse
+returns array of {r, angle} with 1st point having r = 1 and angle 0
+*/
+  let points, distances, sumDist, avgDist, sumAngles, corrAngles, ratio;
+
+  let angles = new Array(this.nbPoints).fill(m2PI / this.nbPoints);
+
+  anglesToPoints.call(this);
+//  drawPoints(points, 5,"#f00");
+/* we set points to the places given by the angles
+ then we compute the actual distances between points, and their average distance
+ then we change the angles to compensate for the ratio between actual and average distance
+We iterate this process until the min distance / max distance ratio is "very" close to 1,
+which means distances are almost the same.
+*/
+  while (true) {
+
+    distances = [];
+    sumDist = 0;
+    let maxDist = -1, minDist = 1e9;
+    points.forEach ((p, k) => {
+      if (k > 0) {
+        distances[k - 1] = p.distance(points[k - 1]);
+        sumDist += distances[k - 1];
+        if (distances[k - 1] > maxDist) maxDist = distances[k - 1];
+        if (distances[k - 1] < minDist) minDist = distances[k - 1];
+      }
+      return p;
+    });
+    ratio = minDist / maxDist;
+
+  // do not forget distance between last point and first
+    distances[this.nbPoints - 1] = points[0].distance (points[this.nbPoints - 1]);
+    sumDist += distances[this.nbPoints - 1];
+    avgDist = sumDist / this.nbPoints;
+    this.dotsDistance = maxDist;
+    if (ratio > 0.999) break; // good enough
+
+  // now, modif every angle to (try to) compensate the ratio between distance and average distance
+    angles.forEach ((angle, k) => {angles[k] *= avgDist / distances[k]});
+  // "normalize" corrected angles (make their sum 2 pi)
+    sumAngles = angles.reduce((sum, curr) => sum + curr);
+    corrAngles = m2PI / sumAngles;
+    angles = angles.map(val => val * corrAngles);
+
+    anglesToPoints.call(this);
+//    drawPoints(points, 3,`hsl(${40* (k+1) },100%,50%)`);
+
+  }
+
+//  drawPoints(points, 3,`hsl(${60},100%,50%)`);
+
+  return points.map(p => ({r: mhypot(p.x, p.y), angle: matan2(p.y, p.x)}));
+
+
+    function anglesToPoints() {
+
+      let p;
+      let sumAngles = 0;
+
+      points = angles.map((angle, k) => {
+        p = new Point(mcos(sumAngles), this.kab * msin(sumAngles));
+        sumAngles += angle;
+        return p;
+      });
+
+    } // anglesToPoints
+} // setPoints
+//------------------------------------------------------------------------
+
+function Flower(tStamp) {
+
+  this.hue0 = intAlea(360);
+  this.xCenter = alea(1) * maxx;   // final position of center
+  this.hStem = alea(0.15, 0.85) * maxy; // final length of stem
+  this.yCenter = maxy - this.hStem;
+  this.b = alea(0.2, 0.4) * this.hStem;
+  this.dxStem = alea(-0.2, 0.2) * this.hStem;
+  this.xStem = this.xCenter - this.dxStem;
+  this.yStem = maxy;
+  this.kab = 0.7;
+  this.a = this.b / this.kab;
+  Ellipse.call(this, this.kab, intAlea(NB_DOTS_MIN, NB_DOTS_MAX + 1));
+
+  this.color = `hsl(${this.hue0},${intAlea(60,100)}%,${intAlea(40,60)}%)`;
+  this.tStamp = tStamp;
+  this.animDuration = alea(4000, 8000) * this.hStem / maxy;
+} // Flower
+
+Flower.prototype = new Ellipse(1,2); //
+Flower.constructor = Flower;
+
+Flower.prototype.drawDotsPath = function (alpha) {
+
+  const ctx = new Path2D();
+  const radius = mmax(2 + 2 * alpha,this.dotsDistance * this.a * alpha / 2.5 - 1);
+
+  this.dots.forEach (dot => {
+    ctx.moveTo(dot.pp.x + radius, dot.pp.y);
+    ctx.arc(dot.pp.x, dot.pp.y, radius, 0, m2PI);
+  });
+  this.pathDots = ctx;
+} // Flower.drawDots
+//------------------------------------------------------------------------
+Flower.prototype.drawRadiiPath = function(alpha) {
+  const coeff = 0.4;
+  const ctx = new Path2D();
+  const uma = 1 - alpha;
+  this.dots.forEach(dot => {
+    let lBez = coeff * dot.r * this.a * alpha;
+    let cangle = uma * dot.cangle0 + alpha * dot.cangle1;
+    let p1x = this.xc + lBez * mcos(cangle);
+    let p1y = this.yc + lBez * msin(cangle);
+    let pangle = uma * dot.pangle0 + alpha * dot.pangle1;
+    let p2x = dot.pp.x - lBez * mcos(pangle);
+    let p2y = dot.pp.y - lBez * msin(pangle);
+    ctx.moveTo (this.xc, this.yc);
+    ctx.bezierCurveTo(p1x, p1y, p2x, p2y, dot.pp.x, dot.pp.y);
+  });
+  this.pathRadii = ctx;
+} // drawRadii
+
+//------------------------------------------------------------------------
+// calculate actual points positions at given alpah (0..1) value
+Flower.prototype.calcpp = function(alpha) {
+  const scale = this.a * alpha;
+  this.dots.forEach(dot => dot.pp = new Point(this.xc + dot.p.x * scale, this.yc + dot.p.y * scale));
+}
+
+//------------------------------------------------------------------------
+Flower.prototype.drawStemPath = function(alpha) {
+
+// calculates xc and yc of flower too (it's the end of the stem)
+
+  alpha = alpha * (2 -alpha); // ease function
+
+  const ctx = new Path2D();
+
+  const dxStem = alpha * this.dxStem;
+  const dyStem = -alpha * this.hStem;
+
+  this.yc = this.yStem + dyStem;
+  this.xc = this.xStem + dxStem;
+
+  const lStem = mhypot(dxStem, dyStem); // actual length
+
+  const xInterm = this.xStem;
+  const yInterm = this.yStem + dyStem / 2;
+
+  ctx.moveTo (this.xc, this.yc);
+  ctx.quadraticCurveTo(xInterm, yInterm, this.xStem, this.yStem);
+  this.pathStem = ctx;
+
+} // drawStemPath
+
+//------------------------------------------------------------------------
+Flower.prototype.draw = function(ctx,alpha) {
+
+  this.drawStemPath(mmin(1.5 * alpha, 1));
+
+  const alph2 = mmax(0, 1.5 * alpha - 0.5);
+  this.calcpp(alph2);
+  this.drawDotsPath(alph2);
+  this.drawRadiiPath(alph2);
+
+//  const color = `hsl(${intAlea(190,220)},${intAlea(50,100)}%,${intAlea(50,50)}%)`;
+//  const color = `hsl(${intAlea(210,210)},${intAlea(40,100)}%,${intAlea(50,50)}%)`;
+
+  ctx.strokeStyle = edgeColor;
+  ctx.lineWidth = 4;
+  ctx.stroke(this.pathStem);
+  ctx.strokeStyle = this.color;
+  ctx.lineWidth = 2;
+  ctx.stroke(this.pathStem);
+
+  ctx.strokeStyle = edgeColor;
+  ctx.lineWidth = 2;
+  ctx.stroke(this.pathDots);
+  ctx.lineWidth = 4;
+  ctx.stroke(this.pathRadii);
+  ctx.strokeStyle = this.color;
+  ctx.fillStyle = this.color;
+  ctx.lineWidth = 2;
+  ctx.stroke(this.pathRadii);
+  ctx.fill(this.pathDots);
+}
+
+//------------------------------------------------------------------------
+Flower.prototype.animate = function(tStamp) {
+
+/* returns true while playing, false when it is done */
+
+  const alpha = mmin((tStamp - this.tStamp) / this.animDuration,1);
+
+  ctx.clearRect(0, 0, maxx, maxy);
+  this.draw(ctx, alpha)
+  return (alpha < 1);
+
+} // Flower.prototype.animate
+
+//------------------------------------------------------------------------
+
+let animate;
+
+{ // scope for animate
+
+let animState = 0;
+let fnoise;
+let flo;
+let tinit;
+
+animate = function(tStamp) {
+
+  let event;
+
+  event = events.shift();
+  if (event && event.event == 'reset') animState = 0;
+  if (event && event.event == 'click') animState = 0;
+
+  window.requestAnimationFrame(animate)
+
+  switch (animState) {
+
+    case 0 :
+      startOver();
+      ++animState;
+//      break;
+
+    case 1:
+      ++animState;
+      for (let k = 0; k < 60; ++k) {
+        bgctx.fillStyle = fadeColor;
+        bgctx.fillRect(0, 0, maxx, maxy);
+        new Flower().draw(bgctx,1);
+      }
+      break;
+
+    case 2:
+      flo = new Flower(tStamp);
+      ++animState;
+      break;
+
+    case 3:
+      if (! flo.animate(tStamp)){
+        bgctx.fillStyle = fadeColor;
+        bgctx.fillRect(0, 0, maxx, maxy);
+        flo.draw(bgctx, 1);
+       -- animState ;
+       break;
+      }
+
+  } // switch
+
+} // animate
+} // scope for animate
+
+//------------------------------------------------------------------------
+//------------------------------------------------------------------------
+
+function startOver() {
+
+// canvas dimensions
+
+  maxx = window.innerWidth;
+  maxy = window.innerHeight;
+
+  canv.width = bgcanv.width = maxx;
+  canv.height = bgcanv.height = maxy;
+  ctx.lineJoin = 'round';
+  ctx.lineCap = 'round';
+
+  dark = !dark;
+  edgeColor = dark ? "#fff" : "#000";
+  fadeColor = dark ? `rgba(0,0,0,0.1)` : `rgba(255,255,255,0.1)`;
+
+  bgctx.fillStyle = dark ? "#000" : "#fff";
+  bgctx.fillRect(0, 0, maxx, maxy);
+
+} // startOver
+
+//------------------------------------------------------------------------
+
+function mouseClick (event) {
+
+  events.push({event:'click'});;
+
+} // mouseClick
+
+//------------------------------------------------------------------------
+//------------------------------------------------------------------------
+// beginning of execution
+
+  {
+    bgcanv = document.createElement('canvas');
+    bgcanv.style.position="absolute";
+    document.body.appendChild(bgcanv);
+    bgctx = bgcanv.getContext('2d');
+  } // création CANVAS
+  {
+    canv = document.createElement('canvas');
+    canv.style.position="absolute";
+    document.body.appendChild(canv);
+    ctx = canv.getContext('2d');
+//    canv.setAttribute ('title','click me');
+  } // création CANVAS
+  canv.addEventListener('click',mouseClick);
+  events = [{event:'reset'}];
+  requestAnimationFrame (animate);
+
+}); // window load listener
+
+    </script>
+</body>
+</html>
