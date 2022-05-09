@@ -1,218 +1,423 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flowers</title>
-    <style>
-        html, body {
-	height: 100%;
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Flowers</title>
+<style>
+	html,
+body,
+.ag-format-container,
+.ag-products {
+  height: 100%;
 }
 
-body {
-	perspective: 600px;
-	perspective-origin: center center;
-	background: #111;
-	overflow: hidden;
-	&:after {
-		content: "Salom";
-		font-seze:30px;
-		color: rgba(255, 255, 255, .8);
-		text-shadow: 0 1px 0 rgba(0,0,0,.2);
-		position: absolute;
-		padding: 5px;
-		bottom: 0;
-		width: 100%;
-		text-align: center;
-		font-size: 14px;
-	}
+.ag-format-container {
+  width: 1142px;
+  margin: 0 auto;;
 }
 
+.ag-products {
+  background-color: #dbf0f5;
 
-.flower {
-	border-radius: 50%;
-	position: absolute;
-	opacity: 0;
-	.petal {
-		width: inherit;
-		height: inherit;
-		position: absolute;
-		opacity: 0;
-	}
+  overflow: hidden;
+
+  position: relative;
 }
-    </style>
+
+.ag-flower {
+  -webkit-animation-name: an-grow;
+  animation-name: an-grow;
+
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+
+  -webkit-animation-duration: 4s;
+  animation-duration: 4s;
+  
+  z-index: 81;
+  position: absolute;
+  top: 16px;
+}
+.ag-flower span {
+  height: 800px;
+  width: 8px;
+  background: #b4d28c;
+
+  z-index: 5;
+  position: absolute;
+}
+
+.ag-flower span:before {
+  content: "";
+  display: block;
+  height: 48px;
+  width: 48px;
+  background: #a3c872;
+
+  box-shadow: 0 0 0 3px #a1c76f inset;
+
+  border-radius: 0 32px;
+
+  -webkit-transform: rotateY(140deg);
+  transform: rotateY(140deg);
+
+  -webkit-transform-origin: right;
+  transform-origin: right;
+
+  -webkit-animation-name: an-turn-left;
+  animation-name: an-turn-left;
+
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+
+  -webkit-animation-delay: 4s;
+  animation-delay: 4s;
+
+  -webkit-animation-duration: 4s;
+  animation-duration: 4s;
+
+  z-index: 0;
+  position: absolute;
+  top: 80px;
+  left: -48px;
+}
+.ag-flower span:after {
+  content: "";
+  display: block;
+  height: 48px;
+  width: 48px;
+  background: #a8cb7a;
+
+  box-shadow: 0 0 0 3px #a1c76f inset;
+
+  border-radius: 32px 0;
+
+  -webkit-transform: rotateY(-140deg);
+  transform: rotateY(-140deg);
+
+  -webkit-transform-origin: left;
+  transform-origin: left;
+
+  z-index: 0;
+  position: absolute;
+  top: 16px;
+  left: 8px;
+}
+
+.ag-flower-1 {
+  height: 144px;
+  width: 144px;
+  margin-top: 336px;
+  border: 16px solid #f8c475;
+  background-color: #f3f875;
+
+  opacity: 0;
+
+  box-shadow: 0 0 0 3px #f7bc62, 0 0 0 3px #f5f988 inset;
+
+  border-radius: 320px;
+
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+
+  left: 5%;
+}
+.ag-flower-1 span {
+  top: 163px;
+  left: 68px;
+}
+.ag-flower-1 span:before {
+  -webkit-animation-name: an-turn-right;
+  animation-name: an-turn-right;
+
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+}
+.ag-flower-1 span:after {
+  -webkit-animation-name: an-turn-left;
+  animation-name: an-turn-left;
+
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+}
+
+.ag-flower-2 {
+  height: 80px;
+  width: 80px;
+  margin-top: 192px;
+  border: 16px solid #75bff8;
+  background-color: #a6d6fa;
+
+  opacity: 0;
+
+  box-shadow: 0 0 0 3px #62b6f7, 0 0 0 3px #b9dffb inset;
+
+  border-radius: 480px;
+
+  -webkit-animation-delay: .3s;
+  animation-delay: .3s;
+
+  left: 25%;
+}
+.ag-flower-2 span {
+  top: 99px;
+  left: 36px;
+}
+.ag-flower-2 span:before {
+  -webkit-animation-name: an-turn-right;
+  animation-name: an-turn-right;
+
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+
+  -webkit-animation-delay: .3s;
+  animation-delay: .3s;
+
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+}
+.ag-flower-2 span:after {
+  -webkit-animation-name: an-turn-left;
+  animation-name: an-turn-left;
+
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+
+  -webkit-animation-delay: .4s;
+  animation-delay: .4s;
+
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+}
+
+.ag-flower-3 {
+  height: 112px;
+  width: 112px;
+  margin-top: 304px;
+  border: 11px solid #ff89b3;
+  background-color: #d9abff;
+
+  opacity: 0;
+
+  box-shadow: 0 0 0 3px #ff75a6, 0 0 0 3px #e2bfff inset;
+
+  border-radius: 320px;
+
+  -webkit-animation-delay: 1.5s;
+  animation-delay: 1.5s;
+
+  right: 25%;
+}
+.ag-flower-3 span {
+  top: 126px;
+  left: 52px;
+}
+.ag-flower-3 span:before {
+  -webkit-animation-name: an-turn-right;
+  animation-name: an-turn-right;
+
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+
+  -webkit-animation-delay: 1.5s;
+  animation-delay: 1.5s;
+
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+}
+.ag-flower-3 span:after {
+  -webkit-animation-name: an-turn-left;
+  animation-name: an-turn-left;
+
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+
+  -webkit-animation-delay: 2s;
+  animation-delay: 2s;
+
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+}
+
+.ag-flower-4 {
+  height: 176px;
+  width: 176px;
+  margin-top: 144px;
+  border: 19px solid #f8c475;
+  background-color: #f87575;
+
+  opacity: 0;
+
+  box-shadow: 0 0 0 3px #f7bc62, 0 0 0 3px #f98888 inset;
+
+  border-radius: 400px;
+
+  -webkit-animation-delay: 1.8s;
+  animation-delay: 1.8s;
+
+  right: 5%;
+}
+.ag-flower-4 span {
+  top: 198px;
+  left: 84px;
+}
+.ag-flower-4 span:before {
+  -webkit-animation-name: an-turn-right;
+  animation-name: an-turn-right;
+
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+
+  -webkit-animation-delay: 1.8s;
+  animation-delay: 1.8s;
+
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+}
+.ag-flower-4 span:after {
+  -webkit-animation-name: an-turn-left;
+  animation-name: an-turn-left;
+
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+
+  -webkit-animation-delay: 2.4s;
+  animation-delay: 2.4s;
+
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+}
+
+@-webkit-keyframes an-grow {
+  from {
+    top: 240px;
+  }
+  to {
+    top: 16px;
+    opacity: 1;
+  }
+}
+
+@keyframes an-grow {
+  from {
+    top: 240px;
+  }
+  to {
+    top: 16px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes an-turn-right {
+  from {
+    -webkit-transform: rotateY(-140deg);
+    transform: rotateY(-140deg);
+  }
+  to {
+    -webkit-transform: rotateY(0);
+    transform: rotateY(0);
+  }
+}
+
+@keyframes an-turn-right {
+  from {
+    -webkit-transform: rotateY(-140deg);
+    transform: rotateY(-140deg);
+  }
+  to {
+    -webkit-transform: rotateY(0);
+    transform: rotateY(0);
+  }
+}
+
+@-webkit-keyframes an-turn-left {
+  from {
+    -webkit-transform: rotateY(140deg);
+    transform: rotateY(140deg);
+  }
+  to {
+    -webkit-transform: rotateY(0);
+    transform: rotateY(0);
+  }
+}
+
+@keyframes an-turn-left {
+  from {
+    -webkit-transform: rotateY(140deg);
+    transform: rotateY(140deg);
+  }
+  to {
+    -webkit-transform: rotateY(0);
+    transform: rotateY(0);
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .ag-format-container {
+    width: 96%;
+  }
+
+}
+
+@media only screen and (max-width: 639px) {
+
+}
+
+@media only screen and (max-width: 479px) {
+
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+  .ag-format-container {
+    width: 750px;
+  }
+
+}
+
+@media (min-width: 980px) and (max-width: 1161px) {
+  .ag-format-container {
+    width: 960px;
+  }
+
+}
+
+</style>
 </head>
 <body>
-    <h1 style="color:red !import;"></h1>
+	<div class="ag-format-container">
+		<div class="ag-products">
+		  <div class="ag-flower ag-flower-1"><span></span></div>
+		  <div class="ag-flower ag-flower-2"><span></span></div>
+		  <div class="ag-flower ag-flower-3"><span></span></div>
+		  <div class="ag-flower ag-flower-4"><span></span></div>
+		</div>
+	  </div>
 
-    <style>
-        var flowers = [];
-var maxFlowers = 100;
-var w = window.innerWidth;
-var h = window.innerHeight;
-var flowerIndex = 0;
-var x = tx = window.innerWidth/2;
-var y = ty = window.innerHeight/2;
+<script>
+	(function ($) {
+  $(function () {
 
-function random(min, max){
-	return Math.random() * (max - min) + min
-}
+    
 
-
-
-function Flower(){
-	this.size = random(5, 40);
-	this.petals = random(5, 6);
-	this.petalColor = "hsl("+random(0, 360)+", 40%, 70%)";
-	this.centerColor = "rgb(124, 86, 34)";
-	this.direction = Math.random() > .5 ? "right" : "left";
-	this.x = this.origX = 0;
-	this.y = this.origY = 0;
-	this.vx = this.ovx = random(-10, 10);
-	this.vy = this.ovy = random(-10, -3);
-	this.id = "dat-flower-" + flowerIndex; 
-	this.alpha = 0;
-	flowerIndex++;
-	this.life = 0;
-	this.maxLife = random(100,200);
-	this.flower = $("<div />", {
-		class: "flower",
-		id: "dat-flower-" + flowerIndex 
-	}).css({
-		height: this.size,
-		width: this.size,
-		background: this.centerColor,
-		top: window.innerHeight + 300,
-		left: random(0, (window.innerWidth - this.size)),
-		opacity: 0,
-		webkitTransform: "translate3d(0,0,-500px)",
-		transform: "translate3d(0,0,-500px)",
-	});
-	
-	for(var i=0; i<this.petals; i++){
-		var rotate = (i + 1) * (360/this.petals);
-		var translateY = (this.size - (this.size * .2));
-		
-		var petal = $("<div />", {
-			class: "petal",
-		}).css({
-			backgroundColor: this.petalColor,
-			webkitTransform: "rotate(" + rotate + "deg) translateY("+ translateY +"px)",
-			transform: "rotate(" + rotate + "deg) translateY("+ translateY +"px)",
-			opacity: "inherit"
-		});
-		
-		if(this.direction == "right"){
-			petal.css({
-				borderBottomRightRadius: "50%",
-				borderTopRightRadius: "50%",
-			});
-		} else {
-			petal.css({
-				borderBottomLeftRadius: "50%",
-				borderTopLeftRadius: "50%",
-			});
-		}
-		this.flower.append(petal);
-	}
-	
-	$("body").append(this.flower);
-	this.flower = $("#" + this.id);
-}
-
-Flower.prototype.reset = function(){
-	this.x = this.origX;
-	this.y = this.origY;
-	this.vx = this.ovx;
-	this.vy = this.ovy;
-	this.z = -1000;
-	this.life = 0;
-	this.alpha = 0;
-}
-
-Flower.prototype.draw = function(){
-	this.flower.css({
-		webkitTransform: "translate3d("+this.x+"px, "+this.y+"px, "+this.z+"px)",
-		transform: "translate3d("+this.x+"px, "+this.y+"px, "+this.z+"px)",
-		opacity: this.alpha
-	});
-	this.update();
-};
-
-Flower.prototype.update = function(){
-	if(this.life >= this.maxLife){
-		this.reset();
-	} else {
-		this.x += this.vx;
-		this.y += this.vy;
-		this.vy += .01;
-		this.z += 12;
-		this.alpha += .1;
-		this.life++;
-	}
-	
-};
-
-
-for(var i=0; i<maxFlowers; i++){
-	
-	flowers.push( new Flower() );
-	
-	
-}
-
-
-
-
-function anim(){
-	for(var i in flowers){
-		var f = flowers[i];
-		f.draw();
-	}
-	camera();
-	requestAnimationFrame(anim);
-}
-
-function camera(){
-	if(Math.abs(tx - x) > .1 && Math.abs(ty - y) > .1){
-		x += (tx - x) * .05;
-		y += (ty - y) * .05;
-		$("body").css({
-			perspectiveOrigin: x + "px " + y + "px"
-		})
-	}
-	
-}
-
-function touches(e) {
-	var touches = e.touches;
-	var newX, newY;
-	if(touches){
-		console.log(touches);
-		newX = touches[0].clientX;
-		newY = touches[0].clientY;
-	} else {
-		newX = e.clientX;
-	  newY = e.clientY;
-	}
-	tx = (newX - (window.innerWidth/2)) * 3;
-	ty = (newY - (window.innerHeight/2)) * 3;
-	e.preventDefault();
-};
-
-window.addEventListener("mousemove", touches);
-window.addEventListener("touchstart", touches);
-window.addEventListener("touchmove", touches);
-
-$(window).on("mouseleave", function(e){
-	tx = window.innerWidth/2;
-	ty = window.innerHeight/2;
-})
-
-
-
-anim();
-    </style>
+  });
+})(jQuery);
+</script>
 </body>
 </html>
