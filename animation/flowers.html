@@ -69,22 +69,6 @@ function intAlea (mini, maxi) {
 }
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-/*	============================================================================
-	This is based upon Johannes Baagoe's carefully designed and efficient hash
-	function for use with JavaScript.  It has a proven "avalanche" effect such
-	that every bit of the input affects every bit of the output 50% of the time,
-	which is good.	See: http://baagoe.com/en/RandomMusings/hash/avalanche.xhtml
-	============================================================================
-*/
-/* This function returns a hash function depending on a seed.
-
-if no seed is provided (or a falsy value), Math.random() is used.
-The returned function always returns the same number in the range [0..1[ for the
-same value of the argument. This argument may be a String or a Number or anything else
-which can be 'toStringed'
-Two returned functions obtained with two equal seeds are equivalent.
-*/
-
 function hashFunction(seed) {
   let n0 = 0xefc8249d;
   let n = n0;
@@ -110,10 +94,7 @@ function hashFunction(seed) {
 } // hashFunction(seed)
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-/* returns a pseudo-random number generator function.
-  Two generators created with the same seed will return the same sequence of numbers
-  The returned generator function returns numbers in the range 0..1
-*/
+
 function prng(seed) {
   const f = hashFunction (seed);
   let t = 0;
@@ -124,18 +105,6 @@ function prng(seed) {
 
 //------------------------------------------------------------------------
 function circularNoise(min, max, period, harmonics, rand = Math.random) {
-/* returns a function to generate noise for something circular
-i.e. a continuous periodical function with period period.
-The value returned is between min and max.
-harmonics is an array of{frq, ampl} objects with frq integer >=2 (number of random points by period)
-and ampl a relative amplitude. ampl should be positive, their sum non-zero.
-A pseudo random numbers generator, which generates values between 0 and 1,
-may be provided, by example for reproducible noise
-remark 1 : a random phase shift is used for every harmonic - no check for frq value,
-may lead to non continuous function if not integer values.
-
-The average value returned is NOT guaranteed to be 0, and won't be
-*/
 
   let herm;
 // global amplitude
@@ -193,23 +162,13 @@ function drawPoints(points, radius, color) {
 
 //------------------------------------------------------------------------
 function Ellipse(kab, nbPoints) {
-/* creates an ellipse with horizontal axis 1, vertical axis kab 
- creates nbPoints around it
- The center is located at (0, 0)
- The points are moved from their original place to give a nice flower shape,
- internally tangent to the "true" ellipse
-*/
 
   this.kab = kab;
   this.nbPoints = nbPoints;
   this.dots = [];
 
   const points = this.setPoints();
-/* we will slightly move these points by adding a noise to the radius
-To make a nice curve between the center and the point, we will create two slightly
-modified copies of the list of angles : one for the start of the curve at the center,
-the other for the end at the point
-*/
+
 /* noise on radius */
   let fNoise = circularNoise(0.7,1, nbPoints,[{frq:5, ampl:1},{frq:2, ampl:2}], rand);
 // "normalize" fnoise to have an actual max value of 1
@@ -242,21 +201,13 @@ the other for the end at the point
 //------------------------------------------------------------------------
 
 Ellipse.prototype.setPoints = function() {
-/* spreads points as regularly as possible around the ellipse
-returns array of {r, angle} with 1st point having r = 1 and angle 0
-*/
+
   let points, distances, sumDist, avgDist, sumAngles, corrAngles, ratio;
 
   let angles = new Array(this.nbPoints).fill(m2PI / this.nbPoints);
 
   anglesToPoints.call(this);
-//  drawPoints(points, 5,"#f00");
-/* we set points to the places given by the angles
- then we compute the actual distances between points, and their average distance
- then we change the angles to compensate for the ratio between actual and average distance
-We iterate this process until the min distance / max distance ratio is "very" close to 1,
-which means distances are almost the same.
-*/
+
   while (true) {
 
     distances = [];
