@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snowglobe</title>
+<style>
+    html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: #e5eef2;
+  overflow: hidden;
+}
+
+.snowflake {
+  visibility: hidden;
+}
+</style>    
+</head>
+<body>
+    <svg width='100%' height='100%' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+        <defs>
+          <mask id='mask'>
+            <circle fill="#EAEAEA" cx="414.4" cy="284.5" r="212.4" id="circle"/>
+          </mask>
+        </defs>
+        <path fill="#E5EEF2" d="M0 0h800v600H0z" id="rect"/>
+        <g id="shadow" fill="#FFF">
+          <path d="M592.1 556H208.2c-3.1 0-5.7-2.5-5.7-5.7v-7.6c0-3.1 2.5-5.7 5.7-5.7h383.9c3.1 0 5.7 2.5 5.7 5.7v7.6c0 3.2-2.6 5.7-5.7 5.7zM649.4 556h-16.3c-3.1 0-5.7-2.5-5.7-5.7v-7.6c0-3.1 2.5-5.7 5.7-5.7h16.3c3.1 0 5.7 2.5 5.7 5.7v7.6c0 3.2-2.5 5.7-5.7 5.7z"/>
+        </g>
+        <g id="ball">
+          <circle fill="#EAEAEA" cx="414.4" cy="284.5" r="212.4" id="circle"/>
+          <g id="_x33_">
+            <path fill="#AD472B" stroke="#232249" stroke-miterlimit="10" d="M484.3 331.3h69.2v100h-69.2z"/>
+            <path fill="#AD472B" stroke="#232249" stroke-miterlimit="10" d="M484.3 331.3h71.4v9.6h-71.4z"/>
+            <path fill="#9E3F2A" d="M484.3 341.7h68.3v3.3h-68.3z"/>
+            <path fill="#ADA9A8" stroke="#232249" stroke-miterlimit="10" d="M484.3 405.1h69.2v26.1h-69.2z"/>
+            <g stroke="#232249" stroke-miterlimit="10">
+              <path fill="#C4CECE" d="M500.6 368.1h-9.2v-14.7c0-1.5 1.2-2.8 2.8-2.8h3.7c1.5 0 2.8 1.2 2.8 2.8v14.7z"/>
+              <path fill="#ADA9A8" d="M488.5 366.3h14.9v3.1h-14.9z"/>
+              <path fill="#C4CECE" d="M492 359.4h8"/>
+            </g>
+            <g stroke="#232249" stroke-miterlimit="10">
+              <path fill="#C4CECE" d="M523.1 368.1H514v-14.7c0-1.5 1.2-2.8 2.8-2.8h3.7c1.5 0 2.8 1.2 2.8 2.8v14.7z"/>
+              <path fill="#ADA9A8" d="M511 366.3h14.9v3.1H511z"/>
+              <path fill="#C4CECE" d="M514.6 359.4h8"/>
+            </g>
+            <g stroke="#232249" stroke-miterlimit="10">
+              <path fill="#C4CECE" d="M545 368.1h-9.2v-14.7c0-1.5 1.2-2.8 2.7-2.8h3.7c1.5 0 2.8 1.2 2.8 2.8v14.7z"/>
+              <path fill="#ADA9A8" d="M532.9 366.3h14.9v3.1h-14.9z"/>
+              <path fill="#C4CECE" d="M536.5 359.4h8"/>
+            </g>
+            <g stroke="#232249" stroke-miterlimit="10">
+              <path fill="#C4CECE" d="M500.6 393.4h-9.2v-14.7c0-1.5 1.2-2.8 2.8-2.8h3.7c1.5 0 2.8 1.2 2.8 2.8v14.7z"/>
+              <path fill="#ADA9A8" d="M488.5 391.5h14.9v3.1h-14.9z"/>
+              <path fill="#C4CECE" d="M492 384.6h8"/>
+            </g>
+            <g stroke="#232249" stroke-miterlimit="10">
+              <path fill="#C4CECE" d="M523.1 393.4H514v-14.7c0-1.5 1.2-2.8 2.8-2.8h3.7c1.5 0 2.8 1.2 2.8 2.8v14.7z"/>
+              <path fill="#ADA9A8" d="M511 391.5h14.9v3.1H511z"/>
+              <path fill="#C4CECE" d="M514.6 384.6h8"/>
+            </g>
+            <g stroke="#232249" stroke-miterlimit="10">
+              <path fill="#C4CECE" d="M545 393.4h-9.2v-14.7c0-1.5 1.2-2.8 2.7-2.8h3.7c1.5 0 2.8 1.2 2.8 2.8v14.7z"/>
+              <path fill="#ADA9A8" d="M532.9 391.5h14.9v3.1h-14.9z"/>
+              <path fill="#C4CECE" d="M536.5 384.6h8"/>
+            </g>
+            <path fill="#9B3A24" d="M528.5 398.9h8.6v2.5h-8.6zM510.3 336.1h8.6v2.5h-8.6zM493.3 334.8h8.6v2.5h-8.6zM543.5 333.6h8.6v2.5h-8.6zM503.3 374h8.6v2.5h-8.6zM528.5 348.1h8.6v2.5h-8.6z"/>
+            <path fill="#9B3A24" d="M522.1 400.1h8.6v2.5h-8.6z"/>
+            <path fill="#AD472B" stroke="#232249" stroke-miterlimit="10" d="M275.5 341.3h55.3v90h-55.3z"/>
+            <path fill="#AD472B" stroke="#232249" stroke-miterlimit="10" d="M273.7 341.3h57.2v8.6h-57.2z"/>
+            <path fill="#9E3F2A" d="M276.2 350.6h54.7v3h-54.7z"/>
+            <path fill="#ADA9A8" stroke="#232249" stroke-miterlimit="10" d="M275.5 407.8h55.3v23.5h-55.3z"/>
+            <g stroke="#232249" stroke-miterlimit="10">
+              <path fill="#C4CECE" d="M317.9 374.4h7.3v-13.9c0-1-.8-1.9-1.9-1.9h-3.6c-1 0-1.9.8-1.9 1.9v13.9z"/>
+              <path fill="#ADA9A8" d="M315.7 372.8h11.9v2.7h-11.9z"/>
+              <path fill="#C4CECE" d="M324.7 366.6h-6.4"/>
+            </g>
+            <g stroke="#232249" stroke-miterlimit="10">
+              <path fill="#C4CECE" d="M299.8 374.4h7.3v-13.9c0-1-.8-1.9-1.9-1.9h-3.6c-1 0-1.9.8-1.9 1.9v13.9z"/>
+              <path fill="#ADA9A8" d="M297.6 372.8h11.9v2.7h-11.9z"/>
+              <path fill="#C4CECE" d="M306.7 366.6h-6.5"/>
+            </g>
+            <g stroke="#232249" stroke-miterlimit="10">
+              <path fill="#C4CECE" d="M282.3 374.4h7.3v-13.9c0-1-.8-1.9-1.9-1.9h-3.6c-1 0-1.9.8-1.9 1.9v13.9z"/>
+              <path fill="#ADA9A8" d="M280.1 372.8H292v2.7h-11.9z"/>
+              <path fill="#C4CECE" d="M289.2 366.6h-6.5"/>
+            </g>
+            <g stroke="#232249" stroke-miterlimit="10">
+              <path fill="#C4CECE" d="M317.9 397.2h7.3v-13.9c0-1-.8-1.9-1.9-1.9h-3.6c-1 0-1.9.8-1.9 1.9v13.9z"/>
+              <path fill="#ADA9A8" d="M315.7 395.5h11.9v2.7h-11.9z"/>
+              <path fill="#C4CECE" d="M324.7 389.3h-6.4"/>
+            </g>
+            <g stroke="#232249" stroke-miterlimit="10">
+              <path fill="#C4CECE" d="M299.8 397.2h7.3v-13.9c0-1-.8-1.9-1.9-1.9h-3.6c-1 0-1.9.8-1.9 1.9v13.9z"/>
+              <path fill="#ADA9A8" d="M297.6 395.5h11.9v2.7h-11.9z"/>
+              <path fill="#C4CECE" d="M306.7 389.3h-6.5"/>
+            </g>
+            <g stroke="#232249" stroke-miterlimit="10">
+              <path fill="#C4CECE" d="M282.3 397.2h7.3v-13.9c0-1-.8-1.9-1.9-1.9h-3.6c-1 0-1.9.8-1.9 1.9v13.9z"/>
+              <path fill="#ADA9A8" d="M280.1 395.5H292v2.7h-11.9z"/>
+              <path fill="#C4CECE" d="M289.2 389.3h-6.5"/>
+            </g>
+            <path fill="#9B3A24" d="M288.7 402.1h6.9v2.2h-6.9zM303.2 345.6h6.9v2.2h-6.9zM316.8 344.5h6.9v2.2h-6.9zM276.7 343.3h6.9v2.2h-6.9zM308.8 379.8h6.9v2.2h-6.9zM288.7 356.5h6.9v2.2h-6.9z"/>
+            <path fill="#9B3A24" d="M293.7 403.3h6.9v2.2h-6.9z"/>
+          </g>
+          <g id="_x34_">
+            <path fill="#D9B79B" stroke="#232249" stroke-miterlimit="10" d="M314 298.8h94v135.9h-94z"/>
+            <path fill="#C6A48B" d="M407.9 434.7H314l62.4-128 14.2-.6z"/>
+            <path fill="#D9B79B" stroke="#232249" stroke-miterlimit="10" d="M310.6 298.8h97.3v7.1h-97.3z"/>
+            <path fill="#C6A48B" d="M315 306.9h92.9v6H315z"/>
+            <path fill="#C4CECE" stroke="#232249" stroke-miterlimit="10" d="M322.7 317.9h7.5v9.7h-7.5zM342.5 317.9h7.5v9.7h-7.5zM361.5 317.9h7.5v9.7h-7.5zM322.7 337.3h7.5v9.7h-7.5zM342.5 337.3h7.5v9.7h-7.5zM361.5 337.3h7.5v9.7h-7.5zM322.7 356.6h7.5v9.7h-7.5zM342.5 356.6h7.5v9.7h-7.5zM361.5 356.6h7.5v9.7h-7.5zM322.7 375.2h7.5v9.7h-7.5zM342.5 375.2h7.5v9.7h-7.5zM361.5 375.2h7.5v9.7h-7.5z"/>
+          </g>
+          <g id="_x32_">
+            <path fill="#488EA8" stroke="#232249" stroke-miterlimit="10" d="M484.3 434.7h-49.1v-157h49.1z"/>
+            <path fill="#488EA8" stroke="#232249" stroke-miterlimit="10" d="M442.5 277.7h6v156.9h-6z"/>
+            <path fill="#488EA8" stroke="#232249" stroke-miterlimit="10" d="M448.4 277.7h6v156.9h-6zM454.4 277.7h6v156.9h-6z"/>
+            <path fill="#488EA8" stroke="#232249" stroke-miterlimit="10" d="M460.3 277.7h6v156.9h-6zM466.3 277.7h6v156.9h-6z"/>
+            <path fill="#488EA8" stroke="#232249" stroke-miterlimit="10" d="M472.2 277.7h6v156.9h-6z"/>
+            <path opacity=".26" fill="#FFF" d="M435.9 347.5l47.5-26v3.2l-47.5 25.9zM435.9 353.1l47.5-26.1v9.5l-47.5 25z"/>
+          </g>
+          <g id="_x31_">
+            <path fill="#C9CDD1" stroke="#232249" stroke-miterlimit="10" d="M397.2 104.4h2.7v48.5h-2.7zM393 153h11v19.2h-11z"/>
+            <path fill="#C9CDD1" stroke="#232249" stroke-miterlimit="10" d="M390 159.6h16.7v19.2H390z"/>
+            <path fill="#C9CDD1" stroke="#232249" stroke-miterlimit="10" d="M385.7 204.6v-26c0-7.1 5.8-12.9 12.9-12.9 7.1 0 12.9 5.8 12.9 12.9v26"/>
+            <path fill="#C9CDD1" stroke="#232249" stroke-miterlimit="10" d="M411.5 204.6h-25.8v-24.7c0-4.3 3.5-7.8 7.7-7.8h10.3c4.3 0 7.8 3.5 7.8 7.8v24.7z"/>
+            <path fill="#C9CDD1" stroke="#232249" stroke-miterlimit="10" d="M415.3 280.5H382v-87.6c0-5.5 4.5-10 10-10h13.3c5.5 0 10 4.5 10 10v87.6z"/>
+            <path fill="#C9CDD1" stroke="#232249" stroke-miterlimit="10" d="M424.1 434.7V238H408v-31.7c0-5.1-4.1-9.2-9.2-9.2s-9.2 4.1-9.2 9.2V238h-16.1v196.7"/>
+            <path fill="#BEBEBF" stroke="#232249" stroke-miterlimit="10" d="M367.5 315.9h62.8v118.8h-62.8z"/>
+            <path fill="#ACACAD" d="M430.3 434.7h-40.6l40.6-118.8z"/>
+            <path fill="#C9CDD1" stroke="#232249" stroke-miterlimit="10" d="M373.6 434.7h50.5"/>
+            <path fill="#BEBEBF" stroke="#232249" stroke-miterlimit="10" d="M360.8 325.5h12.8v109.1h-12.8z"/>
+            <path fill="#C9CDD1" stroke="#232249" stroke-miterlimit="10" d="M355.8 366h17.8v68.7h-17.8z"/>
+            <path fill="#BEBEBF" stroke="#232249" stroke-miterlimit="10" d="M349.9 388.5h23.7v46.1h-23.7zM424.3 325.5h12.8v109.1h-12.8z"/>
+            <path fill="#C9CDD1" stroke="#232249" stroke-miterlimit="10" d="M424.3 366h17.8v68.7h-17.8z"/>
+            <path fill="#BEBEBF" stroke="#232249" stroke-miterlimit="10" d="M424.3 388.5H448v46.1h-23.7z"/>
+            <path fill="#232249" d="M379.9 245h2.8v65.4h-2.8zM388.3 245h2.8v65.4h-2.8zM397.2 245h2.8v65.4h-2.8zM388.5 331.3h2.8v90h-2.8zM397 331.3h2.8v90H397zM405.9 331.3h2.8v90h-2.8zM406.4 245h2.8v65.4h-2.8zM415.5 245h2.8v65.4h-2.8z"/>
+          </g>
+          <g id="snowflakes" mask="url(#mask)">
+            <circle fill="#FFF" cx="473.1" cy="242.5" r="6.2" class="snowflake"/>
+            <circle fill="#FFF" cx="273.7" cy="246.5" r="5.2" class="snowflake"/>
+            <circle fill="#FFF" cx="298.5" cy="248.6" r="2.8" class="snowflake"/>
+            <circle fill="#FFF" cx="279" cy="274.5" r="6.2" class="snowflake"/>
+            <circle fill="#FFF" cx="515" cy="132.4" r="5.2" class="snowflake"/>
+            <circle fill="#FFF" cx="539.7" cy="134.5" r="2.8" class="snowflake"/>
+            <circle fill="#FFF" cx="520.2" cy="160.3" r="6.2" class="snowflake"/>
+            <circle fill="#FFF" cx="320.9" cy="164.3" r="5.2" class="snowflake"/>
+            <circle fill="#FFF" cx="345.6" cy="166.4" r="2.8" class="snowflake"/>
+            <circle fill="#FFF" cx="326.1" cy="192.3" r="6.2" class="snowflake"/>
+            <circle fill="#FFF" cx="467.8" cy="214.6" r="5.2" class="snowflake"/>
+            <circle fill="#FFF" cx="492.6" cy="216.7" r="2.8" class="snowflake"/>
+          </g>
+          <path fill="#FFF" d="M544.4 417.6c-1.3 0-2.6 0-3.9-.1-.4 0-.9-.1-1.3-.1-.9-.1-1.7-.1-2.6-.2-.5-.1-1-.1-1.5-.2-.8-.1-1.5-.2-2.3-.3-.5-.1-1.1-.2-1.6-.3-.7-.1-1.4-.2-2.1-.4-.6-.1-1.1-.2-1.7-.4-.7-.2-1.4-.3-2-.5-.6-.1-1.1-.3-1.7-.4-.7-.2-1.3-.4-2-.6-.6-.2-1.1-.3-1.7-.5-.6-.2-1.3-.4-1.9-.6-.5-.2-1.1-.4-1.6-.6-.6-.2-1.2-.5-1.8-.7-.5-.2-1.1-.4-1.6-.7-.6-.3-1.2-.5-1.8-.8-.5-.2-1.1-.5-1.6-.8-.6-.3-1.2-.6-1.7-.9-.5-.3-1-.5-1.6-.8-.6-.3-1.1-.6-1.7-1l-1.5-.9c-.5-.3-1.1-.7-1.6-1-.5-.3-1-.6-1.5-1s-1.1-.7-1.6-1.1c-.5-.3-.9-.7-1.4-1-.5-.4-1-.8-1.6-1.2-.4-.3-.9-.7-1.3-1-.6-.5-1.1-1-1.7-1.5-.4-.3-.7-.6-1.1-.9-14.4-8.4-31.1-13.3-49-13.3-8.5 0-16.7 1.1-24.5 3.1-10.6 2.8-20.4 7.9-29.1 14.4-10.8 8.1-28.2 18.1-35.7 20.2-9.1 2.5-20.7 3.8-36.1 3.8-35.1 0-66.7-14.9-89-38.7 25.3 46 67.1 81.6 117.5 98.8.1 1.4.2 2.8.3 4.3 2.5.8 5 1.6 7.6 2.3.2.1.4.1.7.2 2.2.6 4.5 1.2 6.8 1.7.6.1 1.2.3 1.8.4 1.9.4 3.8.9 5.8 1.3.8.2 1.5.3 2.3.4 1.8.3 3.6.7 5.3.9.9.1 1.7.3 2.6.4 1.7.3 3.4.5 5.1.7.9.1 1.8.2 2.8.3 1.7.2 3.4.4 5.2.5.9.1 1.9.2 2.8.2 1.8.1 3.7.2 5.5.3.8 0 1.6.1 2.5.1 2.7.1 5.3.2 8 .2 74 0 139.1-37.8 177.1-95.1-12.5 8.4-27.4 13.1-43.3 13.1z" id="ground_snow"/>
+          <circle fill="none" stroke="#232249" stroke-width="3" stroke-miterlimit="10" cx="415" cy="284.5" r="212.5"/>
+          <circle opacity=".31" fill="#FFF" cx="415" cy="284.5" r="212.5"/>
+          <path fill="#162A5E" stroke="#232249" stroke-width="3" stroke-miterlimit="10" d="M570.3 541.9H258.8c-.9 0-1.7-.8-1.7-1.7v-99.9c0-.9.8-1.7 1.7-1.7h311.5c.9 0 1.7.8 1.7 1.7v99.9c0 1-.7 1.7-1.7 1.7z"/>
+          <path fill="none" stroke="#FFF" stroke-width="3" stroke-miterlimit="10" d="M308.1 129c7.6-5.2 15.6-9.9 24-14M226.3 284.5c0-58.1 26.2-110.1 67.5-144.7"/>
+          <path fill="none" stroke="#232249" stroke-width="5" stroke-miterlimit="10" d="M275.6 457.2v48M275.6 517.9v12.7"/>
+          <circle opacity=".25" fill="#FFF" cx="553.5" cy="216" r="37.2"/>
+          <circle opacity=".25" fill="#FFF" cx="590.7" cy="277.7" r="17.5"/>
+          <path fill="#D9B79B" d="M360.6 478.5H478v26.7H360.6z"/>
+          <path fill="#CCAA92" d="M478 505.2H360.6l112.5-26.7h4.9z"/>
+          <path fill="none" stroke="#232249" stroke-width="2" stroke-miterlimit="10" d="M476.7 505.2H361.9c-.7 0-1.3-.6-1.3-1.3v-24c0-.7.6-1.3 1.3-1.3h114.8c.7 0 1.3.6 1.3 1.3v24c0 .7-.6 1.3-1.3 1.3z"/>
+          <circle fill="#FFF" cx="471.5" cy="491.7" r="1.4"/>
+          <circle fill="#FFF" cx="366.8" cy="491.7" r="1.4"/>
+        </g>
+      </svg>
+<script>
+var snowflakes = document.querySelectorAll('.snowflake');
+
+TweenMax.set(snowflakes, {
+	css: {
+		visibility: 'visible',
+		y: -160
+	}
+});
+
+TweenMax.staggerTo(snowflakes, 2.8, {
+	y: 290,
+	repeat: -1
+}, .4); 
+</script>      
+</body>
+</html>
