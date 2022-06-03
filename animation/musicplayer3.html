@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <title>Music Player</title>
+<style>
+    *,*::before,*::after{
+  box-sizing:border-box;
+}
+
+body{
+  /*   display:flex; */
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  margin:0;
+  /*   background-color:#333; */
+  color:#ffffff;
+  width:100%;
+}
+
+.bg{
+  background-image:url("https://images.pexels.com/photos/2264753/pexels-photo-2264753.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250&w=250");
+  position:relative;
+  filter:blur(4px);
+  height:100%;
+  background-repeat:no-repeat;
+  background-size:cover;
+}
+
+.audio-container{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+
+.track-img{
+  border-radius:10px;
+  height:200px;
+  width:200px;
+}
+
+.track-name,.track-artist{
+  margin:10px;
+}
+
+.btn-controls,.seek-container{
+  display:flex;
+  width:100%;
+  justify-content:space-between;
+  align-items:center;
+  margin:10px 0;
+}
+
+.btn{
+  cursor:pointer;
+}
+</style>
+</head>
+  <body>
+    <div class="bg"></div>
+    <div class="audio-container">
+      <div class="currentSongNum">1 of 3</div>
+      <img class="track-img" src="https://images.pexels.com/photos/2264753/pexels-photo-2264753.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250&w=250"/>
+      <h2 class="track-name">--</h2>
+      <h4 class="track-artist">--</h4>
+      <div class="btn-controls">
+        <div class="btn change-track prev-track"><i class="fa fa-step-backward fa-2x"></i> </div>
+        <div class="btn playpause-track"><i class="fa fa-play-circle fa-5x"></i> </div>
+        <div class="btn change-track next-track"><i class="fa fa-step-forward fa-2x"></i> </div>
+      </div>
+      <div class="seek-container">
+        <div id="curr-time">00:00</div>        
+        <input id="seek-slider" type="range" min="1" max="100" value="0" />
+        <div id="total-time">00:00</div>
+      </div>
+      <div class="seek-container">
+        <i class="fa fa-volume-down"></i>        
+        <input id="vol-slider" type="range" min="1" max="100" value="99" />
+        <i class="fa fa-volume-up"></i>        
+      </div>
+    </div>
+    <script>
+            path: "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/WFMU/Broke_For_Free/Directionless_EP/Broke_For_Free_-_01_-_Night_Owl.mp3"
+
+    </script>
+  </body>
+</html>
