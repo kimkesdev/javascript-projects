@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Avatars</title>
+<style>
+    /* GENERAL */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* CONTAINER WITH BUBBLES */
+section {
+  position: relative;
+  width: 1200px;
+  height: 300px;
+}
+
+/* AVATARS */
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* BUBBLES */
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: 350ms all;
+}
+
+.bubble:hover {
+  transform: scale(1.1);
+}
+
+
+.bubble1 {
+  width: 51px;
+  height: 51px;
+  left: 269px;
+  top: 139px;
+}
+
+.bubble2 {
+  width: 52px;
+  height: 52px;
+  left: 333px;
+  top: 181px;
+}
+
+.bubble3 {
+  width: 51px;
+  height: 51px;
+  left: 702px;
+  top: 181px;
+}
+
+.bubble4 {
+  width: 51px;
+  height: 51px;
+  left: 837px;
+  top: 63px;
+}
+  
+.bubble5 {
+  width: 49px;
+  height: 49px;
+  left: 860px;
+  top: 132px;
+}
+
+.bubble6 {
+  width: 38px;
+  height: 38px;
+  left: 305px;
+  top: 101px;
+}
+
+.bubble7 {
+  width: 36px;
+  height: 36px;
+  left: 545px;
+  top: 21px;
+}
+
+.bubble8 {
+  width: 36px;
+  height: 36px;
+  left: 341px;
+  top: 86px;
+}
+
+.bubble9 {
+  width: 39px;
+  height: 39px;
+  left: 526px;
+  top: 175px;
+}
+
+.bubble10{
+  width: 37px;
+  height: 37px;
+  left: 642px;
+  top: 44px;
+}
+
+.bubble11{
+  width: 27px;
+  height: 27px;
+  left: 848px;
+  top: 116px;
+}
+
+.bubble12{
+  width: 27px;
+  height: 27px;
+  left: 875px;
+  top: 181px;
+}
+
+.bubble13{
+  width: 27px;
+  height: 27px;
+  left: 711px;
+  top: 229px;
+}
+
+.bubble14{
+  width: 29px;
+  height: 29px;
+  left: 503px;
+  top: 252px;
+}
+
+.bubble15{
+  width: 27px;
+  height: 27px;
+  left: 278px;
+  top: 193px;
+}
+
+.bubble16{
+  width: 27px;
+  height: 27px;
+  left: 240px;
+  top: 153px;
+}
+
+.bubble17{
+  width: 33px;
+  height: 33px;
+  left: 381px;
+  top: 107px;
+}
+
+.bubble18{
+  width: 19px;
+  height: 19px;
+  left: 381px;
+  top: 78px;
+}
+
+.bubble19{
+  width: 19px;
+  height: 19px;
+  left: 614px;
+  top: 50px;
+}
+
+.bubble20{
+  width: 10px;
+  height: 10px;
+  left: 745px;
+  top: 38px;
+}
+
+.bubble21{
+  width: 9px;
+  height: 9px;
+  left: 841px;
+  top: 57px;
+}
+
+.bubble22{
+  width: 10px;
+  height: 10px;
+  left: 846px;
+  top: 217px;
+}
+
+.bubble23{
+  width: 10px;
+  height: 10px;
+  left: 949px;
+  top: 150px;
+}
+
+.bubble24{
+  width: 10px;
+  height: 10px;
+  left: 789px;
+  top: 244px;
+}
+
+.bubble25{
+  width: 9px;
+  height: 9px;
+  left: 332px;
+  top: 238px;
+}
+
+.bubble26{
+  width: 10px;
+  height: 10px;
+  left: 314px;
+  top: 193px;
+}
+
+.bubble27{
+  width: 9px;
+  height: 9px;
+  left: 366px;
+  top: 74px;
+}
+
+.bubble28{
+  width: 10px;
+  height: 10px;
+  left: 425px;
+  top: 32px;
+}
+
+.bubble29{
+  width: 9px;
+  height: 9px;
+  left: 532px;
+  top: 34px;
+}
+
+.bubble30{
+  width: 10px;
+  height: 10px;
+  left: 629px;
+  top: 69px;
+}
+
+.bubble31{
+  width: 17px;
+  height: 17px;
+  left: 286px;
+  top: 120px;
+}
+  
+.bubble32{
+  width: 17px;
+  height: 17px;
+  left: 391px;
+  top: 212px;
+}
+
+.bubble33{
+  width: 15px;
+  height: 15px;
+  left: 488px;
+  top: 252px;
+}
+
+.bubble34{
+  width: 23px;
+  height: 23px;
+  left: 459px;
+  top: 244px;
+}
+
+.bubble35{
+  width: 41px;
+  height: 41px;
+  left: 743px;
+  top: 217px;
+}
+
+.bubble36{
+  width: 46px;
+  height: 46px;
+  left: 408px;
+  top: 74px;
+}
+
+.bubble37{
+  width: 42px;
+  height: 42px;
+  left: 446px;
+  top: 93px;
+}
+
+.bubble38{
+  width: 80px;
+  height: 80px;
+  left: 389px;
+  top: 118px;
+}
+
+.bubble39{
+  width: 65px;
+  height: 65px;
+  left: 320px;
+  top: 132px;
+}
+
+.bubble40{
+  width: 76px;
+  height: 76px;
+  left: 465px;
+  top: 116px;
+}
+
+.bubble41{
+  width: 78px;
+  height: 78px;
+  left: 480px;
+  top: 46px;
+}
+
+.bubble42{
+  width: 65px;
+  height: 65px;
+  left: 431px;
+  top: 29px;
+}
+
+.bubble43{
+  width: 65px;
+  height: 65px;
+  left: 564px;
+  top: 50px;
+}
+
+.bubble44{
+  width: 58px;
+  height: 58px;
+  left: 623px;
+  top: 78px;
+}
+
+.bubble45{
+  width: 96px;
+  height: 96px;
+  left: 545px;
+  top: 113px;
+}
+
+.bubble46{
+  width: 29px;
+  height: 29px;
+  left: 541px;
+  top: 93px;
+}
+
+.bubble47{
+  width: 30px;
+  height: 30px;
+  left: 448px;
+  top: 179px;
+}
+
+.bubble48{
+  width: 57px;
+  height: 57px;
+  left: 408px;
+  top: 189px;
+}
+
+.bubble49{
+  width: 72px;
+  height: 72px;
+  left: 469px;
+  top: 177px;
+}
+
+.bubble50{
+  width: 31px;
+  height: 31px;
+  left: 381px;
+  top: 183px;
+}
+
+.bubble51{
+  width: 70px;
+  height: 70px;
+  left: 536px;
+  top: 204px;
+}
+
+.bubble52{
+  width: 49px;
+  height: 49px;
+  left: 597px;
+  top: 208px;
+}
+
+.bubble53{
+  width: 76px;
+  height: 76px;
+  left: 637px;
+  top: 195px;
+}
+
+.bubble54{
+  width: 25px;
+  height: 25px;
+  left: 625px;
+  top: 187px;
+}
+
+.bubble55{
+  width: 74px;
+  height: 74px;
+  left: 650px;
+  top: 122px;
+}
+
+.bubble56{
+  width: 44px;
+  height: 44px;
+  left: 700px;
+  top: 93px;
+}
+
+.bubble57{
+  width: 20px;
+  height: 20px;
+  left: 684px;
+  top: 100px;
+}
+
+.bubble58{
+  width: 75px;
+  height: 75px;
+  left: 724px;
+  top: 122px;
+}
+
+.bubble59{
+  width: 45px;
+  height: 45px;
+  left: 674px;
+  top: 55px;
+}
+
+.bubble60{
+  width: 59px;
+  height: 59px;
+  left: 717px;
+  top: 50px;
+}
+
+.bubble61{
+  width: 32px;
+  height: 32px;
+  left: 757px;
+  top: 38px;
+}
+
+.bubble62{
+  width: 21px;
+  height: 21px;
+  left: 526px;
+  top: 124px;
+}
+
+.bubble63{
+  width: 21px;
+  height: 21px;
+  left: 610px;
+  top: 113px;
+}
+
+.bubble64{
+  width: 28px;
+  height: 28px;
+  left: 633px;
+  top: 151px;
+}
+
+.bubble65{
+  width: 37px;
+  height: 37px;
+  left: 747px;
+  top: 175px;
+}
+
+.bubble66{
+  width: 61px;
+  height: 61px;
+  left: 776px;
+  top: 179px;
+}
+
+.bubble67{
+  width: 61px;
+  height: 61px;
+  left: 799px;
+  top: 132px;
+}
+
+.bubble68{
+  width: 75px;
+  height: 75px;
+  left: 768px;
+  top: 63px;
+}
+
+.bubble69{
+  width: 37px;
+  height: 37px;
+  left: 911px;
+  top: 135px;
+}
+
+.bubble70{
+  width: 36px;
+  height: 36px;
+  left: 839px;
+  top: 175px;
+}
+</style>    
+</head>
+<body>
+    <section id="avatars"></section>
+<script>
+const COLORS = ["3C67EA", "242D48", "A136B4", "5C5AC6", "2BBDCB", "14A687", "DB3743", "FFBB16", "2BBDCB", "413EA7", "EB4A61", "FFA437", "00A8EC", "F7E64F", "00C8B2", "546775", "B31C1C"];
+
+const AVATARS = [
+ "https://pixabay.com/nl/illustrations/vrouw-meisje-mooi-portret-mode-3219507.jpg"
+  "https://cdn.pixabay.com/photo/2014/01/02/04/14/woman-237438_1280.jpg",
+  "https://cdn.pixabay.com/photo/2016/11/10/12/33/model-1814200_1280.jpg",
+  "https://cdn.pixabay.com/photo/2014/01/03/01/13/woman-237871_1280.jpg",
+"https://pixabay.com/nl/photos/mooi-vrouw-portret-model-verzinnen-2359121.jpg"
+  "https://cdn.pixabay.com/photo/2017/12/17/08/12/girl-3023831_1280.jpg",
+  "https://cdn.pixabay.com/photo/2016/11/29/06/46/adult-1867889_1280.jpg",
+  "https://cdn.pixabay.com/photo/2016/11/29/03/52/man-1867175_1280.jpg",
+  "https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg",
+  "https://cdn.pixabay.com/photo/2016/11/18/19/07/happy-1836445_1280.jpg",
+  "https://cdn.pixabay.com/photo/2015/03/03/20/42/man-657869_1280.jpg",
+"https://pixabay.com/nl/photos/meisje-handen-portret-model-3033718.jpg"
+  "https://cdn.pixabay.com/photo/2019/11/03/05/36/portrait-4597853_1280.jpg",
+  "https://cdn.pixabay.com/photo/2016/11/29/10/10/girl-1868930_1280.jpg",
+  "https://cdn.pixabay.com/photo/2019/12/21/21/15/man-4711375_1280.jpg"
+];
+
+function render() {
+  let list = document.getElementById("avatars");
+  for (let i = 0; i < 70; i += 1) {
+    let bubble = document.createElement("div");
+    bubble.setAttribute("class", "bubble bubble" + (i + 1));
+    let colorIdx = Math.floor(Math.random() * 17);
+    bubble.style.background = "#" + COLORS[colorIdx];
+    list.appendChild(bubble);
+  }
+}
+
+//Sorts bubbles from largest to smallest and allocates with avatars starting from largest
+function addAvatars() {
+  let bubblesNodeList = document.querySelectorAll(".bubble");
+  let bubblesArr = [];
+  for (let i = 0; i < bubblesNodeList.length; i += 1) {
+    bubblesArr.push(bubblesNodeList[i]);
+  }
+  bubblesArr.sort((a,b) => b.clientWidth - a.clientWidth);
+  for (let i = 0; i < AVATARS.length; i += 1) {
+    let bubble = bubblesArr[i];
+    bubble.style.background = "#fff";
+    let img = document.createElement("img");
+    img.setAttribute("src", AVATARS[i]);
+    img.setAttribute("alt", "User's avatar");
+    bubble.appendChild(img);
+  }
+}
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+}
+
+render();
+shuffleArray(AVATARS);
+addAvatars();
+</script>    
+</body>
+</html>
