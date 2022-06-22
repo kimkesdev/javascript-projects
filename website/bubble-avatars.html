@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bubble Avatars</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-    /* GENERAL */
+/* GENERAL */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -540,72 +539,19 @@ img {
   left: 839px;
   top: 175px;
 }
-</style>    
+</style>
 </head>
 <body>
-    <section id="avatars"></section>
-<script>
-const COLORS = ["3C67EA", "242D48", "A136B4", "5C5AC6", "2BBDCB", "14A687", "DB3743", "FFBB16", "2BBDCB", "413EA7", "EB4A61", "FFA437", "00A8EC", "F7E64F", "00C8B2", "546775", "B31C1C"];
+  <section id="avatars">
+    <!--  
+    * Creates 70 bubbles.
+    
+    * Sorts them by CSS size.
+    
+    * Starts to fill with avatars from largest bubble to make sure all users will be visible.
+      -->
+      
+    </section>
 
-const AVATARS = [
- "https://pixabay.com/nl/illustrations/vrouw-meisje-mooi-portret-mode-3219507.jpg"
-  "https://cdn.pixabay.com/photo/2014/01/02/04/14/woman-237438_1280.jpg",
-  "https://cdn.pixabay.com/photo/2016/11/10/12/33/model-1814200_1280.jpg",
-  "https://cdn.pixabay.com/photo/2014/01/03/01/13/woman-237871_1280.jpg",
-"https://pixabay.com/nl/photos/mooi-vrouw-portret-model-verzinnen-2359121.jpg"
-  "https://cdn.pixabay.com/photo/2017/12/17/08/12/girl-3023831_1280.jpg",
-  "https://cdn.pixabay.com/photo/2016/11/29/06/46/adult-1867889_1280.jpg",
-  "https://cdn.pixabay.com/photo/2016/11/29/03/52/man-1867175_1280.jpg",
-  "https://cdn.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg",
-  "https://cdn.pixabay.com/photo/2016/11/18/19/07/happy-1836445_1280.jpg",
-  "https://cdn.pixabay.com/photo/2015/03/03/20/42/man-657869_1280.jpg",
-"https://pixabay.com/nl/photos/meisje-handen-portret-model-3033718.jpg"
-  "https://cdn.pixabay.com/photo/2019/11/03/05/36/portrait-4597853_1280.jpg",
-  "https://cdn.pixabay.com/photo/2016/11/29/10/10/girl-1868930_1280.jpg",
-  "https://cdn.pixabay.com/photo/2019/12/21/21/15/man-4711375_1280.jpg"
-];
-
-function render() {
-  let list = document.getElementById("avatars");
-  for (let i = 0; i < 70; i += 1) {
-    let bubble = document.createElement("div");
-    bubble.setAttribute("class", "bubble bubble" + (i + 1));
-    let colorIdx = Math.floor(Math.random() * 17);
-    bubble.style.background = "#" + COLORS[colorIdx];
-    list.appendChild(bubble);
-  }
-}
-
-//Sorts bubbles from largest to smallest and allocates with avatars starting from largest
-function addAvatars() {
-  let bubblesNodeList = document.querySelectorAll(".bubble");
-  let bubblesArr = [];
-  for (let i = 0; i < bubblesNodeList.length; i += 1) {
-    bubblesArr.push(bubblesNodeList[i]);
-  }
-  bubblesArr.sort((a,b) => b.clientWidth - a.clientWidth);
-  for (let i = 0; i < AVATARS.length; i += 1) {
-    let bubble = bubblesArr[i];
-    bubble.style.background = "#fff";
-    let img = document.createElement("img");
-    img.setAttribute("src", AVATARS[i]);
-    img.setAttribute("alt", "User's avatar");
-    bubble.appendChild(img);
-  }
-}
-
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-  }
-}
-
-render();
-shuffleArray(AVATARS);
-addAvatars();
-</script>    
 </body>
 </html>
