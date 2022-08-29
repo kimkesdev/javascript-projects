@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    /*Colors
+VIOLET: #b110d9;
+INDIGO: #6810d9;
+BLUE: #1085d9;
+GREEN: #10d95a;
+YELLOW: #d9c510;
+ORANGE: #d97d10;
+RED: #d93410;
+*/
+
+:root {
+  background-color: #262428;
+}
+
+#info {
+  position: absolute;
+  border: 10px white solid;
+  display: inline-block;
+  margin-left: 60px;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  border-color: #6c6c78;
+  box-sizing: border-box;
+}
+
+.menu{
+  margin-top: 2%;
+  margin-left: 20%;
+  position: relative;
+  width: 60%;
+  height: auto;
+}
+
+.menu div {
+  position: inherit;
+  margin-bottom: 2px;
+  width: 60px;
+  height: 60px;
+  background-color: pink;
+  border-radius: 10px;
+}
+
+#violet {
+  background-color: #b110d9;
+}
+#violet img{
+
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 9px;
+  top: 8px;
+  display: none;
+}
+
+#indigo {
+  background-color: #6810d9;
+}
+#indigo img{
+  position: absolute;
+  width: 40px;
+  height: 50px;
+  left: 9px;
+  top: 4px;
+  display: none;
+}
+
+#blue {
+  background-color: #1085d9;
+}
+#blue img {
+  position: absolute;
+  width: 35px;
+  height: 55px;
+  left: 14px;
+  top: 6px;
+  display: none;
+}
+
+#green {
+  background-color: #10d95a;
+}
+#green img {
+  position: absolute;
+  width: 42px;
+  height: 52px;
+  left: 10px;
+  top: 4px;
+  display: none;
+}
+
+#yellow {
+  background-color: #d9c510;
+}
+#yellow img {
+    position: absolute;
+    width: 50px;
+    height: 55px;
+    left: 6px;
+    top: 2px;
+    display: none;
+  }
+
+#orange {
+  background-color: #d97d10;
+}
+#orange img {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  left: 2px;
+  top: 0px;
+  display: none;
+}
+
+#red {
+  background-color: #d93410;
+}
+#red img {
+  position: absolute;
+  width: 50px;
+  height: 55px;
+  left: 6px;
+  top: 4px;
+  display: none;
+}
+
+</style>
+</head>
+<body>
+    <div class="menu">
+        <aside id="info">
+        </aside>
+        <div class="chakra" id="violet">
+          <img id="violet-letter" src="https://s15.postimg.cc/9a281traj/violet.png" >
+        </div>
+        <div class="chakra" id="indigo">
+          <img id="indigo-letter" src="https://s15.postimg.cc/vyrf1dliz/indigo.png" >
+        </div>
+        <div class="chakra" id="blue">
+          <img id="blue-letter" src="https://s15.postimg.cc/j7d8uu1gb/blue.png" >
+        </div>
+        <div class="chakra" id="green">
+          <img id="green-letter" src="https://s15.postimg.cc/me7sehgrf/green.png" >
+        </div>
+        <div class="chakra" id="yellow">
+          <img id="yellow-letter" src="https://s15.postimg.cc/lop0253d7/yellow.png" >
+        </div>
+        <div class="chakra" id="orange">
+          <img id="orange-letter" src="https://s15.postimg.cc/4bepn9smj/orange.png" >
+        </div>
+        <div class="chakra" id="red">
+          <img id="red-letter" src="https://s15.postimg.cc/accekd2e3/red.png" >
+        </div>
+      </div>
+    
+      <script src="main.js" charset="utf-8"></script>
+    
+    </body>
+    
+    </html>
+
+    <script>
+        const chakras = document.getElementsByClassName("chakra");
+for (let i = 0; i < chakras.length; i++) {
+  chakras[i].addEventListener("mouseenter", changeContent);
+}
+
+function changeContent(e) {
+  const contentWindow = document.getElementById("info");
+  const newColor = window.getComputedStyle(e.target, null).backgroundColor;
+  const letter = e.target.getElementsByTagName("img");
+  const otherLetters = document.getElementsByClassName("menu")[0].getElementsByTagName("img");
+
+  contentWindow.style.borderColor = newColor;
+  contentWindow.style.backgroundColor = newColor.substring(0, newColor.length - 1) + ", 0.40)";
+  for (let i = 0; i < otherLetters.length; i++) {
+    otherLetters[i].style.display = "none";
+  }
+  letter[0].style.display = "block";
+
+}
+    </script>
+</body>
+</html>
