@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Comfortaa">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js" crossorigin="anonymous"></script>
+
+  
 <style>
-				#Layer_1 { 
+  			#Layer_1 { 
 				height: 100%;
 				width: 100%;
 			}
@@ -30,7 +35,7 @@
 </style>
 </head>
 <body>
-	<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="630.5px" height="500.5px" viewBox="0 0 630.5 500.5" enable-background="new 0 0 630.5 500.5" xml:space="preserve">
 <g id="bicycle">
 	<g id="innerLeg">
@@ -153,7 +158,7 @@
 			C427.104,284.406,421.061,290.448,413.607,290.448z M240.096,364.434c-0.059-1.057-0.4-2.037-0.959-2.859l45.155-52.688
 			l18.858,63.954L240.096,364.434z M314.125,362.27c-0.944,0.069-24.359-72.873-24.359-72.873l94.071-10.146
 			C383.544,282.6,326.559,348.961,314.125,362.27z"/>
-		<text transform="matrix(0.6807 -0.7326 0.7326 0.6807 329.8809 360.8069)" fill="#FFEA71" font-size="8">TOUR DE FRANCE 2017</text>
+		<text transform="matrix(0.6807 -0.7326 0.7326 0.6807 329.8809 360.8069)" fill="#FFEA71" font-size="8">TOUR DE FRANCE</text>
 	</g>
 	<g id="lowerChains">
 		<g id="upperChains_1_">
@@ -267,94 +272,92 @@
 		h-0.54c0-2.696,1.813-4.959,4.271-5.625v0.586C230.426,382.848,228.847,384.844,228.847,387.234z M235.125,382.059v-0.552
 		c2.679,0.501,4.71,2.872,4.71,5.728h-0.54C239.295,384.682,237.504,382.551,235.125,382.059z"/>
 	
-	<text transform="matrix(1 0 0 1 34, 100)" fill="#00BCD4" font-size="20">Happy Tour de France 2017</text>
+	<text transform="matrix(1 0 0 1 34, 100)" fill="#00BCD4" font-size="20">Happy Tour de France</text>
 </g>
 </svg>
-
-
 <script>
-	 window.onload = function () {
+   window.onload = function () {
           				
-						  var speed = 0.3;			
-						  
-						  var race = new TimelineMax({});
-									  
-						  // Cycle Wheels
-						  race.fromTo(["#frontWheel", "#backWheel", "#chakra"], speed, {
-							  rotation:0, repeat: -1, transformOrigin: "50% 50%",
-						  }, { 
-							  rotation:360, repeat: -1, transformOrigin: "50% 50%", ease: Power0.easeNone
-						  }, 0);	
-								  
-						  
-						  //Lower Chains
-						  var lowerChainSet = $("#lowerChains circle");
-						  race.to(lowerChainSet, speed-0.2, {
-							   x: -5, repeat: -1, ease:Power0.easeNone
-						  }, 0);
-						  
-						  //Upper Chains
-						  var lowerChainSet = $("#upperChains circle");
-						  race.to(lowerChainSet, speed-0.2, {
-							   x: 5, repeat: -1, ease:Power0.easeNone
-						  }, 0);
-						  
-						  
-						  
-						  // Inner Leg
-							  race.fromTo("#upperLeft", speed, {
-								rotation: 0, repeat:-1, yoyo: true, transformOrigin: "15% 15%",
-						  }, { 
-							  rotation: -50, repeat:-1, yoyo: true, transformOrigin: "15% 15%", ease: Power0.easeNone
-						  }, 0)
-						  .fromTo("#lowerLeftG", speed, {
-								y:0, x:0, rotation: 0, repeat:-1, yoyo: true, transformOrigin: "20% 20%",
-						  }, { 
-							  y: -69, x:44, rotation: 20, repeat:-1, yoyo: true, transformOrigin: "20% 20%", ease: Power0.easeNone
-						  }, 0);		
-									  
-						  
-						  
-						  // Outer Leg
-						  race.fromTo("#upperRight", speed, {
-								rotation: 0, repeat:-1, yoyo: true, transformOrigin: "15% 15%",
-						  }, { 
-							  rotation: 50, repeat:-1, yoyo: true, transformOrigin: "15% 15%", ease: Power0.easeNone
-						  }, 0)
-						  .fromTo("#lowerRightG", speed, {
-								y:0, x:0, repeat:-1, rotation: 0, yoyo: true, transformOrigin: "20% 20%",
-						  }, { 
-							  y: 67, x:-67, repeat:-1, rotation: -20, yoyo: true, transformOrigin: "20% 20%", ease: Power0.easeNone
-						  }, 0); 
-									  
-						  
-						  // Mind, Body and Legs
-						  race.staggerFromTo(["#mindBody", "#frontWheel", "#backWheel", "#cycleBody"], speed+0.4, 
-						  { y:3, yoyo: true, repeat:-1 }, {y:0, yoyo: true, repeat:-1}, 0);
-				  
-						  // Mind
-						  race.fromTo("#face_2_", speed+0.6, 
-						  { rotation:0, yoyo:true, repeat:-1 }, {rotation:2, yoyo:true, repeat:-1}, 0);
-					  
-				   // Shoes
-				   race.to(["#innerShoe","#outerShoe"], speed, {
-					 yoyo:true, repeat:-1, rotation: -20, transformOrigin: "10% 10%", ease: Power0.easeNone
-				   }, 0);
-												 
-						  
-						  // Road Marks 
-						  race.to("#roadMarks", speed, {
-							  x: -40, 
-							  repeat: -1,  
-							  ease: Power0.easeNone
-							}, 0)
-							.fromTo("#roadMarks", speed, {
-							  opacity: 0.2
-							}, {
-							  opacity: 0.7
-							}, 0);			  				  	  
-						  
-					  };
+			var speed = 0.3;			
+			
+			var race = new TimelineMax({});
+						
+			// Cycle Wheels
+			race.fromTo(["#frontWheel", "#backWheel", "#chakra"], speed, {
+                rotation:0, repeat: -1, transformOrigin: "50% 50%",
+            }, { 
+                rotation:360, repeat: -1, transformOrigin: "50% 50%", ease: Power0.easeNone
+            }, 0);	
+					
+			
+			//Lower Chains
+			var lowerChainSet = $("#lowerChains circle");
+			race.to(lowerChainSet, speed-0.2, {
+				 x: -5, repeat: -1, ease:Power0.easeNone
+			}, 0);
+			
+			//Upper Chains
+			var lowerChainSet = $("#upperChains circle");
+			race.to(lowerChainSet, speed-0.2, {
+				 x: 5, repeat: -1, ease:Power0.easeNone
+			}, 0);
+			
+			
+			
+			// Inner Leg
+				race.fromTo("#upperLeft", speed, {
+                  rotation: 0, repeat:-1, yoyo: true, transformOrigin: "15% 15%",
+            }, { 
+                rotation: -50, repeat:-1, yoyo: true, transformOrigin: "15% 15%", ease: Power0.easeNone
+            }, 0)
+			.fromTo("#lowerLeftG", speed, {
+                  y:0, x:0, rotation: 0, repeat:-1, yoyo: true, transformOrigin: "20% 20%",
+            }, { 
+                y: -69, x:44, rotation: 20, repeat:-1, yoyo: true, transformOrigin: "20% 20%", ease: Power0.easeNone
+            }, 0);		
+						
+			
+			
+			// Outer Leg
+			race.fromTo("#upperRight", speed, {
+                  rotation: 0, repeat:-1, yoyo: true, transformOrigin: "15% 15%",
+            }, { 
+                rotation: 50, repeat:-1, yoyo: true, transformOrigin: "15% 15%", ease: Power0.easeNone
+            }, 0)
+			.fromTo("#lowerRightG", speed, {
+                  y:0, x:0, repeat:-1, rotation: 0, yoyo: true, transformOrigin: "20% 20%",
+            }, { 
+                y: 67, x:-67, repeat:-1, rotation: -20, yoyo: true, transformOrigin: "20% 20%", ease: Power0.easeNone
+            }, 0); 
+						
+			
+			// Mind, Body and Legs
+			race.staggerFromTo(["#mindBody", "#frontWheel", "#backWheel", "#cycleBody"], speed+0.4, 
+			{ y:3, yoyo: true, repeat:-1 }, {y:0, yoyo: true, repeat:-1}, 0);
+	
+			// Mind
+			race.fromTo("#face_2_", speed+0.6, 
+			{ rotation:0, yoyo:true, repeat:-1 }, {rotation:2, yoyo:true, repeat:-1}, 0);
+		
+     // Shoes
+     race.to(["#innerShoe","#outerShoe"], speed, {
+       yoyo:true, repeat:-1, rotation: -20, transformOrigin: "10% 10%", ease: Power0.easeNone
+     }, 0);
+                   				
+			
+			// Road Marks 
+			race.to("#roadMarks", speed, {
+				x: -40, 
+				repeat: -1,  
+				ease: Power0.easeNone
+			  }, 0)
+			  .fromTo("#roadMarks", speed, {
+				opacity: 0.2
+			  }, {
+				opacity: 0.7
+			  }, 0);			  				  	  
+			
+        };
 </script>
 </body>
 </html>
