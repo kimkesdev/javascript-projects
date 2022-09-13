@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    .cat{
+  position: absolute;
+  left: 50%;
+  margin-left: -150px;
+  top: 50%;
+  margin-top: -150px;
+  width: 300px;
+  height: 300px;
+  background-image: url(https://s22.postimg.cc/j43qwxdap/cat-in-black-silhouette-22b357k.png);
+  background-size: cover;
+}
+.cat_position_for_left_eye{
+  position: absolute;
+  top: 104px;
+  left: 61px;
+  width: 43px;
+  height: 43px;
+}
+.cat_position_for_right_eye{
+  position: absolute;
+  top: 104px;
+  left: 155px;
+  width: 43px;
+  height: 43px;
+}
+.cat_eye{
+  width: 7px;
+  height: 7px;
+  border: 7px solid #444;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  border-radius: 50%;
+  transition: all 0.5s;
+}
+</style>
+</head>
+<body>
+    <div class="cat">
+
+	    <div class="cat_position_for_left_eye">
+	      <span class="cat_eye cat_eye_left"></span>
+	    </div>
+
+	    <div class="cat_position_for_right_eye">
+	      <span class="cat_eye cat_eye_right"></span>
+	    </div>
+	    
+  </div>
+<script>
+    const eyes = document.querySelectorAll('.cat_eye');
+const leftEyeCoord = eyes[0].getBoundingClientRect();
+const rightEyeCoord = eyes[1].getBoundingClientRect();
+let totalWidth = document.documentElement.clientWidth;
+let totalHeight = document.documentElement.clientHeight;
+
+window.onresize = () => {
+	let totalWidth = document.documentElement.clientWidth;
+	let totalHeight = document.documentElement.clientHeight;
+};
+
+function drawLeftEye(coord) {
+	let {x, y} = coord;
+	eyes[0].style.left = `${x}%`;
+	eyes[0].style.top = `${y}%`;
+}
+
+function drawRightEye(coord) {
+	let {x, y} = coord;
+	eyes[1].style.left = `${x}%`;
+	eyes[1].style.top = `${y}%`;
+}
+
+function calcCoord(cursor, eye) {
+	let x, y;
+	if (cursor.x <= eye.x) {
+		x = 25 - (eye.x - cursor.x);
+		if (x < 0 + eye.width / 2) x = 0 + eye.width / 2;
+	} else {
+		x = 25 + (cursor.x - eye.x)
+		if (x > 51 - eye.width / 4) x = 51 - eye.width / 4;
+	};
+	if (cursor.y <= eye.y) {
+		y = 25 - (eye.y - cursor.y);
+		if (y < 0 + eye.height / 2) y = 0 + eye.height / 2;
+	} else {
+		y = 25 + (cursor.y - eye.y)
+		if (y > 51 - eye.height / 4) y = 51 - eye.height / 4;
+	};
+	return {'x': x, 'y': y}
+}
+
+function drawEyes(event) {
+	drawLeftEye(calcCoord(event, leftEyeCoord));
+	drawRightEye(calcCoord(event, rightEyeCoord));
+}
+
+
+function trottle(callback, delay) {
+	let isWaiting = false;
+	return function() {
+		if (!isWaiting) {
+			callback.apply(this, arguments);
+			isWaiting = true;
+			setTimeout(() => {
+				isWaiting = false;
+			}, delay);
+		}
+	}
+};
+
+document.addEventListener('mousemove', 
+	(event) => trottle(drawEyes(event), 16)
+);
+
+</script>
+</body>
+</html>
