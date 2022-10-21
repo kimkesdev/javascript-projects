@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    :root {
+  --size: 16em;
+}
+
+@media screen and (max-width: 36.25em) {
+  :root {
+    --size: 11em;
+  }
+}
+
+html, body, ul, li, header, h1, p {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #F7F8F8;
+  font-family: Georgia, "Nimbus Roman No9 L", serif;
+}
+
+header {
+  color: #093b3e;
+  padding: 8vmin 0 2vmin;
+  position: relative;
+  overflow: hidden;
+}
+
+header a {
+  color: #093b3e;
+  text-decoration: underline;
+}
+
+header a:hover {
+  color: #FC3D3C; 
+}
+
+header p {
+  margin-top: .5em;
+  color: #093b3e7a;
+}
+
+.wrap, .patterns {
+  max-width: 67.5em;
+  margin: 0 auto;
+  padding: 0 1.5em;
+  box-sizing: border-box;
+}
+
+.patterns {
+  list-style: none;
+  width: 100%;
+  margin: 2em auto 8vmin;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--size), 1fr));
+  grid-gap: 1vmin;
+}
+
+ul li {
+  width: 100%;
+  height: 0;
+  padding-top: 100%;
+  position: relative;
+}
+
+.patterns css-doodle {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+    <header>
+        <div class="wrap">
+          <h1>Radial-gradient</h1>
+          <p>Patterns with
+            <a href="https://css-doodle.com" target="_blank">css-doodle</a>
+            and CSS <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/radial-gradient" target="_blank">radial-gradient()</a>.
+          </p>
+        </div>
+      </header>
+      <ul class="patterns">
+        
+      <li>
+        <css-doodle grid="7" #1>
+          overflow: hidden;
+          :after {
+            content: '';
+            position: absolute;
+            @size: 200%;
+            --pos: @pn(0 100%, 100% 0, 100% 100%, 0 0);
+            background:
+              repeating-radial-gradient(
+                circle at var(--pos),
+                transparent 0,
+                transparent @r(5%, 8%),
+                @p(#FFF4E0, #F8B501, #06ACB5, #FC3D3C) @lr(),
+                @lp() calc(@lr() + 1px)
+              ),
+              @m(5, (
+                radial-gradient(
+                  @pn(#F8B501, #FC3D3C, #06ACB5, #FFF4E0, #17191D) 50%,
+                  transparent 0
+                )
+                var(--pos) / calc(@n() * 20%) calc(@n() * 20%) no-repeat
+              ));
+          }
+        </css-doodle>
+      </li>
+      
+      <li>
+        <css-doodle grid="7" #2>
+          overflow: hidden;
+          --pos: @pn(100% 50%, 0 50%);
+          :after {
+            content: '';
+            position: absolute;
+            @size: 1800% 600%;
+            background: @m(50, (
+              radial-gradient(
+                ellipse 80% 32%,
+                @pn(#FFF4E0, #06ACB5, #17191D, #FC3D3C, #F8B501) 45%,
+                transparent 0
+              )
+              var(--pos) / calc(@n() * 2%) calc(@n() * 2%)
+              no-repeat
+            ));
+          }
+        </css-doodle>
+      </li>
+      
+      <li>
+        <css-doodle grid="7" #3>
+          overflow: hidden;
+          :after {
+            content: '';
+            position: absolute;
+            @size: 900% 1022%;
+            --pos: @pn(100% 50%, 0 50%);
+            background: @multi(50, (
+              radial-gradient(
+                ellipse 100% 40%,
+                @pn(#F8B501, #FC3D3C, #17191D, #06ACB5, #FFF4E0) 50%,
+                transparent 0%
+              )
+              var(--pos) / calc(@n() * 2%) calc(@n() * 2%) no-repeat
+            ));
+          }
+          @row(even) {
+            :after {
+               background: @multi(50, (
+                radial-gradient(
+                  ellipse 100% 40%,
+                  @pn(#17191D, #FC3D3C, #F8B501, #FFF4E0, #06ACB5) 50%,
+                  transparent 0
+                )
+                var(--pos) / calc(@n() * 2%) calc(@n() * 2%) no-repeat
+              ));
+            }
+          }
+        </css-doodle>
+      </li>
+      
+      <li>
+        <css-doodle grid="7" #4>
+          background: @p(#FFF4E0, #F8B501, #06ACB5, #17191D, #FC3D3C);
+          :after {
+            content: '';
+            @size: 100%;
+            position: absolute;
+            background:
+              @m(4, radial-gradient(
+                circle at @p(-40% -40%, 140% 140%, 140%  -40%, -40% 140%),
+                @p(#FFF4E0, #F8B501, #06ACB5, #17191D, #FC3D3C) 50%,
+                transparent 50%
+              )),
+              radial-gradient(
+                @p(#FFF4E0, #F8B501, #06ACB5, #17191D, #FC3D3C) @r(10%, 40%),
+                transparent 0
+              )
+          }
+        </css-doodle>
+      </li>
+      
+      <!-- Need a way to simplify repeated colors -->
+      <li>
+        <css-doodle grid="8x1" #5>
+          :doodle {
+            background-color: #17191D;
+            background-image:
+              radial-gradient(@p(#FFF4E0, #F8B501, #06ACB5, #FC3D3C) 4%, transparent 0),
+              radial-gradient(#17191D 8%, transparent 0),
+              radial-gradient(@p(#FFF4E0, #F8B501, #06ACB5, #FC3D3C) 10%, transparent 0);
+          }
+          @place-cell: center;
+          @size: 50%;
+          transform-origin: -50% 50%;
+          transform: translateX(100%) rotate(calc(1turn / @size() * @i()));
+          :after, :before {
+            content: '';
+            position: absolute;
+          }
+          :after {
+            @size: 100% 72%;
+            right: 0%;
+            background:
+              radial-gradient(@pd(#FFF4E0, #F8B501, #06ACB5, #FC3D3C) 30%, transparent 0)
+                2% 50% / 25% 25% no-repeat,
+              radial-gradient(#17191D 50%, transparent 0)
+                5% 50% / 25% 25% no-repeat,
+              radial-gradient(@pd(#FFF4E0, #F8B501, #06ACB5, #FC3D3C) 70%, transparent 0)
+                8% 50% / 30% 30% no-repeat,
+              radial-gradient(#17191D 60%, transparent 0)
+                0% 50% / 50% 50% no-repeat,
+              radial-gradient(@pd(#FFF4E0, #F8B501, #06ACB5, #FC3D3C) 70%, transparent 0)
+          }
+          :before {
+            @size: 24%;
+            left: -27%;
+            transform-origin: -100% center;
+            transform: rotate(22deg);
+            background:
+              radial-gradient(ellipse 100% 80%, @pd(#FFF4E0, #F8B501, #06ACB5, #FC3D3C) 50%, transparent 0)
+                20% 50% / 40% 40% no-repeat,
+              radial-gradient(ellipse 100% 80%, #17191D 50%, transparent 0)
+                10% 50% / 80% 80% no-repeat,
+              radial-gradient(ellipse 100% 80%, @pd(#FFF4E0, #F8B501, #06ACB5, #FC3D3C) 50%, transparent 0)
+                0 / 100% 100% no-repeat;
+          }
+      
+        </css-doodle>
+      </li>
+      
+      <li>
+        <css-doodle grid="7" #6>
+          :doodle {
+            background-color: @p(#F8B501, #06ACB5, #FC3D3C);
+          }
+          transform: rotate(@pn(45deg, -45deg)) scale(.9);
+          --c: @p(#FFF4E0, #F8B501, #06ACB5, #FC3D3C);
+          background-repeat: space;
+          background-position: center;
+          background-color: #17191D;
+          background-image: @m(4, radial-gradient(var(--c) 35%, transparent 0));
+          background-size: @m(4, @pn(100% 40%, 40% 100%));
+      
+          @random(.5) {
+            background-size: @m(4, @pn(25% 25%, 25% 25%));
+          }
+          @random(.4) {
+            background-size: @m(4, @pn(100% 30%, 30% 100%));
+          }
+          @random(.3) {
+            background-size: @m(4, @pn(100% 45%, 45% 100%));
+          }
+          @random(.2) {
+            background-size: @m(4, @pn(60% 45%, 45% 60%));
+          }
+          @random(.2) {
+            background-image: @m(4, (radial-gradient(var(--c) 50%, transparent 0)));
+            background-size: @m(4, @pn(100% 60%, 60% 100%));
+          }
+          :after {
+            content: '';
+            position: absolute;
+            left: @pn(auto, 105%);
+            top: @pn(105%, auto);
+            @size: 50%;
+            background-image: radial-gradient(
+              @p(#17191D, #FFF4E0) @r(20%, 60%), transparent 0
+            );
+          }
+        </css-doodle>
+      </li>
+        
+      </ul>
+      <script>
+        document.addEventListener('click', e => e.target.update && e.target.update())
+      </script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/css-doodle/0.5.1/css-doodle.min.js"></script>
+
+      
+</body>
+</html>
