@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<style>
+    /* Layout things */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, main {
+  height: 100%;
+}
+
+body {
+  background: #35363A;
+}
+
+main {
+  display: grid;
+  place-items: center;
+  max-width: 80em;
+  margin: auto;
+}
+
+ul {
+  width: 100%;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 1em;
+  padding: 2em;
+  grid-template-columns: repeat(auto-fill, minmax(14em, 1fr));
+}
+
+li {
+  height: 20em;
+  border: 6px solid #fff;
+  overflow: hidden;
+}
+
+li css-doodle {
+  transition: transform .2s ease;
+  will-change: transform;
+}
+
+li.active {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 9;
+  border: none;
+}
+li.active css-doodle {
+  animation: scale-down .4s ease;
+}
+li:not(.active):hover {
+  cursor: pointer;
+}
+li:not(.active):hover css-doodle {
+  transform: scale(1.02);
+}
+li.active:after {
+  content: '';
+  cursor: pointer;
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  width: 4em;
+  height: 4em;
+  border-radius: 50%;
+  background-image: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cg stroke='%23fff' stroke-width='.5'%3E%3Cline x1='1' y1='1' x2='9' y2='9' /%3E%3Cline x1='9' y1='1' x2='1' y2='9' /%3E%3C/g%3E%3C/svg%3E");
+  background-color: rgba(0, 0, 0, .8);
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+@keyframes scale-down {
+  from { transform: scale(1.02); }
+  to { transform: scale(1); }
+}
+</style>
+</head>
+<body>
+  <!-- 
+  Patterns built with css-doodle 
+  https://css-doodle.com
+-->
+
+<style>
+    css-doodle {
+      
+      --pattern-1: (
+        @grid: 1 / 100%;
+        background: @doodle(
+          @grid: 1 / 100%;
+          background-size: 300px 300px;
+          background-image: @doodle(
+            :doodle {
+              @grid: 5x12 / 100% 240%;
+              transform: scale(1.25);
+            }
+            top: calc(@y * -30px);
+            :before, :after {
+              content: '';
+              @size: 100%;
+              position: absolute;
+              left: @pn(auto, 50%);
+              top: @pn(auto, 25%);
+              border-radius: 50%;
+              z-index: calc(@y - @pn(2, 1));
+              background: repeating-radial-gradient(
+                @stripe(#023967 4px, #c5dff5 2px)
+              );
+            }
+          );
+        );
+      );
+      
+      --pattern-2: (
+        @grid: 1 / 100%;
+        background: @doodle(
+          @grid: 1 / 100%;
+          background-color: #f5f8ff;
+          background-size:  160px 160px;
+          background-image: @doodle(
+            :doodle {
+              @grid: 3 / 100%;
+              transform: scale(calc(3 / 2));
+            }
+            :after, :before {
+              content: '';
+              @size: 100%;
+              border-radius: 50%;
+              position: absolute;
+              border: 3px double #4169E1;
+              background: @doodle(
+                @grid: 1 / 100%;
+                @shape: clover 4;
+                background: #4169E1;
+              );
+              background-size: 45% 45%;
+              background-repeat: no-repeat;
+              background-position: 50% 52%;
+            }
+            :before {
+              transform: translate(50%, 50%);
+            }
+          );
+        );
+      );
+    
+      --pattern-3: (
+        @grid: 1 / 100%;
+        background-color: #fff;
+        background-image: @doodle(
+          @grid: 1 / 100%;
+          background-size:  180px 180px;
+          background-image: @doodle(
+            :doodle {
+              @grid: 3 / 100%;
+              transform: scale(calc(3 / 2));
+            }
+            z-index: @ri(100);
+            :after, :before {
+              content: '';
+              @size: 100%;
+              border-radius: 50%;
+              position: absolute;
+              background: radial-gradient(
+                @stripe.@m9.@pn(#654062, #fff, transparent)
+              );
+            }
+            :before {
+              transform: translateX(50%) translateY(50%);
+            }
+          );
+        );
+      );
+    
+      --pattern-4: (
+        @grid: 1 / 100%;
+        background-color: #332B33;
+        background-image: @doodle(
+          :doodle {
+            @grid: 1 / 10000px;
+            transform: scale(1.5) rotate(45deg);
+          }
+          background-size: 50px 50px;
+          background-image: @doodle(
+            :doodle {
+              @grid: 8x1 / 90%;
+              border-radius: 0% 60%;
+              overflow: hidden;
+            }
+            position: absolute;
+            border: 1px solid #BCB8BB;
+            @nth(1) { border-radius: 0% 60%; }
+            @size: calc(100% - 100% / @I * (@i - 1));
+            background: linear-gradient(
+              45deg, @stripe(transparent, #BCB8BB 1px, transparent)
+            );
+          );
+        );
+      );
+    
+      --pattern-5: (
+        @grid: 1 / 100%;
+        background: @doodle(
+          :doodle {
+            @grid: 1 / 10000px;
+            transform: rotate(45deg) scale(2);
+          }
+          background-size: 30px 30px;
+          background-image: @doodle(
+            @grid: 5x1 / calc(100% + 1px);
+            @place-cell: center;
+            @size: calc(100% - 100% / @I * (@i - 1));
+            border-radius: calc(100% / @I * (@i - 1));
+            border: 1px solid #003049;
+            background: @pn(
+              #d62828, #f77f00, #fcbf49, #eae2b7
+            );
+          );
+        );
+      );
+    
+      --pattern-6: (
+        @grid: 1 / 100%;
+        background-color: #fff;
+        background-image: @doodle(
+          @grid: 1 / 100%;
+          background-size:  125px 125px;
+          background-image: @doodle(
+            :doodle {
+              @grid: 3 / 100%;
+              transform: scale(calc(3 / 2));
+            }
+            z-index: @ri(100);
+            :after, :before {
+              content: '';
+              @size: 100%;
+              border-radius: 50%;
+              position: absolute;
+              background: radial-gradient(
+                @stripe.@m8.@pn(#F7D006, #52514F)
+              );
+            }
+            :before {
+              transform: translate(50%, 50%);
+            }
+          );
+        );
+      );
+    
+      --pattern-7: (
+        @grid: 1 / 100%;
+        background-size: 83px 135px;
+        background-color: #D24B45;
+        background-image: @doodle(
+          @grid: 2 / 100%;
+          background: @pn(#3C2B34, #F7F0E9, #F7F0E9);
+          transform-origin: @pn(100% 100%, 0 100%, 100% 0, 0 0);
+          transform:
+            rotateX(45deg)
+            skewY(@pn(34deg, -34deg, -34deg));
+        );
+      );
+    
+      --pattern-8: (
+        @grid: 1 / 100%;
+        background: @doodle(
+          :doodle {
+            @grid: 1 / 10000px;
+            transform: scale(1.5) rotate(45deg);
+          }
+          background-size: 150px 150px;
+          background-color: #1d3557;
+          background-image: @doodle(
+            @grid: 4 / 100%;
+            :after {
+              content: '';
+              @size: 100%;
+              position: absolute;
+              background: @doodle(
+                @grid: @p([1-4]) / 100%;
+                @shape: triangle;
+                background: @p(#e63946, #f1faee, #a8dadc, #457b9d);
+                transform: rotate(@p(0, 180deg)) scale(.8);
+              );
+            }
+          );
+        );
+      );
+    
+      --pattern-9: (
+        @grid: 1 / 100%;
+        background-color: #211a4c;
+        background-image: @doodle(
+          :doodle {
+            @grid: 1 / 10000px;
+            transform: scale(1.5) rotate(45deg);
+          }
+          background-size: 300px 300px;
+          background-image: @doodle(
+            @grid: 1 / 100%;
+            background: @doodle(
+              @grid: @r(8) / 100%;
+               background: @doodle(
+                @grid: @r(10) / 100%;
+                background: radial-gradient(
+                  @stripe.@m2.@p(
+                    @m10(#293462),
+                    @m10(#211a4c), 
+                    @m2(#b2ebf2), 
+                    #e84a5f
+                  )
+                );
+              );
+            );
+          );
+        );
+      );
+    
+      --pattern-10: (
+        @grid: 1 / 100%;
+        background: @doodle(
+          :doodle {
+            @grid: / 10000px;
+            transform: scale(1.5) rotate(45deg);
+          }
+          background-color: #213061;
+          background-size: 150px 150px;
+          background-image: @doodle(
+            @grid: 10 / 100%;
+            :after, :before {
+              content: '';
+              position: absolute;
+              left: 50%; top: 50%;
+              @size: @r(10%, 50%) 1px;
+              transform: rotate(@r(360deg));
+              transform-origin: 0 50%;
+              background: currentColor;
+              color: #fff9;
+            }
+          );
+        );
+      );
+      
+      --pattern-11: (
+        @grid: 1 / 100%;
+        background-size: 200px 200px;
+        background-image: @doodle(
+          @grid: 1 / 100%;
+          background-color: #005874;
+          background-image: @m10.@doodle(
+            @grid: 1 / 50px;
+            background: @p(#65d6ce,#1c819e,#e6e6d4,#ffbe00);
+            transform: rotate(@r(360deg)) scale(@r(.5, 1));
+            clip-path: @shape(
+              split: 50;
+              scale: .3;
+              x: cos(t) + cos(2t) * 2;
+              y: sin(2t) + sin(t) * 2;
+            );
+          );
+          background-position: 
+            -25px 45px, 50px 75px, 90px 95px,
+            160px 165px, 20px 0, 22px -65px,
+            110px -18px, 120px 34px, 130px 125px,
+            5px 90px;
+        );
+      );
+      
+      --pattern-12: (
+        @grid: 1 / 100%;
+        background-size: 300px 300px;
+        background-color: #293D56; 
+        background-image: @doodle(
+          @grid: 16x1 / 100%;
+          @place-cell: center;
+          @size: 100%;
+          background-image: @doodle(
+            @grid: 1 / 80px;
+            background: @p(#ff6f6f,#fff46e,#f6f6f6,#a58bff);
+            transform: rotate(@r(360deg)) scale(@r(.5, 1));
+            clip-path: @shape(
+              split: 240;
+              y: sin(2t) * sin(4t) * cos(5t);
+              x: cos(2t) * cos(5t) * sin(t); 
+            );
+          );
+          background-position: @pn(
+            -5px 10px, 65px 25px, 80px 90px, 110px -40px, -40px 120px,
+            40px 240px, 90px 180px, 150px 190px, 160px 40px, 220px 60px,
+            240px 240px, 210px 160px, 20px 150px,  160px 100px
+          );
+          z-index: 2;
+          @nth(15, 16) {
+            z-index: 1;
+            background: @m90(
+              radial-gradient(
+                @p(#ff6f6f,#fff46e,#f6f6f6,#a58bff) @r(50%), 
+                transparent 0
+              ) 
+              @r(100%) @r(100%) / @r(10px) @lr 
+              no-repeat
+            );
+          }
+        );
+      );
+      
+    }
+    </style>
+    
+    <main>
+      <ul>
+        <li> <css-doodle use="var(--pattern-1)"></css-doodle> </li>
+        <li> <css-doodle use="var(--pattern-2)"></css-doodle> </li>
+        <li> <css-doodle use="var(--pattern-3)"></css-doodle> </li>
+        <li> <css-doodle use="var(--pattern-4)"></css-doodle> </li>
+        <li> <css-doodle use="var(--pattern-5)"></css-doodle> </li>
+        <li> <css-doodle use="var(--pattern-6)" seed="1608648378232"></css-doodle> </li>
+        <li> <css-doodle use="var(--pattern-7)"></css-doodle></li>
+        <li> <css-doodle use="var(--pattern-8)" seed="1608633329491"></css-doodle> </li>
+        <li> <css-doodle use="var(--pattern-9)" seed="1608634842475"></css-doodle> </li>
+        <li> <css-doodle use="var(--pattern-10)" seed="1608625270519"></css-doodle> </li>
+        <li> <css-doodle use="var(--pattern-11)" seed="1608724650251"></css-doodle> </li>
+        <li> <css-doodle use="var(--pattern-12)" seed="1608732448356"></css-doodle> </li>
+      </ul>
+    </main>
+    <script>
+        Array.from(document.querySelectorAll('li')).forEach(li => {
+  li.addEventListener('click', e => {
+    li.classList.toggle('active');
+    return false;
+  });
+});</script>  
+<script src="https://unpkg.com/css-doodle@0.13.2/css-doodle.min.js"></script>
+
+</body>
+</html>
