@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    *,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+html {
+  font-size: 1px;
+}
+
+@media (min-width: 600px) {
+  html {
+    font-size: 1.5px;
+  }
+}
+@media (min-width: 1000px) {
+  html {
+    font-size: 2px;
+  }
+}
+@media (min-width: 1400px) {
+  html {
+    font-size: 3px;
+  }
+}
+body {
+  line-height: 1.4em;
+  text-align: center;
+  background-color: #6c86a0;
+  color: #fff;
+  font-size: 16px;
+  padding: 100rem 20px 100rem;
+}
+
+.wrapper {
+  transform-style: preserve-3d;
+  transform: rotateY(60deg) rotateX(5deg);
+  margin-bottom: 50px;
+}
+.wrapper * {
+  transform-style: preserve-3d;
+}
+
+.info {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+button {
+  color: #fff;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 300ms, border-color 300ms;
+}
+button:hover {
+  color: #78d9bd;
+  border-bottom-color: #78d9bd;
+}
+
+css-box {
+  display: block;
+  position: relative;
+}
+css-box > div {
+  position: absolute;
+  border: 1rem solid rgba(0, 0, 0, 0.2);
+  background: white;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  width: 500vw;
+  margin-left: -200vw;
+}
+
+css-person {
+  display: flex;
+  flex-wrap: wrap;
+  width: 54rem;
+  margin-right: 12rem;
+}
+
+css-person:nth-child(1), css-person:nth-child(1) * {
+  -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s;
+}
+css-person:nth-child(1) .head *,
+css-person:nth-child(1) .arm-bottom * {
+  background: #473a30;
+}
+css-person:nth-child(1) .torso *,
+css-person:nth-child(1) .arm-top * {
+  background: #e67e22;
+}
+css-person:nth-child(1) .leg-top *,
+css-person:nth-child(1) .leg-bottom * {
+  background-color: #2c3e50;
+}
+css-person:nth-child(1) .leg-shoe * {
+  background-color: #2b071f;
+}
+
+css-person:nth-child(2), css-person:nth-child(2) * {
+  -webkit-animation-delay: 0.6s;
+          animation-delay: 0.6s;
+}
+css-person:nth-child(2) .head *,
+css-person:nth-child(2) .arm-bottom * {
+  background: #473a30;
+}
+css-person:nth-child(2) .torso *,
+css-person:nth-child(2) .arm-top * {
+  background: #e67e22;
+}
+css-person:nth-child(2) .leg-top *,
+css-person:nth-child(2) .leg-bottom * {
+  background-color: #95a5a6;
+}
+css-person:nth-child(2) .leg-shoe * {
+  background-color: #345;
+}
+
+css-person:nth-child(3), css-person:nth-child(3) * {
+  -webkit-animation-delay: 0.9s;
+          animation-delay: 0.9s;
+}
+css-person:nth-child(3) .head *,
+css-person:nth-child(3) .arm-bottom * {
+  background: #473a30;
+}
+css-person:nth-child(3) .torso *,
+css-person:nth-child(3) .arm-top * {
+  background: #3498db;
+}
+css-person:nth-child(3) .leg-top *,
+css-person:nth-child(3) .leg-bottom * {
+  background-color: #d35400;
+}
+css-person:nth-child(3) .leg-shoe * {
+  background-color: #345;
+}
+
+css-person:nth-child(4), css-person:nth-child(4) * {
+  -webkit-animation-delay: 1.2s;
+          animation-delay: 1.2s;
+}
+css-person:nth-child(4) .head *,
+css-person:nth-child(4) .arm-bottom * {
+  background: #bb9472;
+}
+css-person:nth-child(4) .torso *,
+css-person:nth-child(4) .arm-top * {
+  background: #3498db;
+}
+css-person:nth-child(4) .leg-top *,
+css-person:nth-child(4) .leg-bottom * {
+  background-color: #2c3e50;
+}
+css-person:nth-child(4) .leg-shoe * {
+  background-color: #345;
+}
+
+css-person:nth-child(5), css-person:nth-child(5) * {
+  -webkit-animation-delay: 1.5s;
+          animation-delay: 1.5s;
+}
+css-person:nth-child(5) .head *,
+css-person:nth-child(5) .arm-bottom * {
+  background: #bb9472;
+}
+css-person:nth-child(5) .torso *,
+css-person:nth-child(5) .arm-top * {
+  background: #34495e;
+}
+css-person:nth-child(5) .leg-top *,
+css-person:nth-child(5) .leg-bottom * {
+  background-color: #d35400;
+}
+css-person:nth-child(5) .leg-shoe * {
+  background-color: #345;
+}
+
+css-person:nth-child(6), css-person:nth-child(6) * {
+  -webkit-animation-delay: 1.8s;
+          animation-delay: 1.8s;
+}
+css-person:nth-child(6) .head *,
+css-person:nth-child(6) .arm-bottom * {
+  background: #bb9472;
+}
+css-person:nth-child(6) .torso *,
+css-person:nth-child(6) .arm-top * {
+  background: #f1c40f;
+}
+css-person:nth-child(6) .leg-top *,
+css-person:nth-child(6) .leg-bottom * {
+  background-color: #1e3799;
+}
+css-person:nth-child(6) .leg-shoe * {
+  background-color: #6c5ce7;
+}
+
+css-person:nth-child(7), css-person:nth-child(7) * {
+  -webkit-animation-delay: 2.1s;
+          animation-delay: 2.1s;
+}
+css-person:nth-child(7) .head *,
+css-person:nth-child(7) .arm-bottom * {
+  background: #bb9472;
+}
+css-person:nth-child(7) .torso *,
+css-person:nth-child(7) .arm-top * {
+  background: #e74c3c;
+}
+css-person:nth-child(7) .leg-top *,
+css-person:nth-child(7) .leg-bottom * {
+  background-color: #198066;
+}
+css-person:nth-child(7) .leg-shoe * {
+  background-color: #ffe600;
+}
+
+css-person:nth-child(8), css-person:nth-child(8) * {
+  -webkit-animation-delay: 2.4s;
+          animation-delay: 2.4s;
+}
+css-person:nth-child(8) .head *,
+css-person:nth-child(8) .arm-bottom * {
+  background: #d8b997;
+}
+css-person:nth-child(8) .torso *,
+css-person:nth-child(8) .arm-top * {
+  background: #9b59b7;
+}
+css-person:nth-child(8) .leg-top *,
+css-person:nth-child(8) .leg-bottom * {
+  background-color: #1e3799;
+}
+css-person:nth-child(8) .leg-shoe * {
+  background-color: #ffe600;
+}
+
+css-person:nth-child(9), css-person:nth-child(9) * {
+  -webkit-animation-delay: 2.7s;
+          animation-delay: 2.7s;
+}
+css-person:nth-child(9) .head *,
+css-person:nth-child(9) .arm-bottom * {
+  background: #d8b997;
+}
+css-person:nth-child(9) .torso *,
+css-person:nth-child(9) .arm-top * {
+  background: #34495e;
+}
+css-person:nth-child(9) .leg-top *,
+css-person:nth-child(9) .leg-bottom * {
+  background-color: #198066;
+}
+css-person:nth-child(9) .leg-shoe * {
+  background-color: #345;
+}
+
+css-person:nth-child(10), css-person:nth-child(10) * {
+  -webkit-animation-delay: 3s;
+          animation-delay: 3s;
+}
+css-person:nth-child(10) .head *,
+css-person:nth-child(10) .arm-bottom * {
+  background: #d8b997;
+}
+css-person:nth-child(10) .torso *,
+css-person:nth-child(10) .arm-top * {
+  background: #e74c3c;
+}
+css-person:nth-child(10) .leg-top *,
+css-person:nth-child(10) .leg-bottom * {
+  background-color: #1e3799;
+}
+css-person:nth-child(10) .leg-shoe * {
+  background-color: #ffe600;
+}
+
+css-person:nth-child(11), css-person:nth-child(11) * {
+  -webkit-animation-delay: 3.3s;
+          animation-delay: 3.3s;
+}
+css-person:nth-child(11) .head *,
+css-person:nth-child(11) .arm-bottom * {
+  background: #bb9472;
+}
+css-person:nth-child(11) .torso *,
+css-person:nth-child(11) .arm-top * {
+  background: #9b59b7;
+}
+css-person:nth-child(11) .leg-top *,
+css-person:nth-child(11) .leg-bottom * {
+  background-color: #2c3e50;
+}
+css-person:nth-child(11) .leg-shoe * {
+  background-color: #0abde3;
+}
+
+css-person:nth-child(12), css-person:nth-child(12) * {
+  -webkit-animation-delay: 3.6s;
+          animation-delay: 3.6s;
+}
+css-person:nth-child(12) .head *,
+css-person:nth-child(12) .arm-bottom * {
+  background: #473a30;
+}
+css-person:nth-child(12) .torso *,
+css-person:nth-child(12) .arm-top * {
+  background: #1abc9d;
+}
+css-person:nth-child(12) .leg-top *,
+css-person:nth-child(12) .leg-bottom * {
+  background-color: #1e3799;
+}
+css-person:nth-child(12) .leg-shoe * {
+  background-color: #2b071f;
+}
+
+css-person:nth-child(13), css-person:nth-child(13) * {
+  -webkit-animation-delay: 3.9s;
+          animation-delay: 3.9s;
+}
+css-person:nth-child(13) .head *,
+css-person:nth-child(13) .arm-bottom * {
+  background: #473a30;
+}
+css-person:nth-child(13) .torso *,
+css-person:nth-child(13) .arm-top * {
+  background: #1abc9d;
+}
+css-person:nth-child(13) .leg-top *,
+css-person:nth-child(13) .leg-bottom * {
+  background-color: #510b6d;
+}
+css-person:nth-child(13) .leg-shoe * {
+  background-color: #2b071f;
+}
+
+css-person:nth-child(14), css-person:nth-child(14) * {
+  -webkit-animation-delay: 4.2s;
+          animation-delay: 4.2s;
+}
+css-person:nth-child(14) .head *,
+css-person:nth-child(14) .arm-bottom * {
+  background: #966946;
+}
+css-person:nth-child(14) .torso *,
+css-person:nth-child(14) .arm-top * {
+  background: #34495e;
+}
+css-person:nth-child(14) .leg-top *,
+css-person:nth-child(14) .leg-bottom * {
+  background-color: #2c3e50;
+}
+css-person:nth-child(14) .leg-shoe * {
+  background-color: #0abde3;
+}
+
+css-person:nth-child(15), css-person:nth-child(15) * {
+  -webkit-animation-delay: 4.5s;
+          animation-delay: 4.5s;
+}
+css-person:nth-child(15) .head *,
+css-person:nth-child(15) .arm-bottom * {
+  background: #473a30;
+}
+css-person:nth-child(15) .torso *,
+css-person:nth-child(15) .arm-top * {
+  background: #3498db;
+}
+css-person:nth-child(15) .leg-top *,
+css-person:nth-child(15) .leg-bottom * {
+  background-color: #510b6d;
+}
+css-person:nth-child(15) .leg-shoe * {
+  background-color: #ecf0f1;
+}
+
+css-person:nth-child(16), css-person:nth-child(16) * {
+  -webkit-animation-delay: 4.8s;
+          animation-delay: 4.8s;
+}
+css-person:nth-child(16) .head *,
+css-person:nth-child(16) .arm-bottom * {
+  background: #bb9472;
+}
+css-person:nth-child(16) .torso *,
+css-person:nth-child(16) .arm-top * {
+  background: #1abc9d;
+}
+css-person:nth-child(16) .leg-top *,
+css-person:nth-child(16) .leg-bottom * {
+  background-color: #2c3e50;
+}
+css-person:nth-child(16) .leg-shoe * {
+  background-color: #0abde3;
+}
+
+css-person:nth-child(17), css-person:nth-child(17) * {
+  -webkit-animation-delay: 5.1s;
+          animation-delay: 5.1s;
+}
+css-person:nth-child(17) .head *,
+css-person:nth-child(17) .arm-bottom * {
+  background: #d8b997;
+}
+css-person:nth-child(17) .torso *,
+css-person:nth-child(17) .arm-top * {
+  background: #1abc9d;
+}
+css-person:nth-child(17) .leg-top *,
+css-person:nth-child(17) .leg-bottom * {
+  background-color: #1e3799;
+}
+css-person:nth-child(17) .leg-shoe * {
+  background-color: #2b071f;
+}
+
+css-person:nth-child(18), css-person:nth-child(18) * {
+  -webkit-animation-delay: 5.4s;
+          animation-delay: 5.4s;
+}
+css-person:nth-child(18) .head *,
+css-person:nth-child(18) .arm-bottom * {
+  background: #473a30;
+}
+css-person:nth-child(18) .torso *,
+css-person:nth-child(18) .arm-top * {
+  background: #1abc9d;
+}
+css-person:nth-child(18) .leg-top *,
+css-person:nth-child(18) .leg-bottom * {
+  background-color: #2c3e50;
+}
+css-person:nth-child(18) .leg-shoe * {
+  background-color: #ecf0f1;
+}
+
+css-person:nth-child(19), css-person:nth-child(19) * {
+  -webkit-animation-delay: 5.7s;
+          animation-delay: 5.7s;
+}
+css-person:nth-child(19) .head *,
+css-person:nth-child(19) .arm-bottom * {
+  background: #bb9472;
+}
+css-person:nth-child(19) .torso *,
+css-person:nth-child(19) .arm-top * {
+  background: #e74c3c;
+}
+css-person:nth-child(19) .leg-top *,
+css-person:nth-child(19) .leg-bottom * {
+  background-color: #1e3799;
+}
+css-person:nth-child(19) .leg-shoe * {
+  background-color: #345;
+}
+
+css-person:nth-child(20), css-person:nth-child(20) * {
+  -webkit-animation-delay: 6s;
+          animation-delay: 6s;
+}
+css-person:nth-child(20) .head *,
+css-person:nth-child(20) .arm-bottom * {
+  background: #bb9472;
+}
+css-person:nth-child(20) .torso *,
+css-person:nth-child(20) .arm-top * {
+  background: #f1c40f;
+}
+css-person:nth-child(20) .leg-top *,
+css-person:nth-child(20) .leg-bottom * {
+  background-color: #95a5a6;
+}
+css-person:nth-child(20) .leg-shoe * {
+  background-color: #ecf0f1;
+}
+
+css-person:nth-child(21), css-person:nth-child(21) * {
+  -webkit-animation-delay: 6.3s;
+          animation-delay: 6.3s;
+}
+css-person:nth-child(21) .head *,
+css-person:nth-child(21) .arm-bottom * {
+  background: #d8b997;
+}
+css-person:nth-child(21) .torso *,
+css-person:nth-child(21) .arm-top * {
+  background: #34495e;
+}
+css-person:nth-child(21) .leg-top *,
+css-person:nth-child(21) .leg-bottom * {
+  background-color: #95a5a6;
+}
+css-person:nth-child(21) .leg-shoe * {
+  background-color: #ffe600;
+}
+
+css-person:nth-child(22), css-person:nth-child(22) * {
+  -webkit-animation-delay: 6.6s;
+          animation-delay: 6.6s;
+}
+css-person:nth-child(22) .head *,
+css-person:nth-child(22) .arm-bottom * {
+  background: #d8b997;
+}
+css-person:nth-child(22) .torso *,
+css-person:nth-child(22) .arm-top * {
+  background: #e67e22;
+}
+css-person:nth-child(22) .leg-top *,
+css-person:nth-child(22) .leg-bottom * {
+  background-color: #198066;
+}
+css-person:nth-child(22) .leg-shoe * {
+  background-color: #2b071f;
+}
+
+css-person:nth-child(23), css-person:nth-child(23) * {
+  -webkit-animation-delay: 6.9s;
+          animation-delay: 6.9s;
+}
+css-person:nth-child(23) .head *,
+css-person:nth-child(23) .arm-bottom * {
+  background: #966946;
+}
+css-person:nth-child(23) .torso *,
+css-person:nth-child(23) .arm-top * {
+  background: #9b59b7;
+}
+css-person:nth-child(23) .leg-top *,
+css-person:nth-child(23) .leg-bottom * {
+  background-color: #d35400;
+}
+css-person:nth-child(23) .leg-shoe * {
+  background-color: #0abde3;
+}
+
+css-person:nth-child(24), css-person:nth-child(24) * {
+  -webkit-animation-delay: 7.2s;
+          animation-delay: 7.2s;
+}
+css-person:nth-child(24) .head *,
+css-person:nth-child(24) .arm-bottom * {
+  background: #966946;
+}
+css-person:nth-child(24) .torso *,
+css-person:nth-child(24) .arm-top * {
+  background: #1abc9d;
+}
+css-person:nth-child(24) .leg-top *,
+css-person:nth-child(24) .leg-bottom * {
+  background-color: #95a5a6;
+}
+css-person:nth-child(24) .leg-shoe * {
+  background-color: #2b071f;
+}
+
+css-person:nth-child(25), css-person:nth-child(25) * {
+  -webkit-animation-delay: 7.5s;
+          animation-delay: 7.5s;
+}
+css-person:nth-child(25) .head *,
+css-person:nth-child(25) .arm-bottom * {
+  background: #473a30;
+}
+css-person:nth-child(25) .torso *,
+css-person:nth-child(25) .arm-top * {
+  background: #f1c40f;
+}
+css-person:nth-child(25) .leg-top *,
+css-person:nth-child(25) .leg-bottom * {
+  background-color: #2c3e50;
+}
+css-person:nth-child(25) .leg-shoe * {
+  background-color: #6c5ce7;
+}
+
+css-person:nth-child(26), css-person:nth-child(26) * {
+  -webkit-animation-delay: 7.8s;
+          animation-delay: 7.8s;
+}
+css-person:nth-child(26) .head *,
+css-person:nth-child(26) .arm-bottom * {
+  background: #966946;
+}
+css-person:nth-child(26) .torso *,
+css-person:nth-child(26) .arm-top * {
+  background: #e67e22;
+}
+css-person:nth-child(26) .leg-top *,
+css-person:nth-child(26) .leg-bottom * {
+  background-color: #1e3799;
+}
+css-person:nth-child(26) .leg-shoe * {
+  background-color: #345;
+}
+
+css-person:nth-child(27), css-person:nth-child(27) * {
+  -webkit-animation-delay: 8.1s;
+          animation-delay: 8.1s;
+}
+css-person:nth-child(27) .head *,
+css-person:nth-child(27) .arm-bottom * {
+  background: #473a30;
+}
+css-person:nth-child(27) .torso *,
+css-person:nth-child(27) .arm-top * {
+  background: #3498db;
+}
+css-person:nth-child(27) .leg-top *,
+css-person:nth-child(27) .leg-bottom * {
+  background-color: #1e3799;
+}
+css-person:nth-child(27) .leg-shoe * {
+  background-color: #0abde3;
+}
+
+css-person:nth-child(28), css-person:nth-child(28) * {
+  -webkit-animation-delay: 8.4s;
+          animation-delay: 8.4s;
+}
+css-person:nth-child(28) .head *,
+css-person:nth-child(28) .arm-bottom * {
+  background: #d8b997;
+}
+css-person:nth-child(28) .torso *,
+css-person:nth-child(28) .arm-top * {
+  background: #9b59b7;
+}
+css-person:nth-child(28) .leg-top *,
+css-person:nth-child(28) .leg-bottom * {
+  background-color: #2c3e50;
+}
+css-person:nth-child(28) .leg-shoe * {
+  background-color: #ffe600;
+}
+
+css-person:nth-child(29), css-person:nth-child(29) * {
+  -webkit-animation-delay: 8.7s;
+          animation-delay: 8.7s;
+}
+css-person:nth-child(29) .head *,
+css-person:nth-child(29) .arm-bottom * {
+  background: #bb9472;
+}
+css-person:nth-child(29) .torso *,
+css-person:nth-child(29) .arm-top * {
+  background: #1abc9d;
+}
+css-person:nth-child(29) .leg-top *,
+css-person:nth-child(29) .leg-bottom * {
+  background-color: #510b6d;
+}
+css-person:nth-child(29) .leg-shoe * {
+  background-color: #6c5ce7;
+}
+
+css-person:nth-child(30), css-person:nth-child(30) * {
+  -webkit-animation-delay: 9s;
+          animation-delay: 9s;
+}
+css-person:nth-child(30) .head *,
+css-person:nth-child(30) .arm-bottom * {
+  background: #bb9472;
+}
+css-person:nth-child(30) .torso *,
+css-person:nth-child(30) .arm-top * {
+  background: #e67e22;
+}
+css-person:nth-child(30) .leg-top *,
+css-person:nth-child(30) .leg-bottom * {
+  background-color: #2c3e50;
+}
+css-person:nth-child(30) .leg-shoe * {
+  background-color: #ffe600;
+}
+
+@-webkit-keyframes person-top {
+  0% {
+    transform: translateZ(-7rem) translateY(-15rem) rotateX(-5deg);
+  }
+  50% {
+    transform: translateZ(16rem) translateY(-33rem) rotateX(0deg);
+  }
+}
+
+@keyframes person-top {
+  0% {
+    transform: translateZ(-7rem) translateY(-15rem) rotateX(-5deg);
+  }
+  50% {
+    transform: translateZ(16rem) translateY(-33rem) rotateX(0deg);
+  }
+}
+.person-top {
+  display: flex;
+  flex-wrap: wrap;
+  transform: translateZ(-7rem) translateY(-15rem) rotateX(-5deg);
+  -webkit-animation: person-top 3s ease-in-out infinite;
+          animation: person-top 3s ease-in-out infinite;
+}
+
+.head-wrapper {
+  flex-basis: 100%;
+  margin-bottom: 2rem;
+}
+
+@-webkit-keyframes head {
+  0% {
+    transform: rotateX(3deg);
+  }
+  50% {
+    transform: rotateX(7deg);
+  }
+}
+
+@keyframes head {
+  0% {
+    transform: rotateX(3deg);
+  }
+  50% {
+    transform: rotateX(7deg);
+  }
+}
+.head {
+  width: 15rem;
+  height: 20rem;
+  margin: 0 auto;
+  transform: rotateX(3deg);
+  -webkit-animation: head 3s ease-in-out infinite;
+          animation: head 3s ease-in-out infinite;
+}
+.head .left,
+.head .right,
+.head .front,
+.head .back {
+  width: 15rem;
+  height: 20rem;
+}
+.head .front,
+.head .back {
+  width: 15rem;
+  height: 20rem;
+}
+.head .top,
+.head .bottom {
+  width: 15rem;
+  height: 15rem;
+}
+.head .front {
+  transform: translateZ(7.5rem);
+}
+.head .back {
+  transform: translateZ(-7.5rem) rotateY(180deg);
+}
+.head .left {
+  transform: translateX(-7.5rem) rotateY(270deg);
+}
+.head .right {
+  transform: translateX(7.5rem) rotateY(90deg);
+}
+.head .top {
+  transform: translateY(-7.5rem) rotateX(90deg);
+}
+.head .bottom {
+  transform: translateY(12.5rem) rotateX(-90deg);
+}
+
+.torso {
+  width: 30rem;
+  height: 45rem;
+  margin: 0 2rem;
+  position: relative;
+  z-index: 100;
+}
+.torso .left,
+.torso .right,
+.torso .front,
+.torso .back {
+  width: 15rem;
+  height: 45rem;
+}
+.torso .front,
+.torso .back {
+  width: 30rem;
+  height: 45rem;
+}
+.torso .top,
+.torso .bottom {
+  width: 30rem;
+  height: 15rem;
+}
+.torso .front {
+  transform: translateZ(7.5rem);
+}
+.torso .back {
+  transform: translateZ(-7.5rem) rotateY(180deg);
+}
+.torso .left {
+  transform: translateX(-7.5rem) rotateY(270deg);
+}
+.torso .right {
+  transform: translateX(22.5rem) rotateY(90deg);
+}
+.torso .top {
+  transform: translateY(-7.5rem) rotateX(90deg);
+}
+.torso .bottom {
+  transform: translateY(37.5rem) rotateX(-90deg);
+}
+
+@-webkit-keyframes arm {
+  0% {
+    transform: translateZ(-4rem) rotateX(60deg);
+  }
+  50% {
+    transform: translateZ(-4rem) rotateX(150deg);
+  }
+}
+
+@keyframes arm {
+  0% {
+    transform: translateZ(-4rem) rotateX(60deg);
+  }
+  50% {
+    transform: translateZ(-4rem) rotateX(150deg);
+  }
+}
+.arm {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  transform-origin: top center;
+  transform: translateZ(-4rem) rotateX(60deg);
+  -webkit-animation: arm 3s ease-in-out infinite;
+          animation: arm 3s ease-in-out infinite;
+  margin-top: 10rem;
+}
+
+@-webkit-keyframes arm-top {
+  0% {
+    transform: rotateX(-40deg);
+  }
+  50% {
+    transform: rotateX(0deg);
+  }
+}
+
+@keyframes arm-top {
+  0% {
+    transform: rotateX(-40deg);
+  }
+  50% {
+    transform: rotateX(0deg);
+  }
+}
+.arm-top {
+  width: 10rem;
+  height: 30rem;
+  transform: rotateX(-40deg);
+  -webkit-animation: arm-top 3s ease-in-out infinite;
+          animation: arm-top 3s ease-in-out infinite;
+  position: relative;
+  z-index: 50;
+}
+.arm-top .left,
+.arm-top .right,
+.arm-top .front,
+.arm-top .back {
+  width: 10rem;
+  height: 30rem;
+}
+.arm-top .front,
+.arm-top .back {
+  width: 10rem;
+  height: 30rem;
+}
+.arm-top .top,
+.arm-top .bottom {
+  width: 10rem;
+  height: 10rem;
+}
+.arm-top .front {
+  transform: translateZ(5rem);
+}
+.arm-top .back {
+  transform: translateZ(-5rem) rotateY(180deg);
+}
+.arm-top .left {
+  transform: translateX(-5rem) rotateY(270deg);
+}
+.arm-top .right {
+  transform: translateX(5rem) rotateY(90deg);
+}
+.arm-top .top {
+  transform: translateY(-5rem) rotateX(90deg);
+}
+.arm-top .bottom {
+  transform: translateY(25rem) rotateX(-90deg);
+}
+
+@-webkit-keyframes arm-bottom {
+  0% {
+    transform: rotateX(40deg);
+  }
+  50% {
+    transform: rotateX(0deg) translateZ(0rem);
+  }
+}
+
+@keyframes arm-bottom {
+  0% {
+    transform: rotateX(40deg);
+  }
+  50% {
+    transform: rotateX(0deg) translateZ(0rem);
+  }
+}
+.arm-bottom {
+  width: 9rem;
+  height: 30rem;
+  margin-top: -4rem;
+  transform: rotateX(40deg);
+  -webkit-animation: arm-bottom 3s ease-in-out infinite;
+          animation: arm-bottom 3s ease-in-out infinite;
+}
+.arm-bottom .left,
+.arm-bottom .right,
+.arm-bottom .front,
+.arm-bottom .back {
+  width: 9rem;
+  height: 30rem;
+}
+.arm-bottom .front,
+.arm-bottom .back {
+  width: 9rem;
+  height: 30rem;
+}
+.arm-bottom .top,
+.arm-bottom .bottom {
+  width: 9rem;
+  height: 9rem;
+}
+.arm-bottom .front {
+  transform: translateZ(4.5rem);
+}
+.arm-bottom .back {
+  transform: translateZ(-4.5rem) rotateY(180deg);
+}
+.arm-bottom .left {
+  transform: translateX(-4.5rem) rotateY(270deg);
+}
+.arm-bottom .right {
+  transform: translateX(4.5rem) rotateY(90deg);
+}
+.arm-bottom .top {
+  transform: translateY(-4.5rem) rotateX(90deg);
+}
+.arm-bottom .bottom {
+  transform: translateY(25.5rem) rotateX(-90deg);
+}
+
+.legs {
+  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: -18rem;
+  transform: translateZ(18rem) translateY(-14rem);
+}
+
+.leg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.leg-left {
+  margin-right: 2rem;
+}
+
+@-webkit-keyframes leg-top {
+  0% {
+    transform: translateZ(-15rem) rotateX(-10deg);
+  }
+  50% {
+    transform: translateZ(-6rem) translateY(-15rem) rotateX(-88deg);
+  }
+}
+
+@keyframes leg-top {
+  0% {
+    transform: translateZ(-15rem) rotateX(-10deg);
+  }
+  50% {
+    transform: translateZ(-6rem) translateY(-15rem) rotateX(-88deg);
+  }
+}
+.leg-top {
+  width: 12rem;
+  height: 12rem;
+  transform-origin: bottom center;
+  transform: translateZ(-15rem) rotateX(-10deg);
+  -webkit-animation: leg-top 3s ease-in-out infinite;
+          animation: leg-top 3s ease-in-out infinite;
+  position: relative;
+  z-index: 50;
+}
+.leg-top .left,
+.leg-top .right,
+.leg-top .front,
+.leg-top .back {
+  width: 40rem;
+  height: 12rem;
+}
+.leg-top .front,
+.leg-top .back {
+  width: 12rem;
+  height: 12rem;
+}
+.leg-top .top,
+.leg-top .bottom {
+  width: 12rem;
+  height: 40rem;
+}
+.leg-top .front {
+  transform: translateZ(20rem);
+}
+.leg-top .back {
+  transform: translateZ(-20rem) rotateY(180deg);
+}
+.leg-top .left {
+  transform: translateX(-20rem) rotateY(270deg);
+}
+.leg-top .right {
+  transform: translateX(-8rem) rotateY(90deg);
+}
+.leg-top .top {
+  transform: translateY(-20rem) rotateX(90deg);
+}
+.leg-top .bottom {
+  transform: translateY(-8rem) rotateX(-90deg);
+}
+
+@-webkit-keyframes leg-bottom {
+  0% {
+    transform: rotateX(-15deg);
+  }
+  50% {
+    transform: rotateX(-2deg) translateY(-2rem);
+  }
+}
+
+@keyframes leg-bottom {
+  0% {
+    transform: rotateX(-15deg);
+  }
+  50% {
+    transform: rotateX(-2deg) translateY(-2rem);
+  }
+}
+.leg-bottom {
+  width: 10rem;
+  height: 30rem;
+  transform: rotateX(-15deg);
+  -webkit-animation: leg-bottom 3s ease-in-out infinite;
+          animation: leg-bottom 3s ease-in-out infinite;
+}
+.leg-bottom .left,
+.leg-bottom .right,
+.leg-bottom .front,
+.leg-bottom .back {
+  width: 10rem;
+  height: 30rem;
+}
+.leg-bottom .front,
+.leg-bottom .back {
+  width: 10rem;
+  height: 30rem;
+}
+.leg-bottom .top,
+.leg-bottom .bottom {
+  width: 10rem;
+  height: 10rem;
+}
+.leg-bottom .front {
+  transform: translateZ(5rem);
+}
+.leg-bottom .back {
+  transform: translateZ(-5rem) rotateY(180deg);
+}
+.leg-bottom .left {
+  transform: translateX(-5rem) rotateY(270deg);
+}
+.leg-bottom .right {
+  transform: translateX(5rem) rotateY(90deg);
+}
+.leg-bottom .top {
+  transform: translateY(-5rem) rotateX(90deg);
+}
+.leg-bottom .bottom {
+  transform: translateY(25rem) rotateX(-90deg);
+}
+
+@-webkit-keyframes leg-shoe {
+  0% {
+    transform: translateZ(3rem);
+  }
+  50% {
+    transform: translateZ(3rem) translateY(-2rem) rotateX(-15deg);
+  }
+}
+
+@keyframes leg-shoe {
+  0% {
+    transform: translateZ(3rem);
+  }
+  50% {
+    transform: translateZ(3rem) translateY(-2rem) rotateX(-15deg);
+  }
+}
+.leg-shoe {
+  width: 11rem;
+  height: 8rem;
+  -webkit-animation: leg-shoe 3s ease-in-out infinite;
+          animation: leg-shoe 3s ease-in-out infinite;
+  transform: translateZ(3rem);
+}
+.leg-shoe .left,
+.leg-shoe .right,
+.leg-shoe .front,
+.leg-shoe .back {
+  width: 20rem;
+  height: 8rem;
+}
+.leg-shoe .front,
+.leg-shoe .back {
+  width: 11rem;
+  height: 8rem;
+}
+.leg-shoe .top,
+.leg-shoe .bottom {
+  width: 11rem;
+  height: 20rem;
+}
+.leg-shoe .front {
+  transform: translateZ(10rem);
+}
+.leg-shoe .back {
+  transform: translateZ(-10rem) rotateY(180deg);
+}
+.leg-shoe .left {
+  transform: translateX(-10rem) rotateY(270deg);
+}
+.leg-shoe .right {
+  transform: translateX(1rem) rotateY(90deg);
+}
+.leg-shoe .top {
+  transform: translateY(-10rem) rotateX(90deg);
+}
+.leg-shoe .bottom {
+  transform: translateY(-2rem) rotateX(-90deg);
+}
+</style>
+</head>
+<body>
+    <main class="wrapper">
+        <div class="row">
+          <css-person></css-person>
+          <css-person></css-person>
+          <css-person></css-person>
+          <css-person></css-person>
+          <css-person></css-person>
+          <css-person></css-person>
+        </div>
+      </main>
+      <div class="info">
+        For performance reasons this animation is best viewed in Safari. To add a
+        blocky person <button class="add-more-button">click here</button>.
+      </div>
+<script>
+    "use strict";
+class Box extends HTMLElement {
+    constructor() {
+        super();
+        this.innerHTML = `<div class="front"></div>
+      <div class="back"></div>
+      <div class="right"></div>
+      <div class="left"></div>
+      <div class="bottom"></div>
+      <div class="top"></div>`;
+    }
+}
+window.customElements.define('css-box', Box);
+class Person extends HTMLElement {
+    constructor() {
+        super();
+        this.innerHTML = `<div class="person-top">
+      <div class="head-wrapper">
+        <css-box class="head"></css-box>
+      </div>
+      <div class="arm">
+        <css-box class="arm-top"></css-box>
+        <css-box class="arm-bottom"></css-box>
+      </div>
+      <css-box class="torso"></css-box>
+      <div class="arm arm-right">
+        <css-box class="arm-top"></css-box>
+        <css-box class="arm-bottom"></css-box>
+      </div>
+    </div>
+    <div class="legs">
+      <div class="leg leg-left">
+        <css-box class="leg-top"></css-box>
+        <css-box class="leg-bottom"></css-box>
+        <css-box class="leg-shoe"></css-box>
+      </div>
+      <div class="leg leg-right">
+        <css-box class="leg-top"></css-box>
+        <css-box class="leg-bottom"></css-box>
+        <css-box class="leg-shoe"></css-box>
+      </div>
+    </div>`;
+    }
+}
+window.customElements.define('css-person', Person);
+const addMoreButton = document.querySelector('.add-more-button');
+const row = document.querySelector('.row');
+addMoreButton.addEventListener('click', () => {
+    if (document.querySelectorAll('css-person').length >= 30) {
+        return;
+    }
+    row.innerHTML += `<css-person></css-person>`;
+});
+// Add more people on safari
+const ua = navigator.userAgent.toLowerCase();
+if (ua.indexOf('safari') > -1) {
+    if (ua.indexOf('chrome') > -1) {
+        // Chrome
+    }
+    else {
+        row.innerHTML += `<css-person></css-person>
+    <css-person></css-person>
+    <css-person></css-person>
+    <css-person></css-person>
+    <css-person></css-person>
+    <css-person></css-person>`;
+    }
+}
+// -------- For debug purposes -------- //
+// const wrapper = document.querySelector('.wrapper');
+// window.addEventListener('mousemove', (e) => {
+//   wrapper.style.transform = `rotateY(${
+//     (e.clientX / window.innerWidth) * 360
+//   }deg) rotateX(5deg)`;
+// });
+
+</script>
+</body>
+</html>
