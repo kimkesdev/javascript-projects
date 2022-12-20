@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.2/gsap.min.js" crossorigin="anonymous"></script>
+
 <style>
-    section {
+section {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -43,9 +45,11 @@ svg {
   transform-origin: top;
   transform: translateY(-40px);
 }
+
 </style>
 </head>
-<body><section>
+<body>
+  <section>
     <svg xmlns="http://www.w3.org/2000/svg" width="618.038" height="686.053" viewBox="0 0 618.038 686.053">
       <g id="Hero_Illustration" data-name="Hero Illustration" transform="translate(-124.861 -55.946)">
         <g id="tree">
@@ -194,9 +198,8 @@ svg {
     
     </section>
     
-
     <script>
-        console.clear()
+      console.clear()
 
 // Timeline
 let tl = gsap.timeline({paused: true, repeat: -1, yoyo: true});
@@ -214,6 +217,7 @@ playBtn.addEventListener('click', e => {
   tl.play()
 });
     </script>
-    
+
+
 </body>
 </html>
