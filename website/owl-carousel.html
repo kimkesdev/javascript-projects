@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    .owl-carousel {
+  position: relative;
+  height: 100%;
+}
+.owl-carousel div:not(.owl-controls) {
+  height: 100%;
+}
+.owl-carousel .owl-slide {
+  background-image: url("https://images.unsplash.com/photo-1437915015400-137312b61975?fit=crop&fm=jpg&h=800&q=80&w=1200");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.owl-carousel div.owl--text {
+  position: absolute;
+  bottom: 4em;
+  left: 2em;
+  width: 20em;
+  height: 8em;
+  padding: 1em;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+}
+.owl-carousel .owl-controls {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+}
+.owl-carousel .owl-controls .owl-buttons div {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: inline-block;
+  zoom: 1;
+  margin: 0;
+  width: 50px;
+  height: 30px;
+  line-height: 25px;
+  text-align: center;
+  font-size: 0.9em;
+  border-radius: 3px;
+  color: #FFF;
+  background: #000;
+  opacity: 0.6;
+  text-transform: capitalize;
+}
+.owl-carousel .owl-controls .owl-buttons .owl-prev {
+  left: 5px;
+}
+.owl-carousel .owl-controls .owl-buttons .owl-next {
+  right: 5px;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: futura, sans-serif;
+}
+</style>
+</head>
+<body>
+    <div id="owl-example" class="owl-carousel">
+        <div class="owl-slide">
+              <div class="owl--text">
+              This is a full height Owl slider. There is nothing else interesting here!</div>
+          </div>
+        <div class="owl-slide">
+              <div class="owl--text">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit!</div>
+          </div>
+        <div class="owl-slide">
+              <div class="owl--text">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam excepturi voluptate eveniet consectetur numquam laboriosam.
+              </div>
+          </div>
+      </div>
+<script>
+    $(document).ready(function() {
+ 
+ $("#owl-example").owlCarousel({
+       navigation : true, 
+     slideSpeed : 300,
+     paginationSpeed : 400,
+     singleItem: true,
+           pagination: false,
+       rewindSpeed: 500
+   });
+
+});
+</script>      
+</body>
+</html>
