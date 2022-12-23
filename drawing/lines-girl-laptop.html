@@ -55,7 +55,7 @@ stroke: #e75480; /* color to fill in as */
 </svg>
 
 <script>
-    // TweenLite.to("circle", 1, {drawSVG: 0, delay:0.5});
+// TweenLite.to("circle", 1, {drawSVG: 0, delay:0.5});
 
 var tl = new TimelineMax({});
 
@@ -68,6 +68,19 @@ var tl = new TimelineMax({});
 // tl.fromTo("#one", 4, {drawSVG:"0"}, {drawSVG:"100%"})
 
 
+//
+// THESE WORK BEST!!!!!
+
+// general path
+// tl.staggerFromTo("path", 4, {drawSVG:"0"}, {drawSVG:"100%"}, 0.4);
+
+// with class name - to separate multiple svgs
+// tl.staggerFromTo(".guys", 7, {drawSVG:"0"}, {drawSVG:"100%"}, 0.4);
+
+// with delay
+// tl.staggerFromTo(".guys", 7, {drawSVG:"0"}, {drawSVG:"100%", delay:5}, 0.4);
+
+TweenMax.staggerFromTo(".hand", 7, {drawSVG:"0"}, {drawSVG:"100%"}, 0);
 
 
 TweenMax.staggerFromTo(".svg-girl", 3, {
@@ -76,6 +89,65 @@ TweenMax.staggerFromTo(".svg-girl", 3, {
   drawSVG: "100%",
   delay: 0.5
 }, 0.1);
+
+TweenMax.staggerFromTo("#phoneHand", 4, {
+  drawSVG: "0"
+}, {
+  drawSVG: "100%",
+  delay: 0.5
+}, 0);
+
+TweenMax.staggerFromTo(".firstScooter", 3, {
+  drawSVG: "0"
+}, {
+  drawSVG: "100%",
+  delay: 0.5
+}, 0.1);
+
+
+// TweenMax.staggerFromTo("#handsUp", 7, {
+//   drawSVG: "0"
+// }, {
+//   drawSVG: "100%",
+//   delay: 0.5
+// }, 0);
+
+TweenMax.fromTo(".handsUp", 10, {
+  drawSVG: "0"
+}, {
+  drawSVG: "100%",
+  delay: 1
+}, 0.1);
+
+TweenMax.fromTo(".theGirl", 8, {
+  drawSVG: "0"
+}, {
+  drawSVG: "100%",
+  delay: 1
+}, 0.1);
+
+// TweenMax.staggerFromTo("#girlPhone", 6, {
+//   drawSVG: "0"
+// }, {
+//   drawSVG: "100%",
+//   delay: 0.5
+// }, 0);
+
+// tl.staggerFromTo(".handshake", 4, {
+//       drawSVG: "0"
+//     }, {
+//       drawSVG: "100%",
+//       delay: 0
+//     }, 3);
+
+
+// old from GWD
+// tl.fromTo("path", 5, {
+//       drawSVG: "0",
+//       /*       delay: 3 */
+//     }, {
+//       drawSVG: "100%"
+//     })
 
 
 </script>
