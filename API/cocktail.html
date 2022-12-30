@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    /* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/***********************
+STYLE
+***********************/
+h1 {
+	font-size: 5rem;
+	padding-bottom: 2%;
+}
+h2 {
+	font-size: 3rem;
+	text-decoration: underline;
+}
+h3, img {
+	width: 40%;
+}
+h3 {
+	font-size: 1.75rem;
+	float: right;
+	width: 95%;
+	margin: 2%;
+}
+#instructions, #ingredients, #measurements{
+	font-size: 1.25rem;
+	text-align: left;
+	margin: 2%;
+}
+ input {
+	font-size: 1.25rem;
+	padding: 1%;
+}
+ button {
+	max-width: 100%;
+	font-size: 1.25rem;
+}
+ 
+ /***********************
+ LAYOUT
+ ***********************/
+ body {
+	 line-height: 1;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	color: white;
+	text-shadow: 1px 1px 1px black;
+}
+body::after {
+	content: "";
+	background-image: url('./img/cocktail-bar.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: left;
+	opacity: 1;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	position: absolute;
+	z-index: -1;   
+}
+.search-wrapper {
+	display: flex;
+	flex-direction: column;
+	margin-top: 2%;
+}
+
+.drink-cards :hover {
+	background-color: peachpuff;
+	color:cornflowerblue;
+	cursor: pointer;
+}
+input, button {
+	max-width: 100%;
+	margin: 0 auto;
+}
+.drink-cards {
+	width: 50%;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+	gap: 0.25rem;
+	margin-top: 1rem;
+	align-items: center;
+}
+.card {
+	background-color: none;
+	padding: 0.5rem;
+	text-align: center;
+	max-width: 100%;
+}
+.hide {
+	display: none;
+}
+.container {
+	width: 80%;
+	height: auto;
+	margin: 0 auto;
+	padding: 5%;
+}
+img {
+	float: left;
+	border-radius: 10%;
+	margin: 0 auto;
+}
+div {
+	display: flex;
+	align-items: flex-end;
+	flex-direction: column;
+	justify-content: space-between;
+	height: auto;
+};
+ul, li {
+	 width: 95%;
+	 text-align: center;
+}
+
+@media screen and (max-width: 400px ) {
+	h1 {
+		font-size: 2rem;
+		margin: 5%;
+	}
+	h2 {
+		font-size: 1.25rem;
+		margin: 5%;
+	}
+	#ingredients, #measurements, #instructions {
+		font-size: 0.85rem;
+	}
+	.container {
+		display: flex;
+		flex-direction: column;
+	}
+	#image {
+		display: none;
+	}
+	.media-query {
+		line-height: 1.1rem;
+		background-position: top center;
+		background-repeat: no-repeat;
+		background-size: cover; 
+		max-width: 100%;
+		height: 580px;
+	}
+	.text {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: flex-start;
+		
+	}
+	 
+}
+
+</style>
+</head>
+<body>
+    <body>
+
+        <section class="search-wrapper"> 
+            <h1>Kimy's Bar</h1> <!--label-->
+            <input type="search" name="" value="" class="searchBar" data-search>
+            <button class="button">Choose your drink!</button>
+
+        <div class="drink-cards" data-drink-cards-container></div>
+
+        <template data-drink-template>
+            <ul class="card">
+                    <li class="drinks" data-drink-name></li>
+            </ul>
+        </template>
+
+        </section>
+        
+        <section class="container">
+            <img src="" alt="" id="image">
+            <h2 id="name"></h2>
+
+            <div class="media-query" data-media-query>
+                <h3 id="ingredients"></h3>
+                <h3 id="instructions"></h3>
+            </div>
+           
+        </section>
+		
+
+	<script>
+        /* this block of code displays drink options matching the value in 
+   the search field and hides the options that does not match     
+*/
+const searchInput = document.querySelector("[data-search]");
+
+let drinks = [];
+
+searchInput.addEventListener("input", e => {
+  const value = e.target.value.toLowerCase();
+  if (value !== drinks) {
+    drinkCardContainer.textContent = `No drinks found for ${value}`;
+  };
+  drinkCardContainer.classList.toggle("hide", false);
+  drinks.forEach( drink => {
+    const isVisible = drink.drinkOptions.toLowerCase().includes(value);
+    drink.element.classList.toggle("hide", !isVisible);
+  });
+  debounceFetch (); 
+});
+
+//this block of code sets a time out before executing the getFetch
+let timeOut;
+
+function debounceFetch () {
+  clearTimeout(timeOut);  
+  timeOut = setTimeout (getFetch, 1000);
+};
+
+/* this function initializes the extraction of data from the API
+   which then maps said data and return an object to 'drinks' variable */
+function getFetch () {
+  const choice = document.querySelector("input").value;
+  const url = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${choice}`;
+  
+  const drinkCardTemplate = document.querySelector("[data-drink-template]");
+  
+  fetch (url)
+    .then (res => res.json())
+    .then (data => {
+      if (data) {
+        while (drinkCardContainer.firstChild) {   
+          drinkCardContainer.firstChild.remove();
+        };
+        const drinkVariety = data.drinks;
+        drinks = drinkVariety.map (key => {
+          const drinkOptions = key.strDrink;
+          const card = drinkCardTemplate.content.cloneNode(true).children[0];
+          const dataDrinkName = card.querySelector("[data-drink-name]");
+          dataDrinkName.textContent = drinkOptions;
+          drinkCardContainer.append(card);
+          return {drinkOptions, element: card, drinkVariety};
+        });
+      }
+    })
+    .catch (err => {
+      console.log (`error ${err}`)
+    });
+};
+
+/* this block of code shows the text of the selected card in 
+   the search field and then hides the rest of the cards 
+*/
+let option;
+
+const drinkCardContainer = document.querySelector("[data-drink-cards-container]");
+drinkCardContainer.addEventListener ('click', (event) => {
+  option = event.target.innerText;
+  searchInput.value = option;
+  drinkCardContainer.classList.toggle("hide")
+});
+
+/* the following block of code does these tasks: 
+1 clears the input field
+2 inserts the result or drink name to designated 'name' section in HTML (done)
+3 inserts the image of drink in the img 'src'  section in HTML (done)
+4 inserts the instructions in the 'instructions' section in HTML (done)
+5 inserts the recipe in the 'ingredients' section in HTML   (done)
+*/
+
+const button = document.querySelector('button');
+button.addEventListener ('click', () => {
+  // TASK 1: clear input field
+  searchInput.value = "";   
+  getValues (); 
+});
+
+function getValues () {
+  for (let key in drinks) {
+    drinkVarietyObject = drinks[key].drinkVariety[key];
+    drinkName = drinkVarietyObject.strDrink; 
+    drinkImage = drinkVarietyObject.strDrinkThumb;
+    drinkInstructions = drinkVarietyObject.strInstructions;
+    checkValues ();  
+  };
+};
+
+function checkValues () {
+  if (option === drinkName) {
+    // TASK 2: get name
+    const title = document.getElementById('name');
+    title.innerText = option; 
+    const image = document.getElementById('image');
+      image.src = drinkImage;
+      screenChange(screen);
+    // TASK 4: get instructions
+    const instructions = document.getElementById('instructions');
+    instructions.innerText = drinkInstructions;
+    // TASK 5: get recipe
+    getRecipe ();
+  };
+};
+
+function getRecipe () {
+  const selectedKeys = Object.keys (drinkVarietyObject) 
+                             .filter (key => key.includes("strIngredient") || 
+                                             key.includes("strMeasure"));
+
+  const ingredients = document.getElementById('ingredients');
+  while (ingredients.lastChild) {
+    ingredients.removeChild(ingredients.lastChild);
+  };
+
+  let drinkMeasure = []; 
+  let drinkIngredient = []; 
+
+  selectedKeys.map (key => {
+    if (drinkVarietyObject[key] !== null && key.includes("strMeasure")) {
+      measureList = drinkVarietyObject[key];
+      drinkMeasure.push(measureList)
+    } else if (drinkVarietyObject[key] !== null && key.includes("strIngredient")) {
+      ingredientList = drinkVarietyObject[key];
+      drinkIngredient.push(ingredientList)
+    }
+  });
+
+  const recipeContainer = document.createElement('ul');
+  const recipeElements = drinkIngredient.forEach ((ingredient, index) => {
+        const lists = document.createElement('li');
+              lists.textContent = `${drinkMeasure[index] || ' ' } ${ drinkIngredient[index]}`;
+               recipeContainer.appendChild(lists);
+  });
+
+  ingredients.appendChild(recipeContainer);
+
+};
+// The following block of code will make the page responsive //    
+
+const screen = window.matchMedia("(max-width: 400px)");
+screen.addEventListener('change', screenChange);//
+
+const mediaQuery = document.querySelector('[data-media-query]');
+
+function screenChange (x) {
+  if (x.matches || window.innerWidth < 400) {
+    for (let key in drinks) {
+      drinkVarietyObject = drinks[key].drinkVariety[key];
+      drinkName = drinkVarietyObject.strDrink;
+      drinkImageX = drinkVarietyObject.strDrinkThumb;
+      if (option === drinkName) {
+        drinkImage = drinkImageX;
+        mediaQuery.style.backgroundImage = `url(${drinkImageX})`;
+      };
+    };
+  } else {
+    mediaQuery.style.background = ``;
+  };
+};
+    </script>    
+      
+	</body>
+</body>
+</html>
