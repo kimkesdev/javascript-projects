@@ -1,81 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-    .author_bio_toggle_wrapper    
-{
-        
-}
-
-#author_bio_wrap 
-{
-    margin-top: 0px;  
-    margin-bottom: 30px; 
-    background: gray;
-    width: auto; height: 50px;
-}
-
-
-
-#author_bio_wrap_toggle 
-{
-    display: block;
-    width: 100%;
-    height: 35px;
-    line-height: 35px;
-    background: #9E9E77;
-    text-align: center;
-    color: white;
-    font-weight: bold;
-    font-variant: small-caps;
-    box-shadow: 2px 2px 3px #888888;
-    text-decoration:none;
-}
-
-#author_bio_wrap_toggle:hover 
-{
-    text-decoration:none;
-    border-top: 1px groove white;
-    border-left: 1px groove white;
-    border-bottom: 1px solid #7B7B78;
-    border-right: 1px solid #7B7B78;
-    color: #663200;
-    background: #EBEBB3;
-    box-shadow: 1px 1px 2px #888888;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .collapsible {
+      background-color: #777;
+      color: white;
+      cursor: pointer;
+      padding: 18px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 15px;
+    }
+    
+    .active, .collapsible:hover {
+      background-color: #555;
+    }
+    
+    .content {
+      padding: 0 18px;
+      display: none;
+      overflow: hidden;
+      background-color: #f1f1f1;
+    }
+    </style>
 </head>
 <body>
-    <div class="author_bio_toggle_wrapper">
-        <a href="#0" id="author_bio_wrap_toggle">Expand Author Details</a>
-      </div> 
-      <div id="author_bio_wrap" style="display: none;">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </div>
+  
+<h2>Collapsibles</h2>
+
+<p>A Collapsible:</p>
+<button type="button" class="collapsible">Open Collapsible</button>
+<div class="content">
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</div>
+
+<p>Collapsible Set:</p>
+<button type="button" class="collapsible">Open Section 1</button>
+<div class="content">
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</div>
+<button type="button" class="collapsible">Open Section 2</button>
+<div class="content">
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</div>
+<button type="button" class="collapsible">Open Section 3</button>
+<div class="content">
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+</div>
+
 <script>
-    jQuery(document).ready(function($)
-{
-  
-  $("#author_bio_wrap_toggle").click(function()
-  {
-    
-    $("#author_bio_wrap").slideToggle( "slow");
-    
-	  if ($("#author_bio_wrap_toggle").text() == "Expand Author Details")
-      {			
-        $("#author_bio_wrap_toggle").html("Hide Author Details")
-      }
-	  else 
-      {		
-        $("#author_bio_wrap_toggle").text("Expand Author Details")
-      }
-    
-  });  
-  
-});
-</script>      
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+
 </body>
 </html>
