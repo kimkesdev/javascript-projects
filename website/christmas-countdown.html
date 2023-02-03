@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Lobster%7CParisienne%7CRaleway:200,300" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous"></script>
 
 <style>
-    /* 1. GENERAL CLASSES */
+/* 1. GENERAL CLASSES */
 body {
 	padding: 0;
 	margin: 0;
@@ -83,6 +83,80 @@ form textarea:-ms-input-placeholder {
 	color: #EF5241;  
 }
 /* END GENERAL CLASSES */
+
+/* 2. LOADER */
+#loader{
+	background: -webkit-linear-gradient(top, rgb(14, 81, 133) 0%, rgb(26, 139, 178) 60%, rgb(33, 159, 193) 100%);
+	background: -o-linear-gradient(top, rgb(14, 81, 133) 0%, rgb(26, 139, 178) 60%, rgb(33, 159, 193) 100%);
+	background: -ms-linear-gradient(top, rgb(14, 81, 133) 0%, rgb(26, 139, 178) 60%, rgb(33, 159, 193) 100%);
+	background: -moz-linear-gradient(top, rgb(14, 81, 133) 0%, rgb(26, 139, 178) 60%, rgb(33, 159, 193) 100%);
+	background: linear-gradient(to bottom, rgb(14, 81, 133) 0%, rgb(26, 139, 178) 60%, rgb(33, 159, 193) 100%);
+	position:fixed;
+	overflow:hidden;
+	left:0;
+	top:0;
+	width: 100%;
+	height: 100%;
+	z-index: 99;
+}
+#loader::after{
+	content:'';
+	background:url('http://awesome-coding.com/theme/images/intro.png');
+	background-repeat: no-repeat;
+	background-size:contain;
+	width:70px;
+	height: 70px;
+	position: absolute;
+	margin-left:-35px;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-webkit-animation: snowflake-rotate 2s linear infinite;
+	-moz-animation:    snowflake-rotate 2s linear infinite;
+	-o-animation:      snowflake-rotate 2s linear infinite;
+	animation:         snowflake-rotate 2s linear infinite;
+}
+@-webkit-keyframes snowflake-rotate {
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(180deg);
+		transform: rotate(180deg);
+	}
+}
+@-moz-keyframes snowflake-rotate {
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(180deg);
+		transform: rotate(180deg);
+	}
+}
+@-o-keyframes snowflake-rotate {
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(180deg);
+		transform: rotate(180deg);
+	}
+}
+@keyframes snowflake-rotate {
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	100% {
+		-webkit-transform: rotate(180deg);
+		transform: rotate(180deg);
+	}
+}
+/* END LOADER */
 
 /* 3. PARALLAX CONTAINER */
 #container.parallax-container {
@@ -568,7 +642,7 @@ form textarea:-ms-input-placeholder {
 </style>
 </head>
 <body>
-    <div id="loader"></div>
+	<div id="loader"></div>
 	<!-- Parallax Container -->
 	<div id="container" class="parallax-container snow">
 		<ul id="christmas_scene" class="christmas-scene" >
@@ -644,8 +718,9 @@ form textarea:-ms-input-placeholder {
 			</div>
 		</div>
 	</div>
-<script>
-    // snow fall
+
+	<script>
+		// snow fall
 (function () {
 
 // SnowVolume will change the density of the snowflakes
@@ -840,7 +915,7 @@ var Main = (function($){
 			$('#mail_pole img').css('width', width/3);
 		},
 		countdownInit: function(){
-			$('#countdown_container').countdown('2024/12/25', function(event) {
+			$('#countdown_container').countdown('2019/12/25', function(event) {
 				$(this).html(event.strftime('<div class="col-md-3 col-xs-3 countdown-globe">%D<div class="col-md-12 padding-none">Days</div></div>\
 					<div class="col-md-3 col-xs-3 countdown-globe">%H<div class="col-md-12 padding-none">Hours</div></div>\
 					<div class="col-md-3 col-xs-3 countdown-globe">%M<div class="col-md-12 padding-none">Minutes</div></div>\
@@ -1386,7 +1461,12 @@ $.fn[NAME] = function (value) {
 
 })(window.jQuery || window.Zepto, window, document);
 
-
+/**
+* Request Animation Frame Polyfill.
+* @author Tino Zijdel
+* @author Paul Irish
+* @see https://gist.github.com/paulirish/1579671
+*/
 ;(function() {
 
 	var lastTime = 0;
@@ -1424,9 +1504,13 @@ $('#christmas_scene').parallax({
 	scalarY: 15,
 	invertY: false
 });
-</script>   
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" crossorigin="anonymous"></script>
+
 
 </body>
 </html>
