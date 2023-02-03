@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.3/assets/owl.carousel.min.css" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.3/assets/owl.theme.default.min.css" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous"></script>
 
-<style>
-  .outer { margin:0 auto; max-width:800px;}
+  <title>Carousel with Thumbnails</title>
+  <style>
+    .outer { margin:0 auto; max-width:800px;}
 #big .item { background: #ec6e46; padding: 120px 0px; margin:2px; color: #FFF; border-radius: 3px; text-align: center; }
 #thumbs .item { background: #C9C9C9; height:70px; line-height:70px; padding: 0px; margin:2px; color: #FFF; border-radius: 3px; text-align: center; cursor: pointer; }
 #thumbs .item h1 { font-size: 18px; }
@@ -21,7 +22,7 @@
 #big.owl-theme .owl-prev { left: 10px; }
 #big.owl-theme .owl-next { right: 10px; }
 #thumbs.owl-theme .owl-next, #thumbs.owl-theme .owl-prev { background:#333; }
-</style>
+  </style>
 </head>
 <body>
   <div class="outer">
@@ -90,9 +91,6 @@
       </div>
     </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.3/owl.carousel.min.js" crossorigin="anonymous"></script>
-
     <script>
       $(document).ready(function() {
   var bigimage = $("#big");
@@ -191,5 +189,8 @@
 });
 
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.0.0-beta.3/owl.carousel.min.js" crossorigin="anonymous"></script>
+
 </body>
 </html>
