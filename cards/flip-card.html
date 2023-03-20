@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css'>
+<style>
+    html {
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+.cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: linear-gradient(to left bottom, #F2E3C6 0%, #A7A1A5 100%);
+  perspective: 2000px;
+  perspective-origin: 55% 100px;
+}
+
+.btn {
+  position: relative;
+  transform-style: preserve-3d;
+  background-color: peru;
+  cursor: pointer;
+  transform: translate3d(0, 0, 0);
+  will-change: transform, transition;
+}
+.btn__side {
+  position: absolute;
+  top: -100px;
+  left: -160px;
+  background-color: peru;
+  width: 350px;
+  height: 200px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.btn__front {
+  transform: translateZ(100px);
+  transition: 200ms;
+}
+.btn__top {
+  height: 25px;
+  transform: rotateX(-90deg) translateY(-100px);
+  transform-origin: top center;
+}
+.btn__bottom {
+  height: 25px;
+  transform: rotateX(90deg) translateY(100px) translateZ(-175px);
+  transform-origin: bottom center;
+}
+.btn__left {
+  width: 25px;
+  transform: rotateY(270deg) translateX(75px);
+  transform-origin: center left;
+}
+.btn__right {
+  width: 25px;
+  transform: rotateY(-270deg) translateX(-75px) translateZ(325px);
+  transform-origin: top right;
+}
+.btn__back {
+  transform: translateZ(75px) rotateY(180deg);
+  box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.5);
+  transition: 200ms;
+}
+
+.eyes {
+  display: flex;
+  justify-content: center;
+  margin-top: 35px;
+}
+.eyes--back {
+  margin-top: 35px;
+}
+.eyes__eye {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background-color: #fff;
+}
+.eyes__pupil {
+  transform: translate3d(0, 0, 0);
+  width: 30px;
+  height: 30px;
+  background-color: #000;
+  border-radius: 50%;
+  will-change: transform, box-shadow;
+}
+.eyes__text {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 18px;
+  color: #fff;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.eyes__text--back {
+  font-size: 28px;
+  transform: rotateX(180deg) rotateY(180deg);
+}
+
+.backflip {
+  transition: 500ms !important;
+  transform: rotateX(-181deg) rotateY(1deg) !important;
+}
+.backflip .btn__back {
+  box-shadow: none;
+}
+.backflip .btn__front {
+  box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.5);
+}
+
+.frontflip {
+  transition: 500ms !important;
+  transform: rotateX(181deg) rotateY(1deg) !important;
+}
+.frontflip .btn__back {
+  box-shadow: none;
+}
+.frontflip .btn__front {
+  box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.5);
+}
+
+.right-backflip {
+  transition: 500ms !important;
+  transform: rotateY(-45deg) rotateX(175deg) !important;
+}
+.right-backflip .btn__back {
+  box-shadow: none;
+}
+.right-backflip .btn__front {
+  box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.5);
+}
+
+.left-backflip {
+  transition: 500ms !important;
+  transform: rotateY(45deg) rotateX(175deg) !important;
+}
+.left-backflip .btn__back {
+  box-shadow: none;
+}
+.left-backflip .btn__front {
+  box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.5);
+}
+
+.left-frontflip {
+  transition: 500ms !important;
+  transform: rotateY(-45deg) rotateX(-175deg) !important;
+}
+.left-frontflip .btn__back {
+  box-shadow: none;
+}
+.left-frontflip .btn__front {
+  box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.5);
+}
+
+.right-frontflip {
+  transition: 500ms !important;
+  transform: rotateY(45deg) rotateX(-175deg) !important;
+}
+.right-frontflip .btn__back {
+  box-shadow: none;
+}
+.right-frontflip .btn__front {
+  box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.5);
+}
+
+.icon-link {
+  position: absolute;
+  left: 5px;
+  bottom: 5px;
+  width: 50px;
+}
+.icon-link img {
+  width: 100%;
+  vertical-align: top;
+}
+.icon-link--twitter {
+  left: auto;
+  right: 5px;
+}
+</style>
+</head>
+<body>
+    <div class="cont">
+        <div class='btn'>
+            <div class="btn__side btn__front">
+                <div class="eyes">
+                    <div class="eyes__eye">
+                        <div class="eyes__pupil"></div>
+                    </div>
+                    <div class="eyes__eye">
+                        <div class="eyes__pupil"></div>
+                    </div>
+                </div>
+                <p class='eyes__text eyes__text--front'>
+                        Hi! I can do back & front flips. Click in different areas to see.
+                </p>
+            </div>
+            <div class="btn__side btn__back">
+                <p class='eyes__text eyes__text--back'>
+    
+                </p>
+                <div class="eyes eyes--back">
+                    <div class="eyes__eye">
+                        <div class="eyes__pupil"></div>
+                    </div>
+                    <div class="eyes__eye">
+                        <div class="eyes__pupil"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="btn__side btn__right"></div>
+            <div class="btn__side btn__left"></div>
+            <div class="btn__side btn__top"></div>
+            <div class="btn__side btn__bottom"></div>
+        </div>
+    </div>
+    
+<script>
+    const btn = document.querySelector('.btn');
+const btn__front = document.querySelector('.btn__front');
+const btn__back = document.querySelector('.btn__back');
+const whoa = document.querySelector('.letters');
+const eyes = document.querySelectorAll('.eyes__pupil');
+const backTxt = document.querySelector('.eyes__text--back');
+
+let animation = false;
+let animSpd = .3;
+let clickX, clickY, rotateYvalue, rotateXvalue;
+
+const mouseMoveHandler = function (e) {
+  if (animation) return;
+  let x = e.clientX;
+  let y = e.clientY;
+  let btnOffsLeft = btn.offsetLeft;
+  let btnOffsTop = btn.offsetTop;
+  rotateYvalue = (x - btnOffsLeft) / 10;
+  rotateXvalue = (y - btnOffsTop) / 10;
+  clickY = x - btnOffsLeft;
+  clickX = y - btnOffsTop;
+  let that = this;
+
+  if (that === btn__front) {
+    TweenMax.to(btn, animSpd, {
+      transform: `translate3d(0,0,0)
+									rotateY(${rotateYvalue}deg)
+									rotateX(${-rotateXvalue}deg)` });
+
+  }
+
+  eyesMovement(that, rotateYvalue, rotateXvalue);
+};
+
+const eyesMovement = (that, x, y) => {
+  let eyesLength = eyes.length;
+  for (let i = 0; i < eyesLength; i++) {if (window.CP.shouldStopExecution(0)) break;
+    if (that === btn__front) {
+      TweenMax.to(eyes[i], .2, {
+        transform: `translate3d(${x}px, ${y}px, 0)`,
+        boxShadow: `${-x * 1.5}px ${-y * 1.5}px 10px -5px rgba(0, 0, 0, .5)` });
+
+    } else if (that === btn__back) {
+      TweenMax.to(eyes[i], .2, {
+        transform: `translate3d(${x * -1}px, ${y * -1}px, 0)`,
+        boxShadow: `${-x * -1.5}px ${-y * -1.5}px 10px -5px rgba(0, 0, 0, .3)` });
+
+    }
+  }window.CP.exitedLoop(0);
+};
+
+const mouseClickHandler = function () {
+  if (animation) return;
+  animation = true;
+
+  let backflip = clickY > -75 && clickY < 105 && clickX < 0;
+  let frontflip = clickY > -75 && clickY < 105 && clickX > 0;
+  let leftBackflip = clickY < -75 && clickX < 0;
+  let rightBackflip = clickY > 105 && clickX < 0;
+  let leftFrontflip = clickY < -75 && clickX > 0;
+  let rightFrontflip = clickY > 105 && clickX > 0;
+
+  if (backflip) {
+    btn.classList.add('backflip');
+    backTxt.innerHTML = 'Whoa! Backflip';
+  } else if (frontflip) {
+    btn.classList.add('frontflip');
+    backTxt.innerHTML = 'Whoa! Frontflip';
+  } else if (rightFrontflip) {
+    btn.classList.add('right-frontflip');
+    backTxt.innerHTML = 'Whoa! Right Frontflip';
+  } else if (leftFrontflip) {
+    btn.classList.add('left-frontflip');
+    backTxt.innerHTML = 'Whoa! Left Frontflip';
+  } else if (leftBackflip) {
+    btn.classList.add('left-backflip');
+    backTxt.innerHTML = 'Whoa! Left Backflip';
+  } else if (rightBackflip) {
+    btn.classList.add('right-backflip');
+    backTxt.innerHTML = 'Whoa! Right Backflip';
+  }
+
+  setTimeout(function () {
+    animation = false;
+    eyesMovement(btn__back, rotateYvalue, rotateXvalue);
+  }, 100);
+};
+
+const toDefault = function () {
+  if (animation) return;
+  animation = true;
+
+  btn.style.transition = '500ms';
+  btn.classList.remove('backflip', 'frontflip', 'right-backflip', 'left-backflip', 'left-frontflip', 'right-frontflip');
+
+  setTimeout(function () {
+    eyesMovement(btn__front, rotateYvalue, rotateXvalue);
+  }, 100);
+
+  setTimeout(function () {
+    btn.style.transition = '0ms';
+    backTxt.innerHTML = '';
+    animation = false;
+  }, 500);
+};
+
+btn__front.addEventListener('mousemove', mouseMoveHandler);
+btn__back.addEventListener('mousemove', mouseMoveHandler);
+btn__front.addEventListener('click', mouseClickHandler);
+btn__back.addEventListener('click', toDefault);
+
+btn.addEventListener('mouseleave', function () {
+  if (animation) return;
+  TweenMax.to(btn, .2, {
+    transform: `translate3d(0,0,0)
+								rotateY(0deg)
+								rotateX(0deg)` });
+
+  for (let i = 0, eyesLength = eyes.length; i < eyesLength; i++) {if (window.CP.shouldStopExecution(1)) break;
+    TweenMax.to(eyes[i], .2, {
+      transform: `translate3d(0, 0, 0)`,
+      boxShadow: `none` });
+
+  }window.CP.exitedLoop(1);
+});
+</script>     
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js" crossorigin="anonymous"></script>
+
+</body>
+</html>
