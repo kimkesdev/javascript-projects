@@ -6,155 +6,29 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 	body {
-	background-color: #000;
-	margin: 0;
-	overflow: hidden;
+  background-color: #000;
+  margin: 0;
+  overflow: hidden;
 }
 </style>
 </head>
 <body>
 	<script src="//cdn.rawgit.com/mrdoob/three.js/master/build/three.min.js"></script>
-	<script src="//cdn.rawgit.com/mrdoob/three.js/master/examples/js/controls/OrbitControls.js"></script>
-	<script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/STLLoader.js"></script>
-	
-	<script src="//cdn.rawgit.com/mrdoob/three.js/master/examples/js/shaders/CopyShader.js"></script>
-	<script src="//cdn.rawgit.com/mrdoob/three.js/master/examples/js/postprocessing/EffectComposer.js"></script>
-	<script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/postprocessing/RenderPass.js"></script>
-	<script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/shaders/FilmShader.js"></script>
-	<script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/postprocessing/FilmPass.js"></script>
-	<script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/shaders/LuminosityHighPassShader.js"></script>
-	<script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/postprocessing/UnrealBloomPass.js"></script>
-	<script src="//cdn.rawgit.com/mrdoob/three.js/master/examples/js/postprocessing/ShaderPass.js"></script>
-	<script src="//cdn.rawgit.com/mrdoob/three.js/master/examples/js/postprocessing/OutlinePass.js"></script>
-	
-	<script src="//cdn.rawgit.com/mrdoob/three.js/master/examples/js/libs/stats.min.js"></script>
-	<script src="//cdn.rawgit.com/mrdoob/three.js/master/examples/js/libs/dat.gui.min.js"></script>
-	<script>
-		var container, stats;
-var camera, scene, renderer, controls;
+<script src="//cdn.rawgit.com/mrdoob/three.js/master/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/STLLoader.js"></script>
 
-var composer, outlinePass;
+<script src="//cdn.rawgit.com/mrdoob/three.js/master/examples/js/shaders/CopyShader.js"></script>
+<script src="//cdn.rawgit.com/mrdoob/three.js/master/examples/js/postprocessing/EffectComposer.js"></script>
+<script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/postprocessing/RenderPass.js"></script>
+<script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/shaders/FilmShader.js"></script>
+<script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/postprocessing/FilmPass.js"></script>
+<script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/shaders/LuminosityHighPassShader.js"></script>
+<script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/postprocessing/UnrealBloomPass.js"></script>
+<script src="//cdn.rawgit.com/mrdoob/three.js/master/examples/js/postprocessing/ShaderPass.js"></script>
+<script src="//cdn.rawgit.com/mrdoob/three.js/master/examples/js/postprocessing/OutlinePass.js"></script>
 
-let dots = [
-	{ orbColor: 0x6f007a, color: '#a711ae', y: 2, x: 0, name: 'Crown / Keter', size: 1 },
-	{ orbColor: 0x288000, color: '#65b736', color: '#a711ae', y: 0, x: 0, name: 'Heart / Tif\'eret', size: 1 },
-	{ orbColor: 0x842900, color: '#dd7514', y: -1, x: 0, name: 'Sacral / Yasod', size: 1 },
-	{ orbColor: 0xa00000, color: '#df0002', y: -2, x: 0, name: 'Root / Malkuth', size: 1 },
-	
-	{ orbColor: 0x00307b, color: '#5579d1', y: 1.5, x: -1, name: 'Third Eye / Binya', size: 1 },
-	{ orbColor: 0x00307b, color: '#5579d1', y: 1.5, x: 1, name: 'Third Eye / Chokmah', size: 1 },
-	{ orbColor: 0x00307b, color: '#5579d1', y: 1.5, x: 0, name: 'Third Eye', size: .5 },
-	
-	{ orbColor: 0x004c8a, color: '#6badf5', y: .5, x: -1, name: 'Throat / Geburah', size: 1 },
-	{ orbColor: 0x004c8a, color: '#6badf5', y: .5, x: 1, name: 'Throat / Chessed', size: 1 },
-	{ orbColor: 0x004c8a, color: '#6badf5', y: .5, x: 0, name: 'Throat', size: .5 },
-	
-	{ orbColor: 0xb69000, color: '#f3c732', y: -.5, x: -1, name: 'Solar Plexus / Hod', size: 1 },
-	{ orbColor: 0xb69000, color: '#f3c732', y: -.5, x: 1, name: 'Solar Plexus / Netzach', size: 1 },
-	{ orbColor: 0xb69000, color: '#f3c732', y: -.5, x: 0, name: 'Solar Plexus', size: .5 },
-]
+<script src="//cdn.rawgit.com/mrdoob/three.js/master/examples/js/libs/stats.min.js"></script>
+<script src="//cdn.rawgit.com/mrdoob/three.js/master/examples/js/libs/dat.gui.min.js"></script>
 
-function init() {
-	container = document.createElement( 'div' );
-	document.body.appendChild( container );
-
-	var width = window.innerWidth;
-	var height = window.innerHeight;
-
-	renderer = new THREE.WebGLRenderer({ alpha: false });
-	renderer.setClearColor(0x020202, 1);
-
-	renderer.setSize( width, height );
-  
-	document.body.appendChild( renderer.domElement );
-
-	scene = new THREE.Scene();
-
-	camera = new THREE.PerspectiveCamera( 45, width / height, 0.1, 3000 );
-	camera.position.set( 0, 0, 30 );
-
-	controls = new THREE.OrbitControls( camera, renderer.domElement )
-	controls.autoRotate = true
-
-	document.body.addEventListener('click', () => {
-		controls.autoRotate = false
-	})
-	
-	composer = new THREE.EffectComposer( renderer )
-
-	var renderPass = new THREE.RenderPass( scene, camera );
-	composer.addPass( renderPass );
-
-	outlinePass = new THREE.OutlinePass(new THREE.Vector2(window.innerWidth, window.innerHeight ), scene, camera);
-	composer.addPass( outlinePass );
-
-
-	let bloomPass = new THREE.UnrealBloomPass( new THREE.Vector2( width, height ), 1.5, 0.4, 0.85 );
-	renderer.toneMappingExposure = 1;
-	bloomPass.threshold = 0;
-	bloomPass.strength = 1.5;
-	bloomPass.radius = 1;
-	composer.addPass(bloomPass);
-	
-	let filmPass = new THREE.FilmPass(0.34, 0.025, 256, false);
-	composer.addPass(filmPass);
-
-	outlinePass.edgeStrength = 3
-	outlinePass.edgeThickness = 1
-	outlinePass.edgeGlow  = 0
-	outlinePass.visibleEdgeColor.set('#ffffff')
-	outlinePass.hiddenEdgeColor.set('#ffffff')
-	outlinePass.BlurDirectionX = new THREE.Vector2(0.0, 0.0)
-	outlinePass.BlurDirectionY = new THREE.Vector2(0.0, 0.0)
-
-	let loader = new THREE.TextureLoader()
-	loader.load('https://assets.codepen.io/223954/flower+of+life.png', texture => {	
-		let geometry = new THREE.PlaneGeometry( 20, 20, 32 ),
-		    material = new THREE.MeshBasicMaterial( { map: texture, transparent: true, color: 0x2e2412 } ),
-		    mesh = new THREE.Mesh( geometry, material )
-
-		mesh.material.side = THREE.DoubleSide
-
-		scene.add(mesh)
-	})
-
-
-	dots.map(d => {
-		let geom = new THREE.SphereGeometry( d.size * .75, 20, 20 ),
-		    mat = new THREE.MeshBasicMaterial( { color: d.orbColor, side: THREE.DoubleSide, transparent: false } ),
-		    dot = new THREE.Mesh( geom, mat )
-
-		dot.position.y = d.y * 3
-		dot.position.x = d.x * 2.75
-
-		scene.add(dot)
-	})
-
-	const STLloader = new THREE.STLLoader()
-	STLloader.load('https://assets.codepen.io/223954/buddha.stl', function ( geometry ) {
-		const material = new THREE.MeshBasicMaterial( { color: 0xffffff, opacity: 0, transparent: true, depthWrite: false } )
-		const mesh = new THREE.Mesh( geometry, material )
-
-
-		mesh.position.set( -5.02, -6.5, 3 );
-		mesh.rotation.set( -Math.PI / 2, 0, 0 );
-		mesh.scale.set( 0.3, 0.3, 0.3 );
-
-		scene.add( mesh )
-		outlinePass.selectedObjects = [mesh];
-	})
-}
-
-
-function renderLoop() {
-	requestAnimationFrame(renderLoop)
-	controls.update()
-	
-	composer.render()
-}
-
-init()
-renderLoop()
-	</script>
 </body>
 </html>
