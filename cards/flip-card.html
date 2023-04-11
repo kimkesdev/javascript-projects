@@ -234,134 +234,142 @@
             <div class="btn__side btn__bottom"></div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js" crossorigin="anonymous"></script>
     <script>
-    const btn = document.querySelector('.btn');
-    const btn__front = document.querySelector('.btn__front');
-    const btn__back = document.querySelector('.btn__back');
-    const whoa = document.querySelector('.letters');
-    const eyes = document.querySelectorAll('.eyes__pupil');
-    const backTxt = document.querySelector('.eyes__text--back');
-    
-    let animation = false;
-    let animSpd = .3;
-    let clickX, clickY, rotateYvalue, rotateXvalue;
-    
-    const mouseMoveHandler = function (e) {
-      if (animation) return;
-      let x = e.clientX;
-      let y = e.clientY;
-      let btnOffsLeft = btn.offsetLeft;
-      let btnOffsTop = btn.offsetTop;
-      rotateYvalue = (x - btnOffsLeft) / 10;
-      rotateXvalue = (y - btnOffsTop) / 10;
-      clickY = x - btnOffsLeft;
-      clickX = y - btnOffsTop;
-      let that = this;
-    
-      if (that === btn__front) {
-        TweenMax.to(btn, animSpd, {
-          transform: `translate3d(0,0,0)
-                      rotateY(${rotateYvalue}deg)
-                      rotateX(${-rotateXvalue}deg)` });
-    
-      }
-    
-      eyesMovement(that, rotateYvalue, rotateXvalue);
-    };
-    
-    const eyesMovement = (that, x, y) => {
-      let eyesLength = eyes.length;
-      for (let i = 0; i < eyesLength; i++) {if (window.CP.shouldStopExecution(0)) break;
-        if (that === btn__front) {
-          TweenMax.to(eyes[i], .2, {
-            transform: `translate3d(${x}px, ${y}px, 0)`,
-            boxShadow: `${-x * 1.5}px ${-y * 1.5}px 10px -5px rgba(0, 0, 0, .5)` });
-    
-        } else if (that === btn__back) {
-          TweenMax.to(eyes[i], .2, {
-            transform: `translate3d(${x * -1}px, ${y * -1}px, 0)`,
-            boxShadow: `${-x * -1.5}px ${-y * -1.5}px 10px -5px rgba(0, 0, 0, .3)` });
-    
-        }
-      }window.CP.exitedLoop(0);
-    };
-    
-    const mouseClickHandler = function () {
-      if (animation) return;
-      animation = true;
-    
-      let backflip = clickY > -75 && clickY < 105 && clickX < 0;
-      let frontflip = clickY > -75 && clickY < 105 && clickX > 0;
-      let leftBackflip = clickY < -75 && clickX < 0;
-      let rightBackflip = clickY > 105 && clickX < 0;
-      let leftFrontflip = clickY < -75 && clickX > 0;
-      let rightFrontflip = clickY > 105 && clickX > 0;
-    
-      if (backflip) {
-        btn.classList.add('backflip');
-        backTxt.innerHTML = 'Whoa! Backflip';
-      } else if (frontflip) {
-        btn.classList.add('frontflip');
-        backTxt.innerHTML = 'Whoa! Frontflip';
-      } else if (rightFrontflip) {
-        btn.classList.add('right-frontflip');
-        backTxt.innerHTML = 'Whoa! Right Frontflip';
-      } else if (leftFrontflip) {
-        btn.classList.add('left-frontflip');
-        backTxt.innerHTML = 'Whoa! Left Frontflip';
-      } else if (leftBackflip) {
-        btn.classList.add('left-backflip');
-        backTxt.innerHTML = 'Whoa! Left Backflip';
-      } else if (rightBackflip) {
-        btn.classList.add('right-backflip');
-        backTxt.innerHTML = 'Whoa! Right Backflip';
-      }
-    
-      setTimeout(function () {
-        animation = false;
-        eyesMovement(btn__back, rotateYvalue, rotateXvalue);
-      }, 100);
-    };
-    
-    const toDefault = function () {
-      if (animation) return;
-      animation = true;
-    
-      btn.style.transition = '500ms';
-      btn.classList.remove('backflip', 'frontflip', 'right-backflip', 'left-backflip', 'left-frontflip', 'right-frontflip');
-    
-      setTimeout(function () {
-        eyesMovement(btn__front, rotateYvalue, rotateXvalue);
-      }, 100);
-    
-      setTimeout(function () {
-        btn.style.transition = '0ms';
-        backTxt.innerHTML = '';
-        animation = false;
-      }, 500);
-    };
-    
-    btn__front.addEventListener('mousemove', mouseMoveHandler);
-    btn__back.addEventListener('mousemove', mouseMoveHandler);
-    btn__front.addEventListener('click', mouseClickHandler);
-    btn__back.addEventListener('click', toDefault);
-    
-    btn.addEventListener('mouseleave', function () {
-      if (animation) return;
-      TweenMax.to(btn, .2, {
-        transform: `translate3d(0,0,0)
-                    rotateY(0deg)
-                    rotateX(0deg)` });
-    
-      for (let i = 0, eyesLength = eyes.length; i < eyesLength; i++) {if (window.CP.shouldStopExecution(1)) break;
-        TweenMax.to(eyes[i], .2, {
-          transform: `translate3d(0, 0, 0)`,
-          boxShadow: `none` });
-    
-      }window.CP.exitedLoop(1);
-    });
+    const btn = document.querySelector(".btn");
+const btn__front = document.querySelector(".btn__front");
+const btn__back = document.querySelector(".btn__back");
+const whoa = document.querySelector(".letters");
+const eyes = document.querySelectorAll(".eyes__pupil");
+const backTxt = document.querySelector(".eyes__text--back");
+
+let animation = false;
+let animSpd = 0.3;
+let clickX, clickY, rotateYvalue, rotateXvalue;
+
+const mouseMoveHandler = function (e) {
+	if (animation) return;
+	let x = e.clientX;
+	let y = e.clientY;
+	let btnOffsLeft = btn.offsetLeft;
+	let btnOffsTop = btn.offsetTop;
+	rotateYvalue = (x - btnOffsLeft) / 10;
+	rotateXvalue = (y - btnOffsTop) / 10;
+	clickY = x - btnOffsLeft;
+	clickX = y - btnOffsTop;
+	let that = this;
+
+	if (that === btn__front) {
+		TweenMax.to(btn, animSpd, {
+			transform: `translate3d(0,0,0)
+									rotateY(${rotateYvalue}deg)
+									rotateX(${-rotateXvalue}deg)`
+		});
+	}
+
+	eyesMovement(that, rotateYvalue, rotateXvalue);
+};
+
+const eyesMovement = (that, x, y) => {
+	let eyesLength = eyes.length;
+	for (let i = 0; i < eyesLength; i++) {
+		if (that === btn__front) {
+			TweenMax.to(eyes[i], 0.2, {
+				transform: `translate3d(${x}px, ${y}px, 0)`,
+				boxShadow: `${-x * 1.5}px ${-y * 1.5}px 10px -5px rgba(0, 0, 0, .5)`
+			});
+		} else if (that === btn__back) {
+			TweenMax.to(eyes[i], 0.2, {
+				transform: `translate3d(${x * -1}px, ${y * -1}px, 0)`,
+				boxShadow: `${-x * -1.5}px ${-y * -1.5}px 10px -5px rgba(0, 0, 0, .3)`
+			});
+		}
+	}
+};
+
+const mouseClickHandler = function () {
+	if (animation) return;
+	animation = true;
+
+	let backflip = clickY > -75 && clickY < 105 && clickX < 0;
+	let frontflip = clickY > -75 && clickY < 105 && clickX > 0;
+	let leftBackflip = clickY < -75 && clickX < 0;
+	let rightBackflip = clickY > 105 && clickX < 0;
+	let leftFrontflip = clickY < -75 && clickX > 0;
+	let rightFrontflip = clickY > 105 && clickX > 0;
+
+	if (backflip) {
+		btn.classList.add("backflip");
+		backTxt.innerHTML = "Whoa! Backflip";
+	} else if (frontflip) {
+		btn.classList.add("frontflip");
+		backTxt.innerHTML = "Whoa! Frontflip";
+	} else if (rightFrontflip) {
+		btn.classList.add("right-frontflip");
+		backTxt.innerHTML = "Whoa! Right Frontflip";
+	} else if (leftFrontflip) {
+		btn.classList.add("left-frontflip");
+		backTxt.innerHTML = "Whoa! Left Frontflip";
+	} else if (leftBackflip) {
+		btn.classList.add("left-backflip");
+		backTxt.innerHTML = "Whoa! Left Backflip";
+	} else if (rightBackflip) {
+		btn.classList.add("right-backflip");
+		backTxt.innerHTML = "Whoa! Right Backflip";
+	}
+
+	setTimeout(function () {
+		animation = false;
+		eyesMovement(btn__back, rotateYvalue, rotateXvalue);
+	}, 100);
+};
+
+const toDefault = function () {
+	if (animation) return;
+	animation = true;
+
+	btn.style.transition = "500ms";
+	btn.classList.remove(
+		"backflip",
+		"frontflip",
+		"right-backflip",
+		"left-backflip",
+		"left-frontflip",
+		"right-frontflip"
+	);
+
+	setTimeout(function () {
+		eyesMovement(btn__front, rotateYvalue, rotateXvalue);
+	}, 100);
+
+	setTimeout(function () {
+		btn.style.transition = "0ms";
+		backTxt.innerHTML = "";
+		animation = false;
+	}, 500);
+};
+
+btn__front.addEventListener("mousemove", mouseMoveHandler);
+btn__back.addEventListener("mousemove", mouseMoveHandler);
+btn__front.addEventListener("click", mouseClickHandler);
+btn__back.addEventListener("click", toDefault);
+
+btn.addEventListener("mouseleave", function () {
+	if (animation) return;
+	TweenMax.to(btn, 0.2, {
+		transform: `translate3d(0,0,0)
+								rotateY(0deg)
+								rotateX(0deg)`
+	});
+	for (let i = 0, eyesLength = eyes.length; i < eyesLength; i++) {
+		TweenMax.to(eyes[i], 0.2, {
+			transform: `translate3d(0, 0, 0)`,
+			boxShadow: `none`
+		});
+	}
+});
+
   </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js" crossorigin="anonymous"></script>
 
 </body>
 </html>
