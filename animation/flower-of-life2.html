@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+<style>
+    * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+}
+html {
+    background: #ffffff;
+}
+#drawing {
+    width: 100%;
+    height: 100%;
+}
+#drawing svg {
+    width: 100%;
+    height: 100%;
+}
+.options {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: auto;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    font-size: 10px;
+    padding: 5px;
+}
+.options__listitem {
+    margin-bottom: 5px;
+    clear: both;
+    display: table;
+    content: '';
+}
+.options__listitem:last-child {
+    margin-bottom: 0;
+}
+.options__option {
+    font-size: 10px;
+    float: left;
+    width: 40px;
+    line-height: 20px;
+    height: 20px;
+    padding: 0 0 0 5px;
+    margin: 0;
+    border: 0;
+}
+#options__option--color {
+    padding: 0;
+    cursor: pointer;
+}
+.options__label {
+    float: left;
+    width: 60px;
+    display: block;
+    line-height: 20px;
+}
+</style>
+</head>
+<body>
+    <script>
+        let draw = null,
+    set = [],
+    options = {};
+
+SVG.on(document, 'DOMContentLoaded', function() {
+    init();
+    redraw();
+});
+window.addEventListener('resize', () => {
+    if (draw !== null) {
+        draw.clear();
+    }
+    redraw();
+});
+
+function init() {
+    let html = '';
+    html += '<div class="options">';
+    html += '<ul class="options__list">';
+    html += '<li class="options__listitem">';
+    html +=
+        '<label class="options__label" for="options__option--rank">rank:</label><input id="options__option--rank" class="options__option options__option--rank" name="rank" type="number" value="3" min="1" max="10" step="1" />';
+    html += '</li>';
+    html += '<li class="options__listitem">';
+    html +=
+        '<label class="options__label" for="options__option--speed">speed:</label><input id="options__option--speed" class="options__option options__option--speed" name="speed" type="number" value="50" min="0" max="100" step="1" />';
+    html += '</li>';
+    html += '<li class="options__listitem">';
+    html +=
+        '<label class="options__label" for="options__option--scale">scale:</label><input id="options__option--scale" class="options__option options__option--scale" name="scale" type="number" value="50" min="0" max="1000" step="1" />';
+    html += '</li>';
+    html += '<li class="options__listitem">';
+    html +=
+        '<label class="options__label" for="options__option--radius">radius:</label><input id="options__option--radius" class="options__option options__option--radius" name="radius" type="number" value="1" min="0" max="9" step="0.1" />';
+    html += '</li>';
+    html += '<li class="options__listitem">';
+    html +=
+        '<label class="options__label" for="options__option--offset">offset:</label><input id="options__option--offset" class="options__option options__option--offset" name="offset" type="number" value="1" min="0" max="9" step="0.1" />';
+    html += '</li>';
+    html += '<li class="options__listitem">';
+    html +=
+        '<label class="options__label" for="options__option--border">border:</label><input id="options__option--border" class="options__option options__option--border" name="border" type="number" value="1" min="0" max="2" step="0.1" />';
+    html += '</li>';
+    html += '<li class="options__listitem">';
+    html +=
+        '<label class="options__label" for="options__option--color">color:</label><input id="options__option--color" class="options__option options__option--color" name="color" type="color" value="#1693A5" />';
+    html += '</li>';
+    html += '</ul>';
+    html += '</div>';
+    document.body.insertAdjacentHTML('beforeend', html);
+
+    document.querySelectorAll('.options__option').forEach(el => {
+        options[el.getAttribute('name')] = isNaN(el.value) ? el.value : parseFloat(el.value);
+        el.addEventListener('change', e => {
+            options[el.getAttribute('name')] = isNaN(el.value) ? el.value : parseFloat(el.value);
+            redraw();
+        });
+    });
+}
+
+function setup() {
+    draw = null;
+    set = [];
+
+    if (document.querySelector('#drawing') !== null) {
+        document.querySelector('#drawing').remove();
+    }
+    document.body.insertAdjacentHTML('beforeend', '<div id="drawing"></div>');
+
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+
+    draw = SVG('drawing').size(width, height);
+    draw.attr('preserveAspectRatio', 'xMinYMin meet');
+    draw.attr('viewBox', '0 0 ' + width + ' ' + height);
+}
+
+function redraw() {
+    // clear
+    if (draw !== null) {
+        draw.clear();
+    }
+
+    // setup
+    setup();
+
+    // set shine
+    document.documentElement.style.background =
+        'radial-gradient(ellipse at center, #ffffff 50%, ' +
+        adjustColor(0.5, options.color) +
+        ' 100%)';
+
+    // first determine all points (no drawing)
+    set.push({ x: 0, y: 0, n: determineNextLevel() });
+    if (options.rank > 0) {
+        set.push({ x: 0, y: 0 + options.radius * options.offset, n: determineNextLevel() });
+        while (determineNextLevel() <= options.rank + 2) {
+            calculateNextIntersection();
+        }
+    }
+
+    // then determine the arcs
+    for (const [set__key, set__value] of Object.entries(set)) {
+        if (set__value.n < options.rank + 1) {
+            set__value.arc = 'circle';
+        } else if (set__value.n === options.rank + 1) {
+            set__value.arc = determineSpecialArc(set__key, set__value, set__value.n - 1);
+        } else if (set__value.n === options.rank + 2) {
+            set__value.arc = determineSpecialArc(set__key, set__value, set__value.n - 2);
+        }
+    }
+
+    // determine colors
+    let colors = [],
+        shadeFactor = 0.8 / (options.rank + 2);
+    for (let n_cur = 0; n_cur <= options.rank + 2; n_cur++) {
+        colors.push(adjustColor(shadeFactor * n_cur, options.color));
+    }
+
+    // paint all circles
+    for (const [set__key, set__value] of Object.entries(set)) {
+        if (set__value.arc === 'circle') {
+            paintCircle(
+                set__value.x,
+                set__value.y,
+                options.radius,
+                colors[(set__value.n - 1) % colors.length]
+            );
+        } else if (set__value.arc !== null) {
+            paintArcWithPoints(
+                set__value.arc.x1,
+                set__value.arc.y1,
+                set__value.arc.x2,
+                set__value.arc.y2,
+                set__value.arc.arc,
+                set__value.x,
+                set__value.y,
+                options.radius,
+                colors[(set__value.n - 1) % colors.length]
+            );
+        }
+    }
+
+    // draw finishing circle
+    drawFinishCircle(colors[colors.length - 1]);
+}
+
+function determineSpecialArc(set__key, set__value, level) {
+    // calculate intersections with level-1
+    let intersections = [];
+    for (const [set__key2, set__value2] of Object.entries(set)) {
+        if (set__key === set__key2) {
+            continue;
+        }
+        if (set__value2.n !== level) {
+            continue;
+        }
+        let intersection = calcIntersection(
+            set__value.x,
+            set__value.y,
+            set__value2.x,
+            set__value2.y
+        );
+        if (intersection !== null) {
+            if (
+                intersection[0] !== null &&
+                intersections.find(
+                    i =>
+                        round(i.x) === round(intersection[0].x) &&
+                        round(i.y) === round(intersection[0].y)
+                ) === undefined
+            ) {
+                intersections.push(intersection[0]);
+            }
+            if (
+                intersection[1] !== null &&
+                intersections.find(
+                    i =>
+                        round(i.x) === round(intersection[1].x) &&
+                        round(i.y) === round(intersection[1].y)
+                ) === undefined
+            ) {
+                intersections.push(intersection[1]);
+            }
+        }
+    }
+    if (intersections.length < 2) {
+        return null;
+    }
+    // calculate max arc between any combination of points < 180° (this is the final arc!)
+    let max = {
+        arc: 0,
+        x1: null,
+        y1: null,
+        x2: null,
+        y2: null
+    };
+    for (const [intersections__key1, intersections__value1] of Object.entries(intersections)) {
+        for (const [intersections__key2, intersections__value2] of Object.entries(intersections)) {
+            if (intersections__key1 <= intersections__key2) {
+                continue;
+            }
+            let arc = calcArgBetweenPoints(
+                intersections__value1.x,
+                intersections__value1.y,
+                set__value.x,
+                set__value.y,
+                intersections__value2.x,
+                intersections__value2.y
+            );
+            if (arc > max.arc) {
+                max = {
+                    arc: arc,
+                    x1: intersections__value1.x,
+                    y1: intersections__value1.y,
+                    x2: intersections__value2.x,
+                    y2: intersections__value2.y
+                };
+            }
+        }
+    }
+    return max;
+}
+
+function drawFinishCircle(color = 'red') {
+    if( options.rank > 1 ) {
+    paintCircle(0, 0, options.rank * options.radius, color);
+    }
+}
+
+function calculateNextIntersection() {
+    for (const [set__key1, set__value1] of Object.entries(set)) {
+        for (const [set__key2, set__value2] of Object.entries(set)) {
+            if (set__key1 === set__key2) {
+                continue;
+            }
+
+            let intersection = calcIntersection(
+                set__value1.x,
+                set__value1.y,
+                set__value2.x,
+                set__value2.y
+            );
+            if (intersection === null) {
+                continue;
+            }
+
+            if (
+                set.find(
+                    i =>
+                        round(i.x) === round(intersection[0].x) &&
+                        round(i.y) === round(intersection[0].y)
+                ) === undefined
+            ) {
+                intersection[0].n = determineNextLevel();
+                set.push(intersection[0]);
+                return true;
+            }
+
+            if (intersection[1] !== null) {
+                if (
+                    set.find(
+                        i =>
+                            round(i.x) === round(intersection[1].x) &&
+                            round(i.y) === round(intersection[1].y)
+                    ) === undefined
+                ) {
+                    intersection[1].n = determineNextLevel();
+                    set.push(intersection[1]);
+                    return true;
+                }
+            }
+        }
+    }
+}
+
+function calcIntersection(x1, y1, x2, y2) {
+    let dist = Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+
+    if (dist > 2 * options.radius) {
+        return null;
+    }
+
+    // mid point
+    let m_x1 = (x2 - x1) / 2 + x1,
+        m_y1 = (y2 - y1) / 2 + y1;
+
+    // distance from midpoint to one other point
+    let m_d = dist / 2;
+
+    // distance from midpoint to intersection points
+    let dist2 = Math.sqrt(options.radius * options.radius - m_d * m_d);
+
+    let intersection_1 = {
+        x: m_x1 + (dist2 * 1 * (y2 - y1)) / Math.sqrt(Math.pow(y2 - y1, 2) + Math.pow(x2 - x1, 2)),
+        y: m_y1 + (dist2 * 1 * (x1 - x2)) / Math.sqrt(Math.pow(y2 - y1, 2) + Math.pow(x2 - x1, 2))
+    };
+    let intersection_2 = {
+        x: m_x1 + (dist2 * -1 * (y2 - y1)) / Math.sqrt(Math.pow(y2 - y1, 2) + Math.pow(x2 - x1, 2)),
+        y: m_y1 + (dist2 * -1 * (x1 - x2)) / Math.sqrt(Math.pow(y2 - y1, 2) + Math.pow(x2 - x1, 2))
+    };
+
+    let ret = [];
+    ret.push(intersection_1);
+
+    if (
+        round(intersection_1.x) !== round(intersection_2.x) ||
+        round(intersection_1.y) !== round(intersection_2.y)
+    ) {
+        ret.push(intersection_2);
+    } else {
+        ret.push(null);
+    }
+
+    return ret;
+}
+
+function calcArgBetweenPoints(x1, y1, x2, y2, x3, y3) {
+    let arc = Math.acos(
+        Math.round(
+            (((x2 - x1) * (x2 - x3) + (y2 - y1) * (y2 - y3)) /
+                (Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)) *
+                    Math.sqrt(Math.pow(x2 - x3, 2) + Math.pow(y2 - y3, 2)))) *
+                100
+        ) / 100
+    );
+    arc = Math.round((arc * 180) / Math.PI);
+    if (arc === 0) {
+        arc = 180;
+    }
+    return arc;
+}
+
+function determineNextLevel() {
+    let n = 1;
+    while (3 * n * (n - 1) + 1 < set.length + 1) {
+        n++;
+    }
+    return n;
+}
+
+function round(val) {
+    return Math.round(val * 1000) / 1000;
+}
+
+function paintCircle(x, y, r, color = 'red') {
+    paintArcWithPoints(x, y - r, x, y - r, 360, x, y, r, color);
+}
+
+function paintArcWithPoints(x1, y1, x2, y2, arc, mx, my, r, color = 'red') {
+    let dir = 0;
+    if (
+        (round(mx) == 0 && round(y1) == round(y2) && (my < 0 || x1 > x2)) ||
+        (round(mx) > 0 && round(y2) > round(y1)) ||
+        (round(mx) < 0 && round(y2) < round(y1))
+    ) {
+        dir = 1;
+    }
+
+    let scale = options.scale;
+    scale *= Math.min(window.innerWidth, window.innerHeight);
+    scale /= 450;
+
+    mx = mx * scale + window.innerWidth / 2;
+    x1 = x1 * scale + window.innerWidth / 2;
+    x2 = x2 * scale + window.innerWidth / 2;
+    my = -1 * my * scale + window.innerHeight / 2;
+    y1 = -1 * y1 * scale + window.innerHeight / 2;
+    y2 = -1 * y2 * scale + window.innerHeight / 2;
+    r = r * scale;
+
+    // arc
+    var d = ['M', x1, y1, 'A', r, r, 0, 0, dir, x2, y2].join(' ');
+
+    // circle
+    if (x1 === x2 && y1 === y2) {
+        d =
+            'M ' +
+            mx +
+            ' ' +
+            my +
+            ' m -' +
+            r +
+            ', 0 a ' +
+            r +
+            ',' +
+            r +
+            ' 0 1,0 ' +
+            r * 2 +
+            ',0 a ' +
+            r +
+            ',' +
+            r +
+            ' 0 1,0 -' +
+            r * 2 +
+            ',0';
+    }
+
+    let speed = options.speed;
+    speed = 100 - speed;
+    speed = (10000 / 100) * speed;
+    if (speed === 0) {
+        speed = 1;
+    }
+
+    let border = options.border;
+    border = border * 1.5;
+
+    let c1 = draw
+        .path(d)
+        .attr({
+            'stroke-dasharray': 2 * r * Math.PI * (arc / 360),
+            'stroke-dashoffset': -2 * r * Math.PI * (arc / 360),
+            'stroke-width': border,
+            stroke: color,
+            fill: 'transparent',
+            'fill-opacity': 0.1
+        })
+        .animate({ duration: speed, ease: '<>' })
+        .attr({ 'stroke-dashoffset': 0 });
+}
+
+function adjustColor(p, c0, c1, l) {
+    let r,
+        g,
+        b,
+        P,
+        f,
+        t,
+        h,
+        i = parseInt,
+        m = Math.round,
+        a = typeof c1 == 'string';
+    if (
+        typeof p != 'number' ||
+        p < -1 ||
+        p > 1 ||
+        typeof c0 != 'string' ||
+        (c0[0] != 'r' && c0[0] != '#') ||
+        (c1 && !a)
+    )
+        return null;
+    if (!this.pSBCr)
+        this.pSBCr = d => {
+            let n = d.length,
+                x = {};
+            if (n > 9) {
+                ([r, g, b, a] = d = d.split(',')), (n = d.length);
+                if (n < 3 || n > 4) return null;
+                (x.r = i(r[3] == 'a' ? r.slice(5) : r.slice(4))),
+                    (x.g = i(g)),
+                    (x.b = i(b)),
+                    (x.a = a ? parseFloat(a) : -1);
+            } else {
+                if (n == 8 || n == 6 || n < 4) return null;
+                if (n < 6)
+                    d = '#' + d[1] + d[1] + d[2] + d[2] + d[3] + d[3] + (n > 4 ? d[4] + d[4] : '');
+                d = i(d.slice(1), 16);
+                if (n == 9 || n == 5)
+                    (x.r = (d >> 24) & 255),
+                        (x.g = (d >> 16) & 255),
+                        (x.b = (d >> 8) & 255),
+                        (x.a = m((d & 255) / 0.255) / 1000);
+                else (x.r = d >> 16), (x.g = (d >> 8) & 255), (x.b = d & 255), (x.a = -1);
+            }
+            return x;
+        };
+    (h = c0.length > 9),
+        (h = a ? (c1.length > 9 ? true : c1 == 'c' ? !h : false) : h),
+        (f = pSBCr(c0)),
+        (P = p < 0),
+        (t =
+            c1 && c1 != 'c'
+                ? pSBCr(c1)
+                : P
+                ? { r: 0, g: 0, b: 0, a: -1 }
+                : { r: 255, g: 255, b: 255, a: -1 }),
+        (p = P ? p * -1 : p),
+        (P = 1 - p);
+    if (!f || !t) return null;
+    if (l) (r = m(P * f.r + p * t.r)), (g = m(P * f.g + p * t.g)), (b = m(P * f.b + p * t.b));
+    else
+        (r = m((P * f.r ** 2 + p * t.r ** 2) ** 0.5)),
+            (g = m((P * f.g ** 2 + p * t.g ** 2) ** 0.5)),
+            (b = m((P * f.b ** 2 + p * t.b ** 2) ** 0.5));
+    (a = f.a),
+        (t = t.a),
+        (f = a >= 0 || t >= 0),
+        (a = f ? (a < 0 ? t : t < 0 ? a : a * P + t * p) : 0);
+    if (h)
+        return (
+            'rgb' +
+            (f ? 'a(' : '(') +
+            r +
+            ',' +
+            g +
+            ',' +
+            b +
+            (f ? ',' + m(a * 1000) / 1000 : '') +
+            ')'
+        );
+    else
+        return (
+            '#' +
+            (4294967296 + r * 16777216 + g * 65536 + b * 256 + (f ? m(a * 255) : 0))
+                .toString(16)
+                .slice(1, f ? undefined : -2)
+        );
+}
+    </script>
+</body>
+</html>
