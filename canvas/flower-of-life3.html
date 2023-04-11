@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#canvas {
+  background: #1d1d29;
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+</style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+<script>
+    // Pallete: http://flatcolors.net/palette/904-breathing-dopeness
+
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+let width = (canvas.width = window.innerWidth);
+let height = (canvas.height = window.innerHeight);
+let centerX = width / 2;
+let centerY = height / 2;
+
+const outer = "#9E373B";
+const inner = "#EF5C54";
+const center = "#6C1827";
+const rad = 50;
+const circles = [];
+const noCircles = 21;
+let shrink = false;
+// Circle class
+class Circle {
+  constructor(x, y, radius, colour) {
+    this.x = x;
+    this.y = y;
+    this.radius = radius;
+    this.colour = colour;
+  }
+  draw(ctx) {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
+    ctx.strokeStyle = this.colour;
+    ctx.stroke();
+  }
+  move() {
+    if (shrink == false) {
+      this.radius++;
+      if (this.radius > rad * 3) {
+        shrink = true;
+      }
+    }
+    if (shrink == true) {
+      this.radius--;
+      if (this.radius < rad) {
+        shrink = false;
+      }
+    }
+  }
+}
+// Create circles and push to arrray
+for (let i = 0; i < noCircles; i++) {
+  let colour = center;
+  let dx = 0;
+  let dy = 0;
+  // Change positions & colours
+  if (i > 0) {
+    colour = inner;
+    dx = rad * 2;
+  }
+  if (i > 1) {
+    dx = -rad * 2;
+  }
+  if (i > 2) {
+    dx = 0;
+    dy = rad * 2;
+  }
+  if (i > 3) {
+    dy = -rad * 2;
+  }
+  if (i > 4) {
+    dx = rad;
+    dy = rad;
+  }
+  if (i > 5) {
+    dx = -rad;
+  }
+  if (i > 6) {
+    dx = rad;
+    dy = -rad;
+  }
+  if (i > 7) {
+    dx = -rad;
+  }
+  if (i > 8) {
+    colour = outer;
+    dx = rad * 2;
+    dy = rad * 2;
+  }
+  if (i > 9) {
+    dy = -rad * 2;
+  }
+  if (i > 10) {
+    dx = -rad * 2;
+  }
+  if (i > 11) {
+    dy = rad * 2;
+  }
+  if (i > 12) {
+    dx = rad * 3;
+    dy = rad;
+  }
+  if (i > 13) {
+    dy = -rad;
+  }
+  if (i > 14) {
+    dx = -rad * 3;
+    dy = rad;
+  }
+  if (i > 15) {
+    dy = -rad;
+  }
+  if (i > 16) {
+    dx = rad;
+    dy = rad * 3;
+  }
+  if (i > 17) {
+    dx = -rad;
+  }
+  if (i > 18) {
+    dx = rad;
+    dy = -rad * 3;
+  }
+  if (i > 19) {
+    dx = -rad;
+  }
+  // Instance
+  let c = new Circle(centerX + dx, centerY + dy, rad, colour);
+  // Push to array
+  circles.push(c);
+}
+// Animation loop
+function loop() {
+  // Clear canvas
+  ctx.clearRect(0, 0, width, height);
+  // Draw & move circles
+  for (let circle of circles) {
+    circle.move();
+    circle.draw(ctx);
+  }
+  // Anim frame
+  requestAnimationFrame(loop);
+}
+// First call to loop
+loop();
+
+// Resize canvas - responsive
+window.addEventListener("resize", resize);
+function resize() {
+  width = canvas.width = window.innerWidth;
+  height = canvas.height = window.innerHeight;
+}
+
+</script>    
+</body>
+</html>
