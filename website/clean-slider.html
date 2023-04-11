@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js" crossorigin="anonymous"></script>
 <style>
     html {
   box-sizing: border-box;
@@ -365,11 +366,11 @@
         <img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/twitter-128.png">
       </a>
       <script>
-        $(document).ready(function () {
-  const $app = $('.app');
-  const $img = $('.app__img');
-  const $pageNav1 = $('.pages__item--1');
-  const $pageNav2 = $('.pages__item--2');
+      $(document).ready(function () {
+  const $app = $(".app");
+  const $img = $(".app__img");
+  const $pageNav1 = $(".pages__item--1");
+  const $pageNav2 = $(".pages__item--2");
   let animation = true;
   let curSlide = 1;
   let scrolledUp, nextSlide;
@@ -382,10 +383,10 @@
       nextSlide = target;
     }
 
-    $('.pages__item--' + nextSlide).addClass('page__item-active');
-    $('.pages__item--' + slide).removeClass('page__item-active');
+    $(".pages__item--" + nextSlide).addClass("page__item-active");
+    $(".pages__item--" + slide).removeClass("page__item-active");
 
-    $app.toggleClass('active');
+    $app.toggleClass("active");
     setTimeout(function () {
       animation = false;
     }, 3000);
@@ -406,14 +407,14 @@
   };
 
   setTimeout(function () {
-    $app.addClass('initial');
+    $app.addClass("initial");
   }, 1500);
 
   setTimeout(function () {
     animation = false;
   }, 4500);
 
-  $(document).on('mousewheel DOMMouseScroll', function (e) {
+  $(document).on("mousewheel DOMMouseScroll", function (e) {
     var delta = e.originalEvent.wheelDelta;
     if (animation) return;
     if (delta > 0 || e.originalEvent.detail < 0) {
@@ -425,13 +426,14 @@
 
   $(document).on("click", ".pages__item:not(.page__item-active)", function () {
     if (animation) return;
-    let target = +$(this).attr('data-target');
+    let target = +$(this).attr("data-target");
     pagination(curSlide, target);
     curSlide = target;
   });
 });
+
       </script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js" crossorigin="anonymous"></script>
+
 
 </body>
 </html>
