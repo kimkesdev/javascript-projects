@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    body {
+	background: #1d1f20;
+	overflow: hidden;
+}
+
+</style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+
+<script>
+    const ctx = canvas.getContext("2d");
+const circleRadius = 80;
+const flowerAmount = 1;
+const debug = true;
+
+let size = 3;
+let tick = 0;
+let h = window.innerHeight;
+let w = window.innerWidth;
+let lineThickness = circleRadius / 8;
+
+function init() {
+	canvas.height = h;
+	canvas.width = w;
+	window.addEventListener("resize", resize);
+	requestAnimationFrame(draw);
+}
+
+function draw() {
+	tick++;
+
+	ctx.clearRect(0, 0, w, h);
+	ctx.globalCompositeOperation = "destination-over";
+	drawCircle(w / 2, h / 2, circleRadius * 3);
+
+	var angle = 0;
+	var flowerOffset = circleRadius;
+
+	for (var i = 0; i < size; i++) {
+		/** Draw 6 flowers */
+		for (var j = 0; j < 6; j++) {
+			var x = w / 2 + flowerOffset * Math.cos(angle * (Math.PI / 180));
+			var y = h / 2 + flowerOffset * Math.sin(angle * (Math.PI / 180));
+
+			drawFlower(x, y, circleRadius);
+			angle = angle + 60;
+		}
+
+		flowerOffset = flowerOffset + circleRadius;
+	}
+
+	/** Create color overlay, use source-atop to only overlay on existing drawing */
+	ctx.globalCompositeOperation = "source-atop";
+
+	/** Create a new gradient that animates through tick */
+	var gradient = ctx.createLinearGradient(0, 0, w, h);
+	var adjustment = 2;
+	gradient.addColorStop(0, "hsla(" + triangularWave(tick, 360) + ",50%,50%,1)");
+	gradient.addColorStop(
+		1,
+		"hsla(" + triangularWave(tick + 180, 360) + ",25%,50%,1)"
+	);
+
+	/** Draw the rectangle */
+	ctx.fillStyle = gradient;
+	ctx.fillRect(0, 0, w, h);
+
+	/** Finally draw the circle that masks the flower, using destination-atop */
+	ctx.globalCompositeOperation = "destination-atop";
+	ctx.beginPath();
+	ctx.arc(
+		w / 2,
+		h / 2,
+		circleRadius * 3 + lineThickness / 2,
+		0,
+		Math.PI * 2,
+		false
+	);
+	ctx.fillStyle = "#1d1f20";
+	ctx.fill();
+	requestAnimationFrame(draw);
+}
+
+/**
+ * Draw 6 circles with their edges against the center point,
+ * increase angle by 60 to spread them evenly
+ * centerX {number} the horizontal center of the flower
+ * centerY {number} the vertical center of the flower
+ */
+function drawFlower(centerX, centerY) {
+	var angle = 0;
+	ctx.lineWidth = lineThickness;
+
+	for (var i = 0; i < 6; i++) {
+		var x = centerX + circleRadius * Math.cos(angle * (Math.PI / 180));
+		var y = centerY + circleRadius * Math.sin(angle * (Math.PI / 180));
+
+		drawCircle(x, y, circleRadius);
+
+		angle = angle + 60;
+	}
+}
+
+/**
+ * Draw a circle where x, y represent the center point and radius the size
+ * x {number} the horizontal center point
+ * y {number} the vertical center point
+ * rad {number} the size of the circle in pixels
+ */
+function drawCircle(x, y, rad) {
+	ctx.beginPath();
+
+	// use ~~ to remove floating points quickly
+	ctx.arc(~~x, ~~y, rad, 0, Math.PI * 2, false);
+
+	ctx.strokeStyle = "white";
+	ctx.stroke();
+}
+
+/**
+ * Have a value go up and down in a triangular waveform
+ * tick {number} the current tick
+ * max {number} the maximum value it should go to
+ */
+function triangularWave(tick, max) {
+	return Math.abs((tick % (max * 2)) - max);
+}
+
+function resize() {
+	h = window.innerHeight;
+	w = window.innerWidth;
+
+	canvas.height = h;
+	canvas.width = w;
+}
+
+init();
+
+</script>    
+</body>
+</html>
