@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <style>
+    html, body {
+  margin: 0;
+}
+
+canvas {
+  display: block;
+}
+
+h1 {
+  font-size: 20vmin;
+  text-shadow: 4px 4px 2px white;  
+  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+ </style>
+</head>
+<body>
+    
+<script>
+    "use strict";
+
+class Piece {
+    constructor(pos, img, i) {
+        this.pos = pos;
+        this.img = img;
+        this.i = i;
+        this.width = img.width;
+        this.height = img.height;
+    }
+    draw() {
+        image(this.img, this.pos.x, this.pos.y);
+    }
+    hits(hitpos) {
+        if (hitpos.x > this.pos.x &&
+            hitpos.x < this.pos.x + this.width &&
+            hitpos.y > this.pos.y &&
+            hitpos.y < this.pos.y + this.height) {
+            return true;
+        }
+        return false;
+    }
+}
+class Puzzle {
+    constructor(x, y, img, side) {
+        this.x = x;
+        this.y = y;
+        this.img = img;
+        this.side = side;
+        this.isDragging = false;
+        this.canPlay = true;
+        this.pieces = [];
+        this.width = img.width;
+        this.height = img.height;
+        this.w = this.width / side;
+        this.h = this.height / side;
+        this.placePieces();
+    }
+    placePieces() {
+        for (let y = 0; y < this.side; y++) {
+            for (let x = 0; x < this.side; x++) {
+                let img = createImage(this.w, this.h);
+                img.copy(this.img, this.w * x, this.h * y, this.w, this.h, 0, 0, this.w, this.h);
+                let pos = this.randomPos(this.w, this.h);
+                let index = x + y * this.side;
+                this.pieces.push(new Piece(pos, img, index));
+            }
+        }
+    }
+    randomPos(marginRight, marginBottom) {
+        return createVector(random(0, windowWidth - marginRight), random(0, windowHeight - marginBottom));
+    }
+    draw() {
+        rect(this.x - 1, this.y - 1, this.width + 1, this.height + 1);
+        noFill();
+        this.pieces.forEach(r => r.draw());
+    }
+    mousePressed(x, y) {
+        if (this.canPlay) {
+            let m = createVector(x, y);
+            let index;
+            this.pieces.forEach((p, i) => {
+                if (p.hits(m)) {
+                    this.clickOffset = p5.Vector.sub(p.pos, m);
+                    this.isDragging = true;
+                    this.dragPiece = p;
+                    index = i;
+                }
+            });
+            if (this.isDragging) {
+                this.putOnTop(index);
+            }
+        }
+    }
+    mouseDragged(x, y) {
+        if (this.isDragging) {
+            let m = createVector(x, y);
+            this.dragPiece.pos.set(m).add(this.clickOffset);
+        }
+    }
+    mouseReleased() {
+        if (this.isDragging) {
+            this.isDragging = false;
+            this.snapTo(this.dragPiece);
+            this.checkEndGame();
+        }
+    }
+    putOnTop(index) {
+        this.pieces.splice(index, 1);
+        this.pieces.push(this.dragPiece);
+    }
+    snapTo(p) {
+        let dx = this.w / 2;
+        let dy = this.h / 2;
+        let x2 = this.x + this.width;
+        let y2 = this.y + this.height;
+        for (let y = this.y; y < y2; y += this.h) {
+            for (let x = this.x; x < x2; x += this.w) {
+                if (this.shouldSnapToX(p, x, dx, dy, y2)) {
+                    p.pos.x = x;
+                }
+                if (this.shouldSnapToY(p, y, dx, dy, x2)) {
+                    p.pos.y = y;
+                }
+            }
+        }
+    }
+    shouldSnapToX(p, x, dx, dy, y2) {
+        return this.isOnGrid(p.pos.x, x, dx) && this.isInsideFrame(p.pos.y, this.y, y2 - this.h, dy);
+    }
+    shouldSnapToY(p, y, dx, dy, x2) {
+        return this.isOnGrid(p.pos.y, y, dy) && this.isInsideFrame(p.pos.x, this.x, x2 - this.w, dx);
+    }
+    isOnGrid(actualPos, gridPos, d) {
+        return actualPos > gridPos - d && actualPos < gridPos + d;
+    }
+    isInsideFrame(actualPos, frameStart, frameEnd, d) {
+        return actualPos > frameStart - d && actualPos < frameEnd + d;
+    }
+    checkEndGame() {
+        let nrCorrectNeeded = this.side * this.side;
+        let nrCorrect = 0;
+        this.pieces.forEach(p => {
+            let correctIndex = p.i;
+            let actualIndex = (p.pos.x - this.x) / this.w + (p.pos.y - this.y) / this.h * this.side;
+            if (actualIndex === correctIndex) {
+                nrCorrect += 1;
+            }
+        });
+        if (nrCorrect === nrCorrectNeeded) {
+            let h1 = createElement("h1", "Good Job!");
+            this.canPlay = false;
+        }
+        else {
+            console.log("Right places: " + nrCorrect);
+        }
+    }
+}
+let puzzle;
+let imgCb;
+function preload() {
+    imgCb = loadImage("https://s3-us-west-2.amazonaws.com/s.cdpn.io/254249/Exit_planet_dust_album_cover.jpg");
+}
+function setup() {
+    createCanvas(windowWidth, windowHeight);
+    let x0 = windowWidth / 2 - imgCb.width / 2;
+    let y0 = windowHeight / 2 - imgCb.height / 2;
+    puzzle = new Puzzle(x0, y0, imgCb, 3);
+}
+function draw() {
+    background("white");
+    puzzle.draw();
+}
+function mousePressed() {
+    puzzle.mousePressed(mouseX, mouseY);
+}
+function mouseDragged() {
+    puzzle.mouseDragged(mouseX, mouseY);
+}
+function mouseReleased() {
+    puzzle.mouseReleased();
+}
+function windowResized() {
+    resizeCanvas(windowWidth, windowHeight);
+}
+
+</script>    
+</body>
+</html>
