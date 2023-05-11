@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, minimum-scale=1" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
     * {
     box-sizing: border-box;
@@ -70,8 +71,11 @@ html {
 </style>
 </head>
 <body>
-    <script>
-        let draw = null,
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/2.7.1/svg.min.js"></script>
+ 
+<script>
+    let draw = null,
     set = [],
     options = {};
 
@@ -580,6 +584,8 @@ function adjustColor(p, c0, c1, l) {
                 .slice(1, f ? undefined : -2)
         );
 }
-    </script>
+</script>        
+
+
 </body>
 </html>
