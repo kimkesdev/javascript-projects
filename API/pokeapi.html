@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" crossorigin="anonymous">
+
+<style>
+    #bg{
+  background-color: #E7B24E;
+}
+
+#main{
+  text-align: center;
+  font-family: Bangers;
+  font-size: 100px;
+}
+
+#label1{
+  display: block;
+  text-align: center;
+  font-size: 20px;
+  padding: 10px;
+}
+
+#text{
+  display: block;
+  margin: 0 auto;
+  padding: 5px
+   
+  
+}
+
+button{
+  display: block;
+  margin: 0 auto;
+}
+#submit{
+  padding: 10px;
+  width: 175px;
+}
+
+#poke_pic{
+  display: block;
+  margin: 0 auto;
+  width: 10%;
+}
+
+#hp{
+  color: green;
+}
+
+#attack{
+  color: red;
+}
+
+#defense{
+  color: blue;
+}
+
+#speed{
+  color: yellow;
+}
+#number, #name, #poke_pic, #type, #abilities, #hp, #attack, #defense, #speed{
+  text-align: center;
+}
+
+
+</style>
+</head>
+<body id = "bg">
+  
+  <label id = "label1" for = "query">Search a Pokémon... <br> </label>
+  <input id = "text" placeholder = "Enter name or ID"><br></input>
+<button id = "submit">Find (or press enter)</button>
+<h1 id = "number"></h1>
+<h1 id = "name"></h1>
+<img src = "" id="poke_pic">
+<h3 id = "type"></h3>
+<h3 id = "abilities"></h3>
+<h3 id = "hp"></h3>
+<h3 id = "attack"></h3>
+<h3 id = "defense"></h3>
+<h3 id = "speed"></h3>
+
+<script>
+    window.onload = () =>  {
+	
+	function grabPoke() {
+	let query = $("#text").val().toLowerCase();
+    
+	
+	fetch(`https://pokeapi.co/api/v2/pokemon/${query}`)
+		.then(response => {
+			if(response.ok) {
+				
+					return response.json()
+			} else {
+				
+				alert('Please make sure the Pokémon name or ID is typed correctly.')
+			}
+	})
+		.then((out) => {
+		 console.log(out)
+    
+	let number = out.id;	
+	let	name = out.species.name.toUpperCase();
+	let	pic = out.sprites.front_default;
+  let type = out.types.map((type) => type.type.name).join(', ').toUpperCase();
+  let abilities = out.abilities.map((ability) => ability.ability.name).join(', ').toUpperCase();
+    
+//Displays reverse statistic names all at once, but can't figure out how to display values with them...
+ // let test = out.stats.map((stats) => stats.stat.name).reverse().join(': ' 
+ //                                                                   + '<br>').toUpperCase();
+    
+  let hp = out.stats[5].base_stat;
+  let attack = out.stats[4].base_stat;
+  let defense = out.stats[3].base_stat;
+  let speed = out.stats[0].base_stat;
+    
+		
+    document.getElementById("number").innerHTML = "# " + number;
+		document.getElementById("poke_pic").src = pic;
+		document.getElementById("name").innerHTML = name;
+    document.getElementById("type").innerHTML = "TYPE: " + type;
+    document.getElementById("abilities").innerHTML = "ABILITIES: " + abilities;
+    
+    document.getElementById("hp").innerHTML = "BASE HEALTH: " + hp;
+    document.getElementById("attack").innerHTML = "ATTACK: " + attack;
+    document.getElementById("defense").innerHTML = "DEFENSE: " + defense;
+    document.getElementById("speed").innerHTML = "SPEED: " + speed;
+    
+	})
+			
+	}
+
+  $("#text").keyup(function(event) {
+    if (event.keyCode === 13) {
+        $("#submit").click();
+    }
+});
+			document.getElementById('submit').addEventListener("click", function()
+  {
+			
+			grabPoke();
+		})
+}
+
+</script>
+</body>
+</html>
