@@ -66,7 +66,71 @@ button{
   
   <h1 id ="main">Pokémon Info Search</h1>
   <body id = "bg">
+    <script>
+      window.onload = () =>  {
+      
+      function grabPoke() {
+      let query = $("#text").val().toLowerCase();
+        
+      
+      fetch(`https://pokeapi.co/api/v2/pokemon/${query}`)
+        .then(response => {
+          if(response.ok) {
+            
+              return response.json()
+          } else {
+            
+            alert('Please make sure the Pokémon name or ID is typed correctly.')
+          }
+      })
+        .then((out) => {
+         console.log(out)
+        
+      let number = out.id;	
+      let	name = out.species.name.toUpperCase();
+      let	pic = out.sprites.front_default;
+      let type = out.types.map((type) => type.type.name).join(', ').toUpperCase();
+      let abilities = out.abilities.map((ability) => ability.ability.name).join(', ').toUpperCase();
+        
+    //Displays reverse statistic names all at once, but can't figure out how to display values with them...
+     // let test = out.stats.map((stats) => stats.stat.name).reverse().join(': ' 
+     //                                                                   + '<br>').toUpperCase();
+        
+      let hp = out.stats[5].base_stat;
+      let attack = out.stats[4].base_stat;
+      let defense = out.stats[3].base_stat;
+      let speed = out.stats[0].base_stat;
+        
+        
+        document.getElementById("number").innerHTML = "# " + number;
+        document.getElementById("poke_pic").src = pic;
+        document.getElementById("name").innerHTML = name;
+        document.getElementById("type").innerHTML = "TYPE: " + type;
+        document.getElementById("abilities").innerHTML = "ABILITIES: " + abilities;
+        
+        document.getElementById("hp").innerHTML = "BASE HEALTH: " + hp;
+        document.getElementById("attack").innerHTML = "ATTACK: " + attack;
+        document.getElementById("defense").innerHTML = "DEFENSE: " + defense;
+        document.getElementById("speed").innerHTML = "SPEED: " + speed;
+        
+      })
+          
+      }
     
+      $("#text").keyup(function(event) {
+        if (event.keyCode === 13) {
+            $("#submit").click();
+        }
+    });
+          document.getElementById('submit').addEventListener("click", function()
+      {
+          
+          grabPoke();
+        })
+    }
+    
+    
+    </script>
   </body>
   
   <label id = "label1" for = "query">Search a Pokémon... <br> </label>
@@ -81,69 +145,5 @@ button{
 <h3 id = "attack"></h3>
 <h3 id = "defense"></h3>
 <h3 id = "speed"></h3>
-<script>
-  window.onload = () =>  {
-	
-	function grabPoke() {
-	let query = $("#text").val().toLowerCase();
-    
-	
-	fetch(`https://pokeapi.co/api/v2/pokemon/${query}`)
-		.then(response => {
-			if(response.ok) {
-				
-					return response.json()
-			} else {
-				
-				alert('Please make sure the Pokémon name or ID is typed correctly.')
-			}
-	})
-		.then((out) => {
-		 console.log(out)
-    
-	let number = out.id;	
-	let	name = out.species.name.toUpperCase();
-	let	pic = out.sprites.front_default;
-  let type = out.types.map((type) => type.type.name).join(', ').toUpperCase();
-  let abilities = out.abilities.map((ability) => ability.ability.name).join(', ').toUpperCase();
-    
-//Displays reverse statistic names all at once, but can't figure out how to display values with them...
- // let test = out.stats.map((stats) => stats.stat.name).reverse().join(': ' 
- //                                                                   + '<br>').toUpperCase();
-    
-  let hp = out.stats[5].base_stat;
-  let attack = out.stats[4].base_stat;
-  let defense = out.stats[3].base_stat;
-  let speed = out.stats[0].base_stat;
-    
-		
-    document.getElementById("number").innerHTML = "# " + number;
-		document.getElementById("poke_pic").src = pic;
-		document.getElementById("name").innerHTML = name;
-    document.getElementById("type").innerHTML = "TYPE: " + type;
-    document.getElementById("abilities").innerHTML = "ABILITIES: " + abilities;
-    
-    document.getElementById("hp").innerHTML = "BASE HEALTH: " + hp;
-    document.getElementById("attack").innerHTML = "ATTACK: " + attack;
-    document.getElementById("defense").innerHTML = "DEFENSE: " + defense;
-    document.getElementById("speed").innerHTML = "SPEED: " + speed;
-    
-	})
-			
-	}
 
-  $("#text").keyup(function(event) {
-    if (event.keyCode === 13) {
-        $("#submit").click();
-    }
-});
-			document.getElementById('submit').addEventListener("click", function()
-  {
-			
-			grabPoke();
-		})
-}
-
-
-</script>
 </html>
